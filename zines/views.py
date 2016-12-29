@@ -1,6 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 
+def index(request):
+    recent_issues = Issue.objects.order_by('pub_date')[:5]
+    context = {
+        'recent_issues' : recent_issues,
+    }
+    return render(request, 'zines/index.html', context)
+
 def user(request, user_id):
     user = get_object_or_404(User,pk=user_id)
     works = Authorship.objects.filter(user=user_id,hideIdentity=False)
@@ -21,9 +28,9 @@ def zine(request, zine_id):
     }
     return render(request, 'zines/zine.html', context)
 
-def index(request):
-    recent_issues = Issue.objects.order_by('pub_date')[:5]
+def issue(request, zine_id, issue_no):
+    issue = Issue.objects.filter(zine=zine_id,number=issue_no)
     context = {
-        'recent_issues' : recent_issues,
+        'issue' : issue[0],
     }
-    return render(request, 'zines/index.html', context)
+    return render(request, 'zines/issue.html', context)

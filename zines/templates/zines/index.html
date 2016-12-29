@@ -14,7 +14,7 @@
                 <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
                     &nbsp;
                 </div>
-                <a href="">
+                <a href="{% url 'issue' issue.zine.id issue.number %}">
                     <div class="title">
                         <span>{{ issue.displayTitle }}</span>
                     </div>

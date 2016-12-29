@@ -1,0 +1,19 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    {{ zine }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ issue.titleLink|safe }}</h1>
+    <date>published {{ issue.pub_date|date:'b j, Y' }}</date>
+    <div class="authors">
+        <p>Authors: {{ issue.zine.authorsLink|safe }}</p>
+        <p>Feat. [guests]</p>
+    </div>
+    <hr/>
+    {% if pages %}
+    {% else %}
+        <p>This issue has no pages.</p> 
+    {% endif %}
+{% endblock %}

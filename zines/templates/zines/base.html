@@ -33,13 +33,12 @@
             </div>
             <ul class="menu inline">
                 <li>
-                    <a href="{% url 'user' 1 %}">profile</a>
+                    <a href="{% url 'index' %}">home</a>
                 </li>
             </ul>
         </div>
             {% block body %} {% endblock %}
         </div>
-        {% block scripts %}
-        {% endblock %}
+        {% block scripts %} {% endblock %}
     </body>
 </html>

@@ -33,6 +33,9 @@ class Zine(models.Model):
     def issueCount(self):
         return Issue.objects.filter(zine=self.id).count()
 
+    def link(self):
+        return '<a href="'+reverse('zine',args=(self.id,))+'">'+self.title+'</a>'
+
     def authorsLink(self):
         authorships = Authorship.objects.filter(zine=self.id)
         if len(authorships) == 1:
@@ -65,6 +68,13 @@ class Issue(models.Model):
     def displayTitle(self):
         if self.title == '':
             return self.zine.title+' #'+str(self.number)
+    def titleLink(self):
+        string = self.zine.link()+' &raquo '
+        if self.title == '':
+            string += '#'+str(self.number)
+        else:
+            string += self.title
+        return string
     class Meta:
         order_with_respect_to = 'zine'
     def __str__(self):
@@ -83,7 +93,7 @@ class Authorship(models.Model):
             return '<a href="'+reverse('user', args=(self.user.id,))+'">'+self.user.__str__()+'</a>'
 
     def zineLink(self):
-        return '<a href="'+reverse('zine',args=(self.zine.id,))+'">'+self.zine.title+'</a>'
+        return self.zine.link()
 
     def link(self):
         return (self.zineLink()+' by '+self.authorLink())
