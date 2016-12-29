@@ -1,0 +1,86 @@
+body {
+    margin: auto;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+}
+a {
+    color: #FA4866;
+}
+i {
+    position: relative;
+    bottom: -.25em;
+}
+#wrapper {
+    width: 100%;
+    max-width: 60rem;
+    margin: auto;
+}
+#logo {
+    font-size: 50px;
+    font-weight: 100;
+    display: inline-block;
+}
+#logo span {
+    font-weight: 800;
+    color: #FA4866;
+}
+#logo i {
+    position: relative;
+    bottom: -7px;
+    color: #FA4866;
+}
+#logo a {
+    color: inherit;
+}
+#header ul {
+    display: inline-block;
+    margin-left: 1em;
+    padding: 0;
+    color: #000;
+    font-weight: 100;
+    list-style-type: none;
+}
+#header li {
+    display: inline-block;
+}
+#header li a {
+    opacity: .6;
+    color: inherit;
+}
+#header li a:hover {
+    opacity: .8;
+    color: inherit;
+}
+h1, date {
+    display: inline-block;
+}
+date {
+    margin-left: .75em;
+    margin-right: .75em;
+    opacity: .6;
+    font-weight: 100;
+}
+#works {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+    width: 100%;
+    border-collapse: collapse;
+}
+#works td {
+    padding: 0 1em .6em 1em;
+}
+#works td:first-child {
+    padding: 1em;
+    width: 100%;
+}
+#works tr:nth-child(2n) {
+    background: #eee;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-40 { font-size: 40px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-60 { font-size: 60px; }

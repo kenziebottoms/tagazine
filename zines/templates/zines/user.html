@@ -1,0 +1,31 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    {{ user }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ user }}</h1>
+    <date>member since {{ user.member_since|date:'b j, Y' }}</date>
+    <hr/>
+    <table id="works">
+        {% for work in works %}
+            <tr>
+                <td>
+                    {{ work.link|safe }}
+                    <date>{{ work.zine.start_date|date:'b j, Y' }} – {% if work.zine.end_date != null %}{{ work.zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
+                </td>
+                <td>
+                    <i class="material-icons md-36">chrome_reader_mode</i>
+                </td>
+                <td>
+                    {% if work.zine.website != '' %}
+                        <a href="{{ work.zine.website }}" target="blank">
+                            <i class="material-icons md-36">launch</i>
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

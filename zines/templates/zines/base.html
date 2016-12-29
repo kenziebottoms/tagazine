@@ -1,0 +1,46 @@
+<!doctype html>
+{% load static %}
+<html>
+    <head>
+        <title>
+            FileTile | {% block title %} {% endblock %}
+        </title>
+
+        <!-- foundation -->
+        <link rel="stylesheet" href="{% static 'zines/foundation/css/foundation.css' %}"/>
+        <!-- custom stylesheet -->
+        <link rel="stylesheet" href="{% static 'zines/style.css' %}"/>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- angularJS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+
+        <!-- fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+        
+        <!-- material icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrapper">
+        <div id="header">
+            <div id="logo">
+                <a href="/zines">
+                    <i class="material-icons md-40">subtitles</i>web<span>zine </span>
+                </a>
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="{% url 'user' 1 %}">profile</a>
+                </li>
+            </ul>
+        </div>
+            {% block body %} {% endblock %}
+        </div>
+        <!-- end quill editor -->
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>

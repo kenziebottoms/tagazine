@@ -1,0 +1,11 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    {{ zine }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ zine.title }}</h1>
+    <date>published since {{ zine.start_date|date:'b j, Y' }}</date>
+    <hr/>
+{% endblock %}
