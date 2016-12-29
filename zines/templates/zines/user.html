@@ -12,7 +12,7 @@
         {% for work in works %}
             <tr>
                 <td>
-                    {{ work.link|safe }}
+                    {{ work.zineLink|safe }} by {{ work.zine.authorsLink|safe }}
                     <date>{{ work.zine.start_date|date:'b j, Y' }} – {% if work.zine.end_date != null %}{{ work.zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
                 </td>
                 <td>

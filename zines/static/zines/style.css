@@ -84,7 +84,7 @@ date {
     width: 100%;
 }
 #works tr:nth-child(2n) {
-    background: #eee;
+    background: #f7f7f7;
 }
 .authors ul li:not(:last-child):after {
     content: ',';
