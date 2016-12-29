@@ -16,7 +16,9 @@
                     <date>{{ work.zine.start_date|date:'b j, Y' }} – {% if work.zine.end_date != null %}{{ work.zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
                 </td>
                 <td>
-                    <i class="material-icons md-36">chrome_reader_mode</i>
+                    {% if work.zine.issueCount > 0 %}
+                        <i class="material-icons md-36">chrome_reader_mode</i>
+                    {% endif %}
                 </td>
                 <td>
                     {% if work.zine.website != '' %}
