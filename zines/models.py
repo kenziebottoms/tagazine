@@ -9,6 +9,8 @@ class User(models.Model):
     name = models.CharField(max_length=500,blank=True)
 #    user_pic = models.ImageField(upload_to='user_pics',blank=True)
 
+    def link(self):
+        return '<a href="'+reverse('user', args=(self.id,))+'">'+self.__str__()+'</a>'
     def __str__(self):
         if self.name != '':
             return self.name
@@ -22,8 +24,11 @@ class Zine(models.Model):
     authors = models.ManyToManyField(User, through='Authorship')
     show_author = models.BooleanField(default=True)
     external = models.BooleanField(default=False)
+    submissions_open = models.BooleanField(default=False)
     #optional
     desc = models.TextField(blank=True)
+    contact_email = models.CharField(max_length=200,blank=True)
+    submission_email = models.CharField(max_length=200,blank=True)
     tagline = models.CharField(max_length=500,blank=True)
     end_date = models.DateField('Published until', blank=True,null=True)
     website = models.URLField(blank=True)
@@ -48,6 +53,10 @@ class Zine(models.Model):
                     string += ', '
             return string
 
+    def firstIssue(self):
+        issue = Issue.objects.filter(zine=self.id).order_by('number')[0]
+        return issue
+
     def __str__(self):
         if self.tagline != '':
             return (self.title + ': ' + self.tagline)
@@ -65,6 +74,17 @@ class Issue(models.Model):
     number = models.IntegerField(default=1)
     cover = models.URLField(blank=True)
 
+    def guestAuthorsLink(self):
+        guest_authors = self.guest_authors
+        if len(guest_authors.all()) == 1:
+            return guest_authors.all()[0].link()
+        else:
+            string = ''
+            for author in guest_authors:
+                string += author.authorLink()
+                if author != guest_authors[len(guest_authors)-1]:
+                    string += ', '
+            return string
     def displayTitle(self):
         if self.title == '':
             return self.zine.title+' #'+str(self.number)
@@ -75,6 +95,7 @@ class Issue(models.Model):
         else:
             string += self.title
         return string
+
     class Meta:
         order_with_respect_to = 'zine'
     def __str__(self):
@@ -90,13 +111,13 @@ class Authorship(models.Model):
         if self.hideIdentity:
             return 'Anonymous'
         else:
-            return '<a href="'+reverse('user', args=(self.user.id,))+'">'+self.user.__str__()+'</a>'
+            return self.user.link()
 
     def zineLink(self):
         return self.zine.link()
 
     def link(self):
-        return (self.zineLink()+' by '+self.authorLink())
+        return (self.zine.Link()+' by '+self.authorLink())
 
     def __str__(self):
         string = self.zine.title + ' by '

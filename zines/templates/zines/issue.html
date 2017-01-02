@@ -9,7 +9,12 @@
     <date>published {{ issue.pub_date|date:'b j, Y' }}</date>
     <div class="authors">
         <p>Authors: {{ issue.zine.authorsLink|safe }}</p>
-        <p>Feat. [guests]</p>
+        {% if issue.guest_authors %}
+            Feat. {{ issue.guestAuthorsLink|safe }}
+        {% endif %}
+    </div>
+    <div class="desc">
+        <p>{{ issue.desc }}</p>
     </div>
     <hr/>
     {% if pages %}

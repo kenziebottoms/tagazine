@@ -6,9 +6,12 @@ body {
 a {
     color: #FA4866;
 }
+a:hover {
+    color: #000;
+}
 i {
     position: relative;
-    bottom: -.25em;
+    bottom: -.2em;
 }
 ul.inline {
     display: inline-block;
@@ -60,14 +63,37 @@ ul.inline li {
     opacity: .8;
     color: inherit;
 }
-h1, date {
+h1 {
+    margin-bottom: .25em;
     display: inline-block;
 }
 date {
-    margin-left: .75em;
-    margin-right: .75em;
+    display: block;
+    margin: .5em 0;
     opacity: .6;
     font-weight: 100;
+}
+td date {
+    display: inline-block;
+    margin-left: 1em;
+}
+.actions {
+    float: right;
+    margin-top: 1em;
+}
+.info {
+    display: inline-block;
+    margin-left: .5em;
+}
+.desc {
+    font-size: 1.2em;
+    font-weight: 100;
+}
+.info a {
+    color: #bbb;
+}
+.info a:hover {
+    color: #FA4866;
 }
 #works {
     padding: 0;
@@ -130,6 +156,7 @@ date {
 }
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-40 { font-size: 40px; }
 .material-icons.md-48 { font-size: 48px; }

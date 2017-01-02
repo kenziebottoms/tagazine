@@ -6,7 +6,24 @@
 
 {% block body %}
     <h1>{{ zine.title }}</h1>
-    <date>published since {{ zine.start_date|date:'b j, Y' }}</date>
+    <div class="info">
+        {% if zine.website != '' %}
+            <a href="{{ zine.website }}" target="blank">
+                <i class="material-icons md-30">launch</i>
+            </a>
+        {% endif %}
+        {% if zine.contact_email != '' %}
+            <a href="mailto:{{ zine.contact_email }}" target="blank">
+                <i class="material-icons md-30">mail_outline</i>
+            </a>
+        {% endif %}
+    </div>
+    <div class="actions">
+        <i class="material-icons md-48">playlist_add</i>
+        <i class="material-icons md-48">bookmark_border</i>
+    </div>
+    <date>{{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
+ 
     <div class="authors">
         Authors: {{ zine.authorsLink|safe }}
     </div>

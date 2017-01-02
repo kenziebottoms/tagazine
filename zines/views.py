@@ -11,9 +11,11 @@ def index(request):
 def user(request, user_id):
     user = get_object_or_404(User,pk=user_id)
     works = Authorship.objects.filter(user=user_id,hideIdentity=False)
+    guest_works = Issue.objects.filter(guest_authors=user_id)
     context = {
         'user' : user,
-        'works' : works
+        'works' : works,
+        'guest_works' : guest_works,
     }
     return render(request, 'zines/user.html', context)
 
@@ -29,8 +31,8 @@ def zine(request, zine_id):
     return render(request, 'zines/zine.html', context)
 
 def issue(request, zine_id, issue_no):
-    issue = Issue.objects.filter(zine=zine_id,number=issue_no)
+    issue = Issue.objects.filter(zine=zine_id,number=issue_no)[0]
     context = {
-        'issue' : issue[0],
+        'issue' : issue,
     }
     return render(request, 'zines/issue.html', context)
