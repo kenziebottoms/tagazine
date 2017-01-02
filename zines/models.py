@@ -75,13 +75,13 @@ class Issue(models.Model):
     cover = models.URLField(blank=True)
 
     def guestAuthorsLink(self):
-        guest_authors = self.guest_authors
+        guest_authors = self.guest_authors.all()
         if len(guest_authors.all()) == 1:
             return guest_authors.all()[0].link()
         else:
             string = ''
             for author in guest_authors:
-                string += author.authorLink()
+                string += author.link()
                 if author != guest_authors[len(guest_authors)-1]:
                     string += ', '
             return string
