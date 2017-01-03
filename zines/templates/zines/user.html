@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    {% load static %}
     <h1>{{ user }}</h1>
     <date>member since {{ user.member_since|date:'b j, Y' }}</date>
     <hr/>
@@ -12,24 +13,16 @@
         <h3>co-authored zines</h3>
         <table id="works">
             {% for work in works %}
-                <tr>
-                    <td>
-                        {{ work.zineLink|safe }} by {{ work.zine.authorsLink|safe }}
-                        <date>{{ work.zine.start_date|date:'b j, Y' }} – {% if work.zine.end_date != null %}{{ work.zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
-                    </td>
-                    <td>
-                        {% if work.zine.issueCount > 0 %}
-                            <i class="material-icons md-36">chrome_reader_mode</i>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if work.zine.website != '' %}
-                            <a href="{{ work.zine.website }}" target="blank">
-                                <i class="material-icons md-36">launch</i>
-                            </a>
-                        {% endif %}
-                    </td>
-                </tr>
+                <div class="issue">
+                    <div class="bg" style="background-image: url({% static work.zine.cover %})">
+                        &nbsp;
+                    </div>
+                    <a href="{% url 'zine' work.id %}">
+                        <div class="title">
+                            <span>{{ work.title }}</span>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </table>
     {% endif %}
@@ -37,22 +30,16 @@
         <h3>featured on</h3>
         <table id="works">
             {% for issue in guest_works %}
-                <tr>
-                    <td>
-                        <a href="{% url 'issue' issue.zine.id issue.number %}">{{ issue.displayTitle|safe }}</a> by {{ issue.zine.authorsLink|safe }}
-                        <date>{{ issue.pub_date|date:'b j, Y' }}</date>
-                    </td>
-                    <td>
-                        <a href="{% url 'issue' issue.zine.id issue.zine.firstIssue.number %}"><i class="material-icons md-36">chrome_reader_mode</i></a>
-                    </td>
-                    <td>
-                        {% if issue.zine.website != '' %}
-                            <a href="{{ issue.zine.website }}" target="blank">
-                                <i class="material-icons md-36">launch</i>
-                            </a>
-                        {% endif %}
-                    </td>
-                </tr>
+                <div class="issue">
+                    <div class="bg" style="background-image: url({% if issue.cover != '' %}{% static issue.cover %}{% else %}{{ issue.zine.cover }}{% endif %})">
+                        &nbsp;
+                    </div>
+                    <a href="{% url 'issue' issue.zine.id issue.number %}">
+                        <div class="title">
+                            <span>{{ issue.displayTitle }}</span>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </table>
     {% endif %}

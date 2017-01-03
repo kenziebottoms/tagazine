@@ -3,8 +3,10 @@ from .models import *
 
 def index(request):
     recent_issues = Issue.objects.order_by('pub_date')[:5]
+    new_users = User.objects.order_by('member_since')[:5]
     context = {
         'recent_issues' : recent_issues,
+        'new_users' : new_users,
     }
     return render(request, 'zines/index.html', context)
 

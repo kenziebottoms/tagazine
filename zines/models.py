@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 class User(models.Model):
     #required
@@ -32,7 +33,7 @@ class Zine(models.Model):
     tagline = models.CharField(max_length=500,blank=True)
     end_date = models.DateField('Published until', blank=True,null=True)
     website = models.URLField(blank=True)
-    zine_pic = models.URLField(blank=True)
+    cover = models.FileField(upload_to=settings.MEDIA_ROOT+'uploads')
     locale = models.CharField(max_length=500,blank=True)
 
     def issueCount(self):

@@ -22,4 +22,14 @@
             </div>
         {% endfor %}
     {% endif %}
+    {% if new_users %}
+        <div class="large-4 columns">
+            <h3>New Users</h3>
+            <ul>
+                {% for user in new_users %}
+                    <li>{{ user.link|safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 {% endblock %}
