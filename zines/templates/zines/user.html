@@ -14,12 +14,12 @@
         <table id="works">
             {% for work in works %}
                 <div class="issue">
-                    <div class="bg" style="background-image: url({% static work.zine.cover %})">
+                    <div class="bg" style="background-image: url(/static/zines/uploads/{{ work.zine.cover }})">
                         &nbsp;
                     </div>
                     <a href="{% url 'zine' work.id %}">
                         <div class="title">
-                            <span>{{ work.title }}</span>
+                            <span>{{ work.zine.title }}</span>
                         </div>
                     </a>
                 </div>
@@ -31,7 +31,7 @@
         <table id="works">
             {% for issue in guest_works %}
                 <div class="issue">
-                    <div class="bg" style="background-image: url({% if issue.cover != '' %}{% static issue.cover %}{% else %}{{ issue.zine.cover }}{% endif %})">
+                    <div class="bg" style="background-image: url(/static/zines/uploads/{% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.cover }}{% endif %})">
                         &nbsp;
                     </div>
                     <a href="{% url 'issue' issue.zine.id issue.number %}">

@@ -33,7 +33,7 @@ class Zine(models.Model):
     tagline = models.CharField(max_length=500,blank=True)
     end_date = models.DateField('Published until', blank=True,null=True)
     website = models.URLField(blank=True)
-    cover = models.FileField(upload_to=settings.MEDIA_ROOT+'uploads')
+    cover = models.FileField(upload_to='covers')
     locale = models.CharField(max_length=500,blank=True)
 
     def issueCount(self):
@@ -73,7 +73,7 @@ class Issue(models.Model):
     desc = models.TextField(blank=True)
     guest_authors = models.ManyToManyField(User,blank=True)
     number = models.IntegerField(default=1)
-    cover = models.URLField(blank=True)
+    cover = models.FileField(upload_to='covers')
 
     def guestAuthorsLink(self):
         guest_authors = self.guest_authors.all()
