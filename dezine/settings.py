@@ -120,4 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'zines/static/'
-MEDIA_ROOT = 'zines/static/zines/uploads'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'zines/media/'
