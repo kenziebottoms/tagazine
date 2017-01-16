@@ -19,7 +19,6 @@
         {% endif %}
     </div>
     <div class="actions">
-        <i class="material-icons md-48">playlist_add</i>
         <i class="material-icons md-48">bookmark_border</i>
     </div>
     <date>{{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
@@ -27,20 +26,21 @@
     <div class="authors">
         Authors: {{ zine.authorsLink|safe }}
     </div>
-    <hr/>
     {% if issues %}
-        {% for issue in issues %}
-            <div class="issue">
-                <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover.url }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
-                    &nbsp;
-                </div>
-                <a href="{% url 'issue' zine.id issue.number %}">
-                    <div class="title">
-                        <span>{{ issue.displayTitle }}</span>
+        <div class="block">
+            {% for issue in issues %}
+                <div class="issue">
+                    <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover.url }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
+                        &nbsp;
                     </div>
-                </a>
-            </div>
-        {% endfor %}
+                    <a href="{% url 'issue' zine.id issue.number %}">
+                        <div class="title">
+                            <span>{{ issue.displayTitle }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
         <p>This zine has not published any issues.</p> 
     {% endif %}

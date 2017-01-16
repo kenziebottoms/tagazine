@@ -14,6 +14,11 @@
         {% endif %}
     </div>
     <div class="desc">
+        {% if issue.cover != '' %}
+            <div class="cover" style="background-image: url({{ issue.cover.url }})">
+                &nbsp;
+            </div>
+        {% endif %}
         <p>{{ issue.desc }}</p>
     </div>
     <hr/>

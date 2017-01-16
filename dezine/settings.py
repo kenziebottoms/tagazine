@@ -122,4 +122,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'zines/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'zines/media/'
+MEDIA_ROOT = 'zines/media/zines/'

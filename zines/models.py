@@ -8,7 +8,10 @@ class User(models.Model):
     member_since = models.DateField('Member since')
     #optional
     name = models.CharField(max_length=500,blank=True)
-#    user_pic = models.ImageField(upload_to='user_pics',blank=True)
+    bio = models.TextField(blank=True)
+    website = models.URLField(blank=True)
+    contact_email = models.EmailField(blank=True)
+    user_pic = models.FileField(upload_to='users',blank=True)
 
     def link(self):
         return '<a href="'+reverse('user', args=(self.id,))+'">'+self.__str__()+'</a>'

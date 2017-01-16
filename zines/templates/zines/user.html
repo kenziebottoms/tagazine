@@ -7,31 +7,44 @@
 {% block body %}
     {% load static %}
     <h1>{{ user }}</h1>
+    <div class="info">
+        {% if user.website != '' %}
+            <a href="{{ user.website }}" target="blank">
+                <i class="material-icons md-30">launch</i>
+            </a>
+        {% endif %}
+        {% if user.contact_email != '' %}
+            <a href="mailto:{{ user.contact_email }}" target="blank">
+                <i class="material-icons md-30">mail_outline</i>
+            </a>
+        {% endif %}
+    </div>
     <date>member since {{ user.member_since|date:'b j, Y' }}</date>
+    <p>{{ user.bio }}</p>
     <hr/>
     {% if works %}
-        <h3>co-authored zines</h3>
-        <table id="works">
+        <div class="zines">
+            <h3>co-authored zines</h3>
             {% for work in works %}
                 <div class="issue">
-                    <div class="bg" style="background-image: url(/static/zines/uploads/{{ work.zine.cover }})">
+                    <div class="bg" style="background-image: url(/media/{{ work.zine.cover }})">
                         &nbsp;
                     </div>
-                    <a href="{% url 'zine' work.id %}">
+                    <a href="{% url 'zine' work.zine.id %}">
                         <div class="title">
                             <span>{{ work.zine.title }}</span>
                         </div>
                     </a>
                 </div>
             {% endfor %}
-        </table>
+        </div>
     {% endif %}
     {% if guest_works %}
-        <h3>featured on</h3>
-        <table id="works">
+        <div class="block">
+            <h3>featured on</h3>
             {% for issue in guest_works %}
                 <div class="issue">
-                    <div class="bg" style="background-image: url(/static/zines/uploads/{% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.cover }}{% endif %})">
+                    <div class="bg" style="background-image: url(/media/{% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.cover }}{% endif %})">
                         &nbsp;
                     </div>
                     <a href="{% url 'issue' issue.zine.id issue.number %}">
@@ -41,7 +54,7 @@
                     </a>
                 </div>
             {% endfor %}
-        </table>
+        </div>
     {% endif %}
 
 {% endblock %}

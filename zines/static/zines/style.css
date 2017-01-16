@@ -88,6 +88,20 @@ td date {
 .desc {
     font-size: 1.2em;
     font-weight: 100;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+.desc p {
+    flex: 2 150%;
+}
+.cover {
+    flex: 1 100%;
+    width: 33.333%;
+    float: right;
+    background-size: cover;
+    background-position: center;
+    margin: 1rem 1rem 1rem 0;
 }
 .info a {
     color: #bbb;
@@ -116,6 +130,9 @@ td date {
     content: ',';
     margin-left: -3px;
     padding: 0;
+}
+.block {
+    margin: 1.5rem 0;
 }
 .issue {
     background-color: #000;
