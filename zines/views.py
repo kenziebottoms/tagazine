@@ -3,23 +3,23 @@ from .models import *
 
 def index(request):
     recent_issues = Issue.objects.order_by('pub_date')[:5]
-    new_users = User.objects.order_by('member_since')[:5]
+    new_users = Profile.objects.order_by('member_since')[:5]
     context = {
         'recent_issues' : recent_issues,
         'new_users' : new_users,
     }
     return render(request, 'zines/index.html', context)
 
-def user(request, user_id):
-    user = get_object_or_404(User,pk=user_id)
-    works = Authorship.objects.filter(user=user_id,hideIdentity=False)
-    guest_works = Issue.objects.filter(guest_authors=user_id)
+def profile(request, profile_id):
+    profile = get_object_or_404(Profile,pk=profile_id)
+    works = Authorship.objects.filter(user_profile=profile_id,hideIdentity=False)
+    guest_works = Issue.objects.filter(guest_authors=profile_id)
     context = {
-        'user' : user,
+        'user' : profile,
         'works' : works,
         'guest_works' : guest_works,
     }
-    return render(request, 'zines/user.html', context)
+    return render(request, 'zines/profile.html', context)
 
 def zine(request, zine_id):
     zine = get_object_or_404(Zine,pk=zine_id)

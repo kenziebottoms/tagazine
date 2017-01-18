@@ -2,30 +2,44 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 
-class User(models.Model):
+# integrating native User model
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class Profile(models.Model):
     #required
-    username = models.CharField(max_length=200)
-    member_since = models.DateField('Member since')
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    member_since = models.DateField(auto_now=True)
     #optional
     name = models.CharField(max_length=500,blank=True)
     bio = models.TextField(blank=True)
     website = models.URLField(blank=True)
     contact_email = models.EmailField(blank=True)
-    user_pic = models.FileField(upload_to='users',blank=True)
+    pic = models.FileField(upload_to='users',blank=True)
 
     def link(self):
-        return '<a href="'+reverse('user', args=(self.id,))+'">'+self.__str__()+'</a>'
+        return '<a href="'+reverse('profile', args=(self.id,))+'">'+self.__str__()+'</a>'
     def __str__(self):
         if self.name != '':
             return self.name
         else:
-            return self.username
+            return self.user.username
+
+@receiver(post_save,sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save,sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Zine(models.Model):
     #required
     title = models.CharField(max_length=500)
     start_date = models.DateField('Published since')
-    authors = models.ManyToManyField(User, through='Authorship')
+    authors = models.ManyToManyField(Profile, through='Authorship')
     show_author = models.BooleanField(default=True)
     external = models.BooleanField(default=False)
     submissions_open = models.BooleanField(default=False)
@@ -74,7 +88,7 @@ class Issue(models.Model):
     #optional
     title = models.CharField(max_length=500,blank=True)
     desc = models.TextField(blank=True)
-    guest_authors = models.ManyToManyField(User,blank=True)
+    guest_authors = models.ManyToManyField(Profile,blank=True)
     number = models.IntegerField(default=1)
     cover = models.FileField(upload_to='covers')
 
@@ -107,7 +121,7 @@ class Issue(models.Model):
 
 class Authorship(models.Model):
     zine = models.ForeignKey(Zine,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     date_joined = models.DateField()
     hideIdentity = models.BooleanField('Hide Identity',default=False)
 
@@ -115,7 +129,7 @@ class Authorship(models.Model):
         if self.hideIdentity:
             return 'Anonymous'
         else:
-            return self.user.link()
+            return self.user_profile.link()
 
     def zineLink(self):
         return self.zine.link()
@@ -128,5 +142,5 @@ class Authorship(models.Model):
         if self.hideIdentity:
             string += 'Anonymous'
         else:
-            string += self.user.__str__()
+            string += self.user_profile.__str__()
         return string

@@ -35,6 +35,11 @@
                 <li>
                     <a href="{% url 'index' %}">home</a>
                 </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profile' user.user_profile.id %}">profile</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
             {% block body %} {% endblock %}
