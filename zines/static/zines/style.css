@@ -19,6 +19,7 @@ ul.inline {
     list-style-type: none;
 }
 ul.inline li {
+    margin-left: 1rem;
     display: inline-block;
 }
 #wrapper {
