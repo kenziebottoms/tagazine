@@ -34,7 +34,9 @@ def zine(request, zine_id):
 
 def issue(request, zine_id, issue_no):
     issue = Issue.objects.filter(zine=zine_id,number=issue_no)[0]
+    pages = Page.objects.filter(issue=issue.id)
     context = {
         'issue' : issue,
+        'pages' : pages,
     }
     return render(request, 'zines/issue.html', context)

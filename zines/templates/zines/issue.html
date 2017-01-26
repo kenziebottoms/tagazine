@@ -15,14 +15,21 @@
     </div>
     <div class="desc">
         {% if issue.cover != '' %}
-            <div class="cover" style="background-image: url({{ issue.cover.url }})">
-                &nbsp;
+            <div class="cover large-4 medium-6 small-12 columns">
+                <img src="{{ issue.cover.url }}"/>
             </div>
         {% endif %}
         <p>{{ issue.desc }}</p>
     </div>
     <hr/>
     {% if pages %}
+        {% for page in pages %}
+            <div class="page large-4 medium-6 small-12 columns">
+                <a data-lightbox="pages" data-title="{{ page.subtitles|safe }}" href="{{ page.content.url }}">
+                    <img src="{{ page.content.url }}"/>
+                </a>
+            </div>
+        {% endfor %}
     {% else %}
         <p>This issue has no pages.</p> 
     {% endif %}

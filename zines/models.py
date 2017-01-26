@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
+import os, re
 
 # integrating native User model
 from django.contrib.auth.models import User
@@ -144,3 +145,14 @@ class Authorship(models.Model):
         else:
             string += self.user_profile.__str__()
         return string
+
+class Page(models.Model):
+    issue = models.ForeignKey(Issue,on_delete=models.CASCADE)
+    content = models.FileField(upload_to='issues')
+    subtitles = models.TextField(blank=True)
+    class Meta:
+        order_with_respect_to = 'issue'
+    def __str__(self):
+        pages = map(int,Page.objects.filter(issue=self.issue).values_list('id',flat=True))
+        pageNo = pages.index(self.id)+1
+        return (self.issue.displayTitle() + '.' + str(pageNo))

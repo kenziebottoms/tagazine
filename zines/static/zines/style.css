@@ -88,20 +88,16 @@ td date {
 .desc {
     font-size: 1.2em;
     font-weight: 100;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
 }
-.desc p {
-    flex: 2 150%;
+.desc img {
+    display: block;
+    width: 100%;
+    height: auto;
+    width: auto;
 }
-.cover {
-    flex: 1 100%;
-    width: 33.333%;
-    float: right;
-    background-size: cover;
-    background-position: center;
-    margin: 1rem 1rem 1rem 0;
+.desc .cover {
+    padding-left: 0;
+    padding-bottom: 1.25em;
 }
 .info a {
     color: #bbb;
@@ -171,6 +167,9 @@ td date {
 .issue .title:hover {
     background: rgba(255, 255, 255, .2);
 }
+.page {
+    margin-bottom: 1rem;
+}
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-30 { font-size: 30px; }
@@ -180,5 +179,8 @@ td date {
 .material-icons.md-60 { font-size: 60px; }
 
 .clearfix {
+    clear: both;
+}
+hr {
     clear: both;
 }

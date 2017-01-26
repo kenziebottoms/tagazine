@@ -26,6 +26,15 @@
     <div class="authors">
         Authors: {{ zine.authorsLink|safe }}
     </div>
+    <div class="desc">
+        {% if zine.cover != '' %}
+            <div class="cover large-4 medium-6 small-12 columns">
+                <img src="{{ zine.cover.url }}"/>
+            </div>
+        {% endif %}
+        <p>{{ zine.desc|safe }}</p>
+    </div>
+    <hr/>
     {% if issues %}
         <div class="block">
             {% for issue in issues %}
