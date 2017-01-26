@@ -1,7 +1,7 @@
 {% extends 'zines/base.html' %}
 
 {% block title %}
-    {{ zine }}
+    {{ zine }} :: Edit
 {% endblock %}
 
 {% block editor %}
@@ -9,13 +9,23 @@
         {% for authorship in authorships %}
             {% if authorship.user_profile == user.profile %}
                 <a href="{% url 'edit_zine' zine.id %}">
-                    <i class="material-icons md-48">edit</i>
+                    <i class="material-icons md-48">save</i>
+                </a>
+                &nbsp;
+            {% endif %}
+        {% endfor %}
+        {% for authorship in authorships %}
+            {% if authorship.user_profile == user.profile %}
+                <a href="{% url 'zine' zine.id %}">
+                    <i class="material-icons md-48">close</i>
                 </a>
                 &nbsp;
             {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
+
+{% block classes %}editor{% endblock %}
 
 {% block body %}
     <h1>{{ zine.title }}</h1>

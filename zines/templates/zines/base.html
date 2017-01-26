@@ -27,25 +27,26 @@
         <link href="{% static 'zines/lightbox2-master/src/css/lightbox.css' %}" rel="stylesheet">
         <script src="{% static 'zines/lightbox2-master/src/js/lightbox.js' %}"></script>
     </head>
-    <body>
+    <body class="{% block classes %}{% endblock %}">
+        {% block editor %} {% endblock %}
         <div id="wrapper">
-        <div id="header">
-            <div id="logo">
-                <a href="/zines">
-                    <i class="material-icons md-40">subtitles</i>end<span>zine </span>
-                </a>
-            </div>
-            <ul class="menu inline">
-                <li>
-                    <a href="{% url 'index' %}">home</a>
-                </li>
-                {% if user.is_authenticated %}
+            <div id="header">
+                <div id="logo">
+                    <a href="/zines">
+                        <i class="material-icons md-40">subtitles</i>end<span>zine </span>
+                    </a>
+                </div>
+                <ul class="menu inline">
                     <li>
-                        <a href="{% url 'profile' user.profile.id %}">profile</a>
+                        <a href="{% url 'index' %}">home</a>
                     </li>
-                {% endif %}
-            </ul>
-        </div>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'profile' user.profile.id %}">profile</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
             {% block body %} {% endblock %}
         </div>
         {% block scripts %} {% endblock %}

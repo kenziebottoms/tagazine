@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from .forms import *
 
 def index(request):
     recent_issues = Issue.objects.order_by('pub_date')[:5]
@@ -31,6 +32,29 @@ def zine(request, zine_id):
         'authorships' : authorships,
     }
     return render(request, 'zines/zine.html', context)
+
+def edit_zine(request, zine_id):
+    zine = get_object_or_404(Zine,pk=zine_id)
+    issues = Issue.objects.filter(zine=zine_id)
+    authorships = Authorship.objects.filter(zine=zine_id)
+    context = {
+        'zine' : zine,
+        'issues' : issues,
+        'authorships' : authorships,
+    }
+    if request.method == "POST":
+        form = ZineForm(request.POST,instance=zine)
+        if form.is_valid():
+            context['response'] = 1
+            zine = zine.save()
+            context['zine'] = zine
+        else:
+            context['response'] = 0
+            context['error'] = 'Invalid input'
+    else:
+        form = ZineForm(instance=zine)
+    context['form'] = form
+    return render(request, 'zines/edit-zine.html', context)
 
 def issue(request, zine_id, issue_no):
     issue = Issue.objects.filter(zine=zine_id,number=issue_no)[0]

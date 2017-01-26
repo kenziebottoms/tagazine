@@ -2,12 +2,22 @@ body {
     margin: auto;
     font-size: 17px;
     font-family: 'Roboto', sans-serif;
+    background: #fff;
+    color: #333;
+}
+body.editor {
+    background: #333;
+    color: #fff;
+}
+body.editor #editor {
+    background: #fff;
+    color: #333;
 }
 a {
     color: #FA4866;
 }
 a:hover {
-    color: #000;
+    color: #333;
 }
 i {
     position: relative;
@@ -21,6 +31,17 @@ ul.inline {
 ul.inline li {
     margin-left: 1rem;
     display: inline-block;
+}
+#editor {
+    position: fixed;
+    top: 20%;
+    left: 0;
+    padding: 0 0 .75rem .5rem;
+    border-radius: 0 .5rem .5rem 0;
+    background: #333;
+}
+#editor a:hover {
+    color: inherit;
 }
 #wrapper {
     width: 100%;
@@ -48,7 +69,7 @@ ul.inline li {
     font-size: 1.2rem;
     margin-left: 1em;
     padding: 0;
-    color: #000;
+    color: #333;
     font-weight: 100;
     list-style-type: none;
     text-transform: uppercase;
@@ -57,12 +78,11 @@ ul.inline li {
     display: inline-block;
 }
 #header li a {
-    opacity: .6;
-    color: inherit;
+    opacity: .5;
 }
 #header li a:hover {
-    opacity: .8;
-    color: inherit;
+    opacity: 1;
+    color: #FA4866;
 }
 h1 {
     margin-bottom: .25em;
@@ -81,6 +101,12 @@ td date {
 .actions {
     float: right;
     margin-top: 1em;
+}
+.actions .edit {
+    display: inline;
+    background: #333;
+    padding: 5px 0 5px 5px;
+    border-radius: 5px;
 }
 .info {
     display: inline-block;
@@ -132,7 +158,7 @@ td date {
     margin: 1.5rem 0;
 }
 .issue {
-    background-color: #000;
+    background-color: #333;
     padding: 0;
     width: 100%;
     height: 200px;
