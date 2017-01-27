@@ -145,6 +145,8 @@ class Authorship(models.Model):
         else:
             string += self.user_profile.__str__()
         return string
+    class Meta:
+        auto_created = True
 
 class Page(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE)

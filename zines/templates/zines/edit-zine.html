@@ -8,14 +8,6 @@
     <div id="editor">
         {% for authorship in authorships %}
             {% if authorship.user_profile == user.profile %}
-                <a href="{% url 'edit_zine' zine.id %}">
-                    <i class="material-icons md-48">save</i>
-                </a>
-                &nbsp;
-            {% endif %}
-        {% endfor %}
-        {% for authorship in authorships %}
-            {% if authorship.user_profile == user.profile %}
                 <a href="{% url 'zine' zine.id %}">
                     <i class="material-icons md-48">close</i>
                 </a>
@@ -28,52 +20,20 @@
 {% block classes %}editor{% endblock %}
 
 {% block body %}
-    <h1>{{ zine.title }}</h1>
-    <div class="info">
-        {% if zine.website != '' %}
-            <a href="{{ zine.website }}" target="blank">
-                <i class="material-icons md-30">launch</i>
-            </a>
-        {% endif %}
-        {% if zine.contact_email != '' %}
-            <a href="mailto:{{ zine.contact_email }}" target="blank">
-                <i class="material-icons md-30">mail_outline</i>
-            </a>
-        {% endif %}
-    </div>
-    <div class="actions">
-        <i class="material-icons md-48">bookmark_border</i>
-    </div>
-    <date>{{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
- 
-    <div class="authors">
-        Authors: {{ zine.authorsLink|safe }}
-    </div>
-    <div class="desc">
-        {% if zine.cover != '' %}
-            <div class="cover large-4 medium-6 small-12 columns">
-                <img src="{{ zine.cover.url }}"/>
-            </div>
-        {% endif %}
-        <p>{{ zine.desc|safe }}</p>
-    </div>
-    <hr/>
-    {% if issues %}
-        <div class="block">
-            {% for issue in issues %}
-                <div class="issue">
-                    <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover.url }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
-                        &nbsp;
-                    </div>
-                    <a href="{% url 'issue' zine.id issue.number %}">
-                        <div class="title">
-                            <span>{{ issue.displayTitle }}</span>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+    <form id="edit-zine" name="editZine" method="POST">
+        {{ form }}
+        <div id="quill">
+            {{ zine.desc|safe }}
         </div>
-    {% else %}
-        <p>This zine has not published any issues.</p> 
-    {% endif %}
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('input[type=submit').on('mouseenter focusin', function() {
+            updateQuillHiddenInput('id_desc');
+        });
+    </script>
 {% endblock %}

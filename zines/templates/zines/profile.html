@@ -1,26 +1,26 @@
 {% extends 'zines/base.html' %}
 
 {% block title %}
-    {{ user }}
+    {{ profile }}
 {% endblock %}
 
 {% block body %}
     {% load static %}
-    <h1>{{ user }}</h1>
+    <h1>{{ profile }}</h1>
     <div class="info">
-        {% if user.website != '' %}
-            <a href="{{ user.website }}" target="blank">
+        {% if profile.website != '' %}
+            <a href="{{ profile.website }}" target="blank">
                 <i class="material-icons md-30">launch</i>
             </a>
         {% endif %}
-        {% if user.contact_email != '' %}
-            <a href="mailto:{{ user.contact_email }}" target="blank">
+        {% if profile.contact_email != '' %}
+            <a href="mailto:{{ profile.contact_email }}" target="blank">
                 <i class="material-icons md-30">mail_outline</i>
             </a>
         {% endif %}
     </div>
-    <date>member since {{ user.member_since|date:'b j, Y' }}</date>
-    <p>{{ user.bio }}</p>
+    <date>member since {{ profile.member_since|date:'b j, Y' }}</date>
+    <p>{{ profile.bio }}</p>
     <hr/>
     {% if works %}
         <div class="zines">

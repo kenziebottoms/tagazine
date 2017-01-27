@@ -26,6 +26,11 @@
         <!-- lightbox -->
         <link href="{% static 'zines/lightbox2-master/src/css/lightbox.css' %}" rel="stylesheet">
         <script src="{% static 'zines/lightbox2-master/src/js/lightbox.js' %}"></script>
+
+        <!-- Main Quill library -->
+        <script src="//cdn.quilljs.com/1.1.7/quill.js"></script>
+        <script src="//cdn.quilljs.com/1.1.7/quill.min.js"></script>
+        <link href="https://cdn.quilljs.com/1.1.7/quill.snow.css" rel="stylesheet">
     </head>
     <body class="{% block classes %}{% endblock %}">
         {% block editor %} {% endblock %}
@@ -49,6 +54,16 @@
             </div>
             {% block body %} {% endblock %}
         </div>
+
+        <script>
+            var quill = new Quill('#quill', {
+                theme: 'snow'
+            });
+            function updateQuillHiddenInput(hiddenInputID) {
+                $input = $('#'+hiddenInputID);
+                $input.val($('#quill>div')[0].innerHTML);
+            }
+        </script>
         {% block scripts %} {% endblock %}
     </body>
 </html>

@@ -40,8 +40,19 @@ ul.inline li {
     border-radius: 0 .5rem .5rem 0;
     background: #333;
 }
-#editor a:hover {
+.editor a:hover {
+    color: #fff;
+}
+.editor #editor a:hover {
+    color: #333;
+}
+.editor input, .editor select {
+    background: transparent;
+    box-shadow: none;
     color: inherit;
+}
+.editor input:focus {
+    background: #444;
 }
 #wrapper {
     width: 100%;
@@ -210,4 +221,17 @@ td date {
 }
 hr {
     clear: both;
+}
+
+.ql-toolbar * {
+    color: #fff !important;
+}
+.ql-stroke {
+    stroke: #fff !important;
+}
+.ql-fill {
+    fill: #fff !important;
+}
+.ql-editor p {
+    margin-bottom: 1rem;
 }

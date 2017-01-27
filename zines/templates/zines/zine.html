@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block editor %}
-    <div id="editor">
-        {% for authorship in authorships %}
-            {% if authorship.user_profile == user.profile %}
+    {% for authorship in authorships %}
+        {% if authorship.user_profile == user.profile %}
+            <div id="editor">
                 <a href="{% url 'edit_zine' zine.id %}">
                     <i class="material-icons md-48">edit</i>
                 </a>
                 &nbsp;
-            {% endif %}
-        {% endfor %}
-    </div>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
 
 {% block body %}

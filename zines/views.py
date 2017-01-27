@@ -3,7 +3,7 @@ from .models import *
 from .forms import *
 
 def index(request):
-    recent_issues = Issue.objects.order_by('pub_date')[:5]
+    recent_issues = Issue.objects.order_by('-pub_date')[:3]
     new_users = Profile.objects.order_by('member_since')[:5]
     context = {
         'recent_issues' : recent_issues,
@@ -16,7 +16,7 @@ def profile(request, profile_id):
     works = Authorship.objects.filter(user_profile=profile_id,hideIdentity=False)
     guest_works = Issue.objects.filter(guest_authors=profile_id)
     context = {
-        'user' : profile,
+        'profile' : profile,
         'works' : works,
         'guest_works' : guest_works,
     }
@@ -46,7 +46,7 @@ def edit_zine(request, zine_id):
         form = ZineForm(request.POST,instance=zine)
         if form.is_valid():
             context['response'] = 1
-            zine = zine.save()
+            zine = form.save()
             context['zine'] = zine
         else:
             context['response'] = 0
