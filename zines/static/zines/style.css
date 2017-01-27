@@ -13,6 +13,10 @@ body.editor #editor {
     background: #fff;
     color: #333;
 }
+input, select {
+    font-size: 17px !important;
+    font-weight: 100 !important;
+}
 a {
     color: #FA4866;
 }
@@ -41,6 +45,9 @@ ul.inline li {
     background: #333;
 }
 .editor a:hover {
+    color: #fff;
+}
+#editor a:hover {
     color: #fff;
 }
 .editor #editor a:hover {
@@ -232,6 +239,11 @@ hr {
 .ql-fill {
     fill: #fff !important;
 }
+.ql-editor {
+    padding: 0 !important;
+    font-size: 1rem;
+    font-weight: 100;
+}
 .ql-editor p {
-    margin-bottom: 1rem;
+    margin: 1rem !important;
 }
