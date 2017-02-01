@@ -247,3 +247,21 @@ hr {
 .ql-editor p {
     margin: 1rem !important;
 }
+
+input.heading {
+    font-size: 2rem !important;
+    height: auto;
+    font-weight: bold !important;
+}
+label {
+    display: block !important;
+}
+#id_end_date_month,
+#id_end_date_day,
+#id_end_date_year,
+#id_start_date_month,
+#id_start_date_day,
+#id_start_date_year {
+    width: 33%;
+    display: inline-block;
+}
