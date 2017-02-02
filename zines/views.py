@@ -14,7 +14,9 @@ def index(request):
 def profile(request, profile_id):
     profile = get_object_or_404(Profile,pk=profile_id)
     works = Authorship.objects.filter(user_profile=profile_id,hideIdentity=False)
-    guest_works = Issue.objects.filter(guest_authors=profile_id)
+    works = sorted(works, key=lambda i: i.zine.lastUpdated())
+    works.reverse()
+    guest_works = Issue.objects.filter(guest_authors=profile_id).order_by('pub_date')
     context = {
         'profile' : profile,
         'works' : works,

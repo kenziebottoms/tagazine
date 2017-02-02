@@ -4,23 +4,29 @@
     welcome
 {% endblock %}
 
+{% block classes %}home{% endblock %}
+
 {% block body %}
     <h1>welcome</h1>
     <hr/>
     {% if recent_issues %}
-        <h3>Recent Issues</h3>
-        {% for issue in recent_issues %}
-            <div class="issue">
-                <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover.url }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
-                    &nbsp;
-                </div>
-                <a href="{% url 'issue' issue.zine.id issue.number %}">
-                    <div class="title">
-                        <span>{{ issue.displayTitle }}</span>
+        <div class="large-8 medium-6 small-12 columns">
+            <h3>Recent Issues</h3>
+            {% for issue in recent_issues %}
+                <div class="issue">
+                    <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover.url }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
+                        &nbsp;
                     </div>
-                </a>
-            </div>
-        {% endfor %}
+                    <a href="{% url 'issue' issue.zine.id issue.number %}">
+                        <div class="title">
+                            <span>{{ issue.displayTitle }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No issues have been published.</p>
     {% endif %}
     {% if new_users %}
         <div class="large-4 columns">

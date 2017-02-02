@@ -37,12 +37,13 @@
     <date>{{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
  
     <div class="authors">
-        Authors: {{ zine.authorsLink|safe }}
+        Authors: {{ zine.authorsLink|safe }}<br/>
+        Locale: {{ zine.locale }}
     </div>
     <div class="desc">
         {% if zine.cover != '' %}
-            <div class="cover large-4 medium-6 small-12 columns">
-                <img src="{{ zine.cover.url }}"/>
+            <div class="cover large-3 medium-6 small-12 columns">
+                <a data-lightbox="cover" href="{{ zine.cover.url }}"><img src="{{ zine.cover.url }}"/></a>
             </div>
         {% endif %}
         <p>{{ zine.desc|safe }}</p>

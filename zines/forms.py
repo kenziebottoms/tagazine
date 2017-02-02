@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 class ZineForm(ModelForm):
     class Meta:
         model = Zine
-        fields = ['title', 'start_date', 'end_date', 'authors', 'show_author', 'external', 'submissions_open', 'desc', 'contact_email', 'submission_email', 'tagline', 'website', 'cover', 'locale']
+        fields = ['title', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'authors', 'desc', 'contact_email', 'submission_email', 'tagline', 'website', 'cover', 'locale']
         widgets = {
             'title' : forms.TextInput(attrs={
                 'class':'heading',

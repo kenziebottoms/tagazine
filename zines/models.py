@@ -72,9 +72,15 @@ class Zine(models.Model):
                     string += ', '
             return string
 
+    def lastUpdated(self):
+        issues = Issue.objects.filter(zine=self.id)
+        if issues:
+            return issues.latest('pub_date').pub_date
+        else:
+            return False
+
     def firstIssue(self):
-        issue = Issue.objects.filter(zine=self.id).order_by('number')[0]
-        return issue
+        return Issue.objects.filter(zine=self.id).order_by('number').first()
 
     def __str__(self):
         if self.tagline != '':

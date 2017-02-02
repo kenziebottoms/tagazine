@@ -21,7 +21,22 @@
 
 {% block body %}
     <form id="edit-zine" name="editZine" method="POST">
-        {{ form }}
+        {% for field in form.visible_fields %}
+            <div id="{{ field.id_for_label }}">
+                <p class="error">
+                    {{ field.errors }}
+                </p>
+                {% if field.id_for_label == "id_cover" %}
+                    <img class="preview" src="{{ field.value.url }}"/>
+                {% endif %}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        <label>Desc:</label>
         <div id="quill">
             {{ zine.desc|safe }}
         </div>
