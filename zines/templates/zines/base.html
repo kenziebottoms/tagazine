@@ -9,7 +9,8 @@
         <!-- foundation -->
         <link rel="stylesheet" href="{% static 'zines/foundation/css/foundation.css' %}"/>
         <!-- custom stylesheet -->
-        <link rel="stylesheet" href="{% static 'zines/style.css' %}"/>
+        {% load sass_tags %}
+        <link rel="stylesheet" href="{% sass_src 'zines/style.scss' %}"/>
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

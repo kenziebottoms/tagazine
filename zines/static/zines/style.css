@@ -1,309 +1,319 @@
 body {
-    margin: auto;
-    font-size: 17px;
-    font-family: 'Roboto', sans-serif;
-    background: #fff;
-    color: #333;
-}
+  margin: auto;
+  font-size: 17px;
+  font-family: 'Roboto', sans-serif;
+  background: #fff;
+  color: #333; }
+
 body.editor {
+  background: #333;
+  color: #fff; }
+  body.editor #editor {
     background: #333;
-    color: #fff;
-}
-body.editor #editor {
-    background: #fff;
-    color: #333;
-}
+    color: #fff; }
+
 input, select {
-    font-size: 17px !important;
-    font-weight: 100 !important;
-}
+  font-size: 17px !important;
+  font-weight: 100 !important; }
+
 a {
-    color: #FA4866;
-}
+  color: #FA4866; }
+
 a:hover {
-    color: #333;
-}
+  color: #333; }
+
 i {
-    position: relative;
-    bottom: -.2em;
-}
+  position: relative;
+  bottom: -.2em; }
+
 ul.inline {
-    display: inline-block;
-    padding: 0;
-    list-style-type: none;
-}
+  display: inline-block;
+  padding: 0;
+  list-style-type: none; }
+
 ul.inline li {
-    margin-left: 1rem;
-    display: inline-block;
-}
+  margin-left: 1rem;
+  display: inline-block; }
+
 #editor {
-    position: fixed;
-    top: 20%;
-    left: 0;
-    padding: 0 0 .75rem .5rem;
-    border-radius: 0 .5rem .5rem 0;
-    background: #333;
-}
+  position: fixed;
+  top: 20%;
+  left: 0;
+  padding: 0 0 .75rem .5rem;
+  border-radius: 0 .5rem .5rem 0;
+  background: #333; }
+
 .editor a:hover {
-    color: #fff;
-}
+  color: #fff; }
+
 #editor a:hover {
-    color: #fff;
-}
+  color: #fff; }
+
 .editor #editor a:hover {
-    color: #333;
-}
+  color: #333; }
+
 .editor input, .editor select {
-    background: transparent;
-    box-shadow: none;
-    color: inherit;
-}
+  background: transparent;
+  box-shadow: none;
+  color: inherit; }
+
 .editor input:focus {
-    background: #444;
-}
+  background: #444; }
+
 #wrapper {
-    width: 100%;
-    max-width: 60rem;
-    margin: auto;
-}
+  width: 100%;
+  max-width: 60rem;
+  margin: auto; }
+
 #logo {
-    font-size: 50px;
-    font-weight: 100;
-    display: inline-block;
-}
+  font-size: 50px;
+  font-weight: 100;
+  display: inline-block; }
+
 #logo span {
-    font-weight: 800;
-    color: #FA4866;
-}
+  font-weight: 800;
+  color: #FA4866; }
+
 #logo i {
-    position: relative;
-    bottom: -7px;
-    color: #FA4866;
-}
+  position: relative;
+  bottom: -7px;
+  color: #FA4866; }
+
 #logo a {
-    color: inherit;
-}
+  color: inherit; }
+
 #header ul {
-    font-size: 1.2rem;
-    margin-left: 1em;
-    padding: 0;
-    color: #333;
-    font-weight: 100;
-    list-style-type: none;
-    text-transform: uppercase;
-}
+  font-size: 1.2rem;
+  margin-left: 1em;
+  padding: 0;
+  color: #333;
+  font-weight: 100;
+  list-style-type: none;
+  text-transform: uppercase; }
+
 #header li {
-    display: inline-block;
-}
+  display: inline-block; }
+
 #header li a {
-    opacity: .5;
-}
+  opacity: .5; }
+
 #header li a:hover {
-    opacity: 1;
-    color: #FA4866;
-}
+  opacity: 1;
+  color: #FA4866; }
+
 h1 {
-    margin-bottom: .25em;
-    display: inline-block;
-}
+  margin-bottom: .25em;
+  display: inline-block; }
+
 date {
-    display: block;
-    margin: .5em 0;
-    opacity: .6;
-    font-weight: 100;
-}
+  display: block;
+  margin: .5em 0;
+  opacity: .6;
+  font-weight: 100; }
+
 td date {
-    display: inline-block;
-    margin-left: 1em;
-}
+  display: inline-block;
+  margin-left: 1em; }
+
 .actions {
-    float: right;
-    margin-top: 1em;
-}
+  float: right;
+  margin-top: 1em; }
+
 .actions .edit {
-    display: inline;
-    background: #333;
-    padding: 5px 0 5px 5px;
-    border-radius: 5px;
-}
+  display: inline;
+  background: #333;
+  padding: 5px 0 5px 5px;
+  border-radius: 5px; }
+
 .info {
-    display: inline-block;
-    margin-left: .5em;
-}
+  display: inline-block;
+  margin-left: .5em; }
+
 .desc {
-    font-size: 1.2em;
-    font-weight: 100;
-}
+  font-size: 1.2em;
+  font-weight: 100; }
+
 .desc img {
-    display: block;
-    width: 100%;
-    height: auto;
-    width: auto;
-}
+  display: block;
+  width: 100%;
+  height: auto;
+  width: auto; }
+
 .desc .cover {
-    padding: 0;
-    margin: 0 1rem 1rem 0;
-    background: #fafafa;
-    font-size: 1.1em;
-}
+  padding: 0;
+  margin: 0 1rem 1rem 0;
+  background: #fafafa;
+  font-size: 1.1em; }
+
 .desc .cover p {
-    margin: .5em 0;
-    line-height: 1;
-}
+  margin: .5em 0;
+  line-height: 1; }
+
 .info a {
-    color: #bbb;
-}
+  color: #bbb; }
+
 .info a:hover {
-    color: #FA4866;
-}
+  color: #FA4866; }
+
 #works {
-    padding: 0;
-    list-style-type: none;
-    margin: 0;
-    width: 100%;
-    border-collapse: collapse;
-}
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+  width: 100%;
+  border-collapse: collapse; }
+
 #works td {
-    padding: 0 1em .6em 1em;
-}
+  padding: 0 1em .6em 1em; }
+
 #works td:first-child {
-    padding: 1em;
-    width: 100%;
-}
+  padding: 1em;
+  width: 100%; }
+
 #works tr:nth-child(2n) {
-    background: #f7f7f7;
-}
+  background: #f7f7f7; }
+
 .authors ul li:not(:last-child):after {
-    content: ',';
-    margin-left: -3px;
-    padding: 0;
-}
+  content: ',';
+  margin-left: -3px;
+  padding: 0; }
+
 .block {
-    margin: 1.5rem 0;
-}
+  margin: 1.5rem 0; }
+
 .issue {
-    z-index: -1;
-    background-color: #333;
-    padding: 0;
-    width: 100%;
-    height: 200px;
-}
+  z-index: -1;
+  background-color: #333;
+  padding: 0;
+  width: 100%;
+  height: 200px; }
+
 .issue .bg {
-    position: relative;
-    top: 0;
-    z-index: 0;
-    width: 100%;
-    opacity: .4;
-    background-position: center;
-    background-size: cover;
-    height: 200px;
-}
+  position: relative;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  opacity: .4;
+  background-position: center;
+  background-size: cover;
+  height: 200px; }
+
 .issue .title {
-    position: relative;
-    z-index: 3000;
-    top: -200px;
-    left: 0;
-    color: #fff;
-    padding: 2rem 0;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
-    font-weight: 100;
-    transition: .15s;
-}
+  position: relative;
+  z-index: 3000;
+  top: -200px;
+  left: 0;
+  color: #fff;
+  padding: 2rem 0;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  font-weight: 100;
+  transition: .15s; }
+
 .issue .title a {
-    color: inherit;
-}
+  color: inherit; }
+
 .issue .title:hover {
-    background: rgba(255, 255, 255, .2);
-}
+  background: rgba(255, 255, 255, 0.2); }
+
 .page {
-    margin-bottom: 1rem;
-}
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-30 { font-size: 30px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-40 { font-size: 40px; }
-.material-icons.md-48 { font-size: 48px; }
-.material-icons.md-60 { font-size: 60px; }
+  margin-bottom: 1rem; }
+
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-30 {
+  font-size: 30px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-40 {
+  font-size: 40px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
+
+.material-icons.md-60 {
+  font-size: 60px; }
 
 .clearfix {
-    clear: both;
-}
+  clear: both; }
+
 hr {
-    clear: both;
-}
+  clear: both; }
 
 .ql-toolbar * {
-    color: #fff !important;
-}
+  color: #fff !important; }
+
 .ql-stroke {
-    stroke: #fff !important;
-}
+  stroke: #fff !important; }
+
 .ql-fill {
-    fill: #fff !important;
-}
+  fill: #fff !important; }
+
 .ql-editor {
-    padding: 0 !important;
-    font-size: 1rem;
-    font-weight: 100;
-}
+  padding: 0 !important;
+  font-size: 1rem;
+  font-weight: 100; }
+
 .ql-editor p {
-    margin: 1rem !important;
-}
+  margin: 1rem !important; }
 
 input.heading {
-    font-size: 2rem !important;
-    height: auto;
-    font-weight: bold !important;
-}
+  font-size: 2rem !important;
+  height: auto;
+  font-weight: bold !important; }
+
 label {
-    display: block;
-}
+  display: block; }
 
 div#id_end_date_month,
 div#id_start_date_month {
-    width: 49.5%;
-    display: inline-block;
-}
+  width: 49.5%;
+  display: inline-block; }
+
 select#id_end_date_month,
 select#id_end_date_day,
 select#id_end_date_year,
 select#id_start_date_month,
 select#id_start_date_day,
 select#id_start_date_year {
-    width: 31%;
-    display: inline-block;
-}
+  width: 31%;
+  display: inline-block; }
+
 div#id_show_author,
 div#id_external,
 div#id_submissions_open {
-    display: inline-block;
-    width: 31%;
-}
+  display: inline-block;
+  width: 31%; }
+
 label[for=id_show_author],
 label[for=id_external],
 label[for=id_submissions_open] {
-    display: inline;
-    margin-right: 1rem;
-}
+  display: inline;
+  margin-right: 1rem; }
+
 body.home .issue,
 body.home .issue .bg,
 body.home .issue .title {
-    height: 130px;
-}
+  height: 130px; }
+
 body.home .issue .title {
-    top: -130px;
-}
+  top: -130px; }
+
 img.preview {
-    width: 100px;
-    height: auto;
-    float: left;
-    margin: 0 1rem 1rem 0;
-}
+  width: 100px;
+  height: auto;
+  float: left;
+  margin: 0 1rem 1rem 0; }
+
+/*# sourceMappingURL=../../../../../../../static/zines/style.css.map */
