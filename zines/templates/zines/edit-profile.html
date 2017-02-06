@@ -1,0 +1,57 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    {{ profile }} :: Edit
+{% endblock %}
+
+{% block editor %}
+    <div id="editor">
+        <a id="alt_submit">
+            <i class="material-icons md-48">save</i>
+        </a><br/>
+        <a href="{% url 'profile' profile.id %}">
+            <i class="material-icons md-48">close</i>
+        </a>
+    </div>
+{% endblock %}
+
+{% block classes %}editor{% endblock %}
+
+{% block body %}
+    <form id="edit-profile" name="editProfile" method="POST">
+        {% for field in form.visible_fields %}
+            <div id="{{ field.id_for_label }}">
+                <p class="error">
+                    {{ field.errors }}
+                </p>
+                {% if field.id_for_label == "id_cover" %}
+                    <img class="preview" src="{{ field.value.url }}"/>
+                {% endif %}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        <label>Bio:</label>
+        <div id="quill">
+            {{ profile.bio|safe }}
+        </div>
+        {% csrf_token %}
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        console.log({{ response }});
+        $('#alt_submit').click(function(e) {
+            e.preventDefault();
+            updateQuillHiddenInput('id_bio');
+            $('#edit-profile').submit();
+        });
+        $('input[type=submit').on('mouseenter focusin', function() {
+            updateQuillHiddenInput('id_bio');
+        });
+    </script>
+{% endblock %}

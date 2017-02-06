@@ -87,7 +87,7 @@ ul.inline {
   position: fixed;
   top: 20%;
   left: 0;
-  padding: 0 0 .75rem .5rem;
+  padding: 0 .25rem .75rem .5rem;
   border-radius: 0 .5rem .5rem 0;
   background: #333; }
   #editor a:hover {
@@ -288,6 +288,20 @@ body.home .issue {
   body.home .issue .title {
     height: 130px;
     top: -130px; }
+
+body.home .recent-zines {
+  padding: 2rem 0; }
+  body.home .recent-zines .columns {
+    padding: 0; }
+  body.home .recent-zines .cover {
+    padding: 0;
+    height: 300px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: .15s; }
+    body.home .recent-zines .cover:hover {
+      opacity: .5; }
 
 img.preview {
   width: 100px;

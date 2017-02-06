@@ -38,4 +38,19 @@
             </ul>
         </div>
     {% endif %}
+    {% if recent_zines %}
+        <div class="recent-zines clearfix">
+            <div class="large-12 columns">
+                <h3>Recently Updated Zines</h3>
+            </div>
+            {% for zine in recent_zines %}
+                <div class="large-4 columns">
+                    <a href="{% url 'zine' zine.id %}">
+                        <div class="cover" style="background-image: url({{ zine.cover.url }});">
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}

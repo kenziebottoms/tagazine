@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Zine
+from .models import Zine, Profile
 from django.shortcuts import get_object_or_404
 
 class ZineForm(ModelForm):
@@ -21,4 +21,12 @@ class ZineForm(ModelForm):
         }
         css_class = {
             'show_author' : 'large-4 medium-4 small-12 columns'
+        }
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name', 'bio', 'website', 'contact_email', 'pic']
+        widgets = {
+            'bio' : forms.HiddenInput,
         }

@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-import os, re
+import os, re, datetime
 
 # integrating native User model
 from django.contrib.auth.models import User
@@ -77,7 +77,7 @@ class Zine(models.Model):
         if issues:
             return issues.latest('pub_date').pub_date
         else:
-            return False
+            return datetime.date(1900,1,1)
 
     def firstIssue(self):
         return Issue.objects.filter(zine=self.id).order_by('number').first()

@@ -5,9 +5,13 @@ from .forms import *
 def index(request):
     recent_issues = Issue.objects.order_by('-pub_date')[:3]
     new_users = Profile.objects.order_by('member_since')[:5]
+    recent_zines = Zine.objects.all();
+    recent_zines = sorted(recent_zines, key=lambda i: i.lastUpdated())[:5]
+    recent_zines.reverse()
     context = {
         'recent_issues' : recent_issues,
         'new_users' : new_users,
+        'recent_zines' : recent_zines,
     }
     return render(request, 'zines/index.html', context)
 
@@ -23,6 +27,25 @@ def profile(request, profile_id):
         'guest_works' : guest_works,
     }
     return render(request, 'zines/profile.html', context)
+
+def edit_profile(request, profile_id):
+    profile = get_object_or_404(Profile,pk=profile_id)
+    context = {
+        'profile' : profile,
+    }
+    if request.method == "POST":
+        form = ProfileForm(request.POST,instance=profile)
+        if form.is_valid():
+            context['response'] = 1
+            profile = form.save()
+            context['profile'] = profile
+        else:
+            context['response'] = 0
+            context['error'] = 'Invalid input'
+    else:
+        form = ProfileForm(instance=profile)
+    context['form'] = form
+    return render(request, 'zines/edit-profile.html', context)
 
 def zine(request, zine_id):
     zine = get_object_or_404(Zine,pk=zine_id)

@@ -4,8 +4,10 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    # /user/1
+    # /profile/1
     url(r'^profile/(?P<profile_id>[0-9]+)/$', views.profile, name='profile'),
+    # /profile/1/edit
+    url(r'^profile/(?P<profile_id>[0-9]+)/edit/$', views.edit_profile, name='edit_profile'),
     # /zine/1
     url(r'^zine/(?P<zine_id>[0-9]+)/$', views.zine, name='zine'),
     # /zine/1/edit
