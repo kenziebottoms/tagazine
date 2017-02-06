@@ -96,6 +96,7 @@ class Issue(models.Model):
     title = models.CharField(max_length=500,blank=True)
     desc = models.TextField(blank=True)
     guest_authors = models.ManyToManyField(Profile,blank=True)
+    ext_guest_authors = models.TextField(blank=True)
     number = models.IntegerField(default=1)
     cover = models.FileField(upload_to='covers')
 
