@@ -5,14 +5,32 @@
 {% endblock %}
 
 {% block editor %}
-    <div id="editor">
-        <a id="alt_submit">
-            <i class="material-icons md-48">save</i>
+    {% if messages %}
+        {% for message in messages %}
+            <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
+            <div class="label">{{ message }}</div>
+            <br/>
+        {% endfor %}
+    {% endif %}
+    {% if zine.published %}
+        <a id="unpublish">
+            <i class="material-icons md-48">file_download</i>
+            <div class="label">Unpublish</div>
         </a><br/>
-        <a href="{% url 'zine' zine.id %}">
-            <i class="material-icons md-48">close</i>
-        </a>
-    </div>
+    {% else %}
+        <a id="publish">
+            <i class="material-icons md-48">publish</i>
+            <div class="label">Publish</div>
+        </a><br/>
+    {% endif %}
+    <a id="alt_submit">
+        <i class="material-icons md-48">save</i>
+        <div class="label">Save &amp; exit</div>
+    </a><br/>
+    <a href="{% url 'zine' zine.id %}">
+        <i class="material-icons md-48">close</i>
+        <div class="label">Close without saving</div>
+    </a>
 {% endblock %}
 
 {% block classes %}editor{% endblock %}
@@ -64,6 +82,7 @@
                 {{ zine.desc|safe }}
             </div>
             {{ form.desc }}
+            {{ form.published }}
             {% csrf_token %}
         </div>
     </form>
@@ -72,18 +91,32 @@
 {% block scripts %}
     <script>
         $(document).ready(function() {
+            initQuill();
+            // cover image
             $('img.preview').click(function() {
                 $('#id_cover').click();
             });
             $('#id_cover').change(function() {
                 $('.refresh').html('Save to view');
             });
-            $('input[type=submit').on('mouseenter focusin', function() {
-                updateQuillHiddenInput('id_desc');
-            });
+
+            // update hidden input before submitting
             $('#alt_submit').click(function(e) {
                 e.preventDefault();
                 updateQuillHiddenInput('id_desc');
+                $('#edit-zine').submit();
+            });
+            // update publish value before submitting
+            $('#publish').click(function(e) {
+                e.preventDefault();
+                updateQuillHiddenInput('id_desc');
+                $('#id_published').val("True");
+                $('#edit-zine').submit();
+            });
+            $('#unpublish').click(function(e) {
+                e.preventDefault();
+                updateQuillHiddenInput('id_desc');
+                $('#id_published').val("False");
                 $('#edit-zine').submit();
             });
         });

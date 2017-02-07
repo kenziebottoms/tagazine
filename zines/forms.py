@@ -7,13 +7,14 @@ import html5.forms.widgets as html5_widgets
 class ZineForm(ModelForm):
     class Meta:
         model = Zine
-        fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'locale']
+        fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'locale', 'published']
         widgets = {
             'title' : forms.TextInput(attrs={
                 'class':'heading',
                 'placeholder':'Title'
             }),
             'desc' : forms.HiddenInput,
+            'published' : forms.HiddenInput,
             'start_date' : html5_widgets.DateInput,
             'end_date' : html5_widgets.DateInput,
         }

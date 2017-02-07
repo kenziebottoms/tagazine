@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
 
 def index(request):
     recent_issues = Issue.objects.filter(published=True).order_by('-pub_date')[:3]
@@ -26,6 +28,7 @@ def profile(request, profile_id):
         'works' : works,
         'guest_works' : guest_works,
     }
+    context['messages'] = messages.get_messages(request)
     return render(request, 'zines/profile.html', context)
 
 def edit_profile(request, profile_id):
@@ -36,10 +39,8 @@ def edit_profile(request, profile_id):
     if request.method == "POST":
         form = ProfileForm(request.POST,instance=profile)
         if form.is_valid():
-            context['response'] = 1
             profile = form.save()
-            context['profile'] = profile
-            context['form'] = form
+            messages.add_message(request, message_constants.SUCCESS, 'Your profile was saved.', 'check')
             return redirect('profile', profile.id)
         else:
             context['response'] = 0
@@ -52,7 +53,7 @@ def edit_profile(request, profile_id):
 
 def zine(request, zine_id):
     zine = get_object_or_404(Zine,pk=zine_id)
-    issues = Issue.objects.filter(zine=zine_id)
+    issues = Issue.objects.filter(zine=zine_id,published=True)
     authorships = Authorship.objects.filter(zine=zine_id)
     context = {
         'zine' : zine,

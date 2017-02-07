@@ -34,7 +34,10 @@
         <link href="https://cdn.quilljs.com/1.1.7/quill.snow.css" rel="stylesheet">
     </head>
     <body class="{% block classes %}{% endblock %}">
-        {% block editor %} {% endblock %}
+        <div id="editor">
+            {% block editor %}
+            {% endblock %}
+        </div>
         <div id="wrapper">
             <div id="header">
                 <div id="logo">
@@ -62,23 +65,34 @@
         </div>
 
         <script>
-            var quill = new Quill('#quill', {
-                theme: 'snow'
-            });
-            $('.ql-editor').focus(function() {
-                console.log('focus');
-                $('.ql-toolbar').addClass('active');
-                $('.ql-container').addClass('active');
-            });
-            $('.ql-editor').blur(function() {
-                console.log('focus');
-                $('.ql-toolbar').removeClass('active');
-                $('.ql-container').removeClass('active');
-            });
+            function initQuill() {
+                var quill = new Quill('#quill', {
+                    theme: 'snow'
+                });
+                $('.ql-editor').focus(function() {
+                    console.log('focus');
+                    $('.ql-toolbar').addClass('active');
+                    $('.ql-container').addClass('active');
+                });
+                $('.ql-editor').blur(function() {
+                    console.log('focus');
+                    $('.ql-toolbar').removeClass('active');
+                    $('.ql-container').removeClass('active');
+                });
+            }
             function updateQuillHiddenInput(hiddenInputID) {
                 $input = $('#'+hiddenInputID);
                 $input.val($('#quill>div')[0].innerHTML);
             }
+            $(document).ready(function() {
+                console.log({{response}});
+                $('div.label').removeClass('show');
+                $('#editor').hover(function() {
+                    $('div.label').addClass('show');
+                }, function() {
+                    $('div.label').removeClass('show');
+                });
+            });
         </script>
         {% block scripts %} {% endblock %}
     </body>

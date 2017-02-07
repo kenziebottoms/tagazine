@@ -1,4 +1,6 @@
 $orange: #FA4866;
+$green: #71c030;
+$red: #ff0072;
 
 body {
     margin: auto;
@@ -102,19 +104,43 @@ ul.inline {
     position: fixed;
     top: 20%;
     left: 0;
-    padding: 0 .25rem .75rem .5rem;
+    color: #fff;
     border-radius: 0 .5rem .5rem 0;
     background: #333;
-    a:hover {
-        color: #fff;
+    box-shadow: 4px 4px 7px rgba(#000, .1);
+    a {
+        &:hover {
+            color: #fff;
+        }
+    }
+    i {
+        padding: 0 .5rem 1.25rem .5rem;
+    }
+    div.label {
+        display: none;
+        vertical-align: top;
+        padding-top: 1.3rem;
+        padding-right: 1rem;
+        margin-left: .25rem;
+        &.show {
+            display: inline-block;
+        }
+    }
+    .check {
+        color: $green;
+    }
+    .close {
+        color: $red;
     }
 }
 body.editor {
     #editor {
         background: #fff;
         color: #333;
-        a:hover {
-            color: #333;
+        a {
+            &:hover {
+                color: #333;
+            }
         }
     }
 }

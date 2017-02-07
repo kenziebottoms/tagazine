@@ -5,14 +5,24 @@
 {% endblock %}
 
 {% block editor %}
-    <div id="editor">
-        <a id="alt_submit">
-            <i class="material-icons md-48">save</i>
-        </a><br/>
-        <a href="{% url 'profile' profile.id %}">
-            <i class="material-icons md-48">close</i>
-        </a>
-    </div>
+
+    {% load app_filters %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
+            <div class="label">{{ message }}</div>
+            <br/>
+        {% endfor %}
+    {% endif %}
+    <a id="alt_submit">
+        <i class="material-icons md-48">save</i>
+        <div class="label">Save &amp; close</div>
+    </a><br/>
+    <a href="{% url 'profile' profile.id %}">
+        <i class="material-icons md-48">close</i>
+        <div class="label">Close without saving</div>
+    </a>
 {% endblock %}
 
 {% block classes %}editor{% endblock %}
@@ -45,13 +55,13 @@
 {% block scripts %}
     <script>
         $(document).ready(function() {
+            console.log({{ messages.0 }});
+            initQuill();
+            // update hidden input before submitting
             $('#alt_submit').click(function(e) {
                 e.preventDefault();
                 updateQuillHiddenInput('id_bio');
                 $('#edit-profile').submit();
-            });
-            $('input[type=submit').on('mouseenter focusin', function() {
-                updateQuillHiddenInput('id_bio');
             });
         });
     </script>

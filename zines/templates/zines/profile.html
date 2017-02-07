@@ -5,13 +5,21 @@
 {% endblock %}
 
 {% block editor %}
+
+    {% load app_filters %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
+            <div class="label">{{ message }}</div>
+            <br/>
+        {% endfor %}
+    {% endif %}
     {% if user.is_authenticated and user.id == profile.user.id %}
-        <div id="editor">
-            <a href="{% url 'edit_profile' profile.id %}">
-                <i class="material-icons md-48">edit</i>
-            </a>
-            &nbsp;
-        </div>
+        <a href="{% url 'edit_profile' profile.id %}">
+            <i class="material-icons md-48">edit</i>
+            <div class="label">Edit</div>
+        </a>
     {% endif %}
 {% endblock %}
 
