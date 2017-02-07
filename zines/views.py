@@ -3,9 +3,9 @@ from .models import *
 from .forms import *
 
 def index(request):
-    recent_issues = Issue.objects.order_by('-pub_date')[:3]
+    recent_issues = Issue.objects.filter(published=True).order_by('-pub_date')[:3]
     new_users = Profile.objects.order_by('member_since')[:5]
-    recent_zines = Zine.objects.all();
+    recent_zines = Zine.objects.filter(published=True).all();
     recent_zines = sorted(recent_zines, key=lambda i: i.lastUpdated())[:5]
     recent_zines.reverse()
     context = {
@@ -17,10 +17,10 @@ def index(request):
 
 def profile(request, profile_id):
     profile = get_object_or_404(Profile,pk=profile_id)
-    works = Authorship.objects.filter(user_profile=profile_id,hideIdentity=False)
+    works = Authorship.objects.filter(user_profile=profile_id,hideIdentity=False,zine__published=True)
     works = sorted(works, key=lambda i: i.zine.lastUpdated())
     works.reverse()
-    guest_works = Issue.objects.filter(guest_authors=profile_id).order_by('pub_date')
+    guest_works = Issue.objects.filter(guest_authors=profile_id,published=True).order_by('pub_date')
     context = {
         'profile' : profile,
         'works' : works,

@@ -21,6 +21,21 @@ class Profile(models.Model):
 
     def link(self):
         return '<a href="'+reverse('profile', args=(self.id,))+'">'+self.__str__()+'</a>'
+    
+    def hasPublishedContent(self):
+        authorships = Authorship.objects.filter(user_profile=self.id)
+        for authorship in authorships:
+            if authorship.zine.published:
+                return True
+        return False
+    
+    def hasUnPublishedContent(self):
+        authorships = Authorship.objects.filter(user_profile=self.id)
+        for authorship in authorships:
+            if authorship.zine.published == False:
+                return True
+        return False
+    
     def __str__(self):
         if self.name != '':
             return self.name
@@ -44,6 +59,7 @@ class Zine(models.Model):
     show_author = models.BooleanField(default=True)
     external = models.BooleanField(default=False)
     submissions_open = models.BooleanField(default=False)
+    published = models.BooleanField(default=False)
     #optional
     desc = models.TextField(blank=True)
     contact_email = models.CharField(max_length=200,blank=True)
@@ -92,6 +108,7 @@ class Issue(models.Model):
     #required
     zine = models.ForeignKey(Zine,on_delete=models.CASCADE)
     pub_date = models.DateField()
+    published = models.BooleanField(default=False)
     #optional
     title = models.CharField(max_length=500,blank=True)
     desc = models.TextField(blank=True)

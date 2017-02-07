@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>
-            Tagazine | {% block title %} {% endblock %}
+            tag&middot;a&middot;zine | {% block title %} {% endblock %}
         </title>
 
         <!-- foundation -->
@@ -39,7 +39,7 @@
             <div id="header">
                 <div id="logo">
                     <a href="/zines">
-                        <i class="material-icons md-40">subtitles</i>tag<em>a</em><span>zine </span>
+                        <i class="material-icons md-40">subtitles</i>taga<span>zine </span>
                     </a>
                 </div>
                 <ul class="menu inline">
@@ -50,6 +50,11 @@
                         <li>
                             <a href="{% url 'profile' user.profile.id %}">profile</a>
                         </li>
+                        {% if user.profile.hasUnPublishedContent %}
+                            <li>
+                                <a href="">drafts</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </div>
