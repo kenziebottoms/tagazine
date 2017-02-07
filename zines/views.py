@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 
@@ -39,12 +39,15 @@ def edit_profile(request, profile_id):
             context['response'] = 1
             profile = form.save()
             context['profile'] = profile
+            context['form'] = form
+            return redirect('profile', profile.id)
         else:
             context['response'] = 0
             context['error'] = 'Invalid input'
+            context['form'] = form
     else:
         form = ProfileForm(instance=profile)
-    context['form'] = form
+        context['form'] = form
     return render(request, 'zines/edit-profile.html', context)
 
 def zine(request, zine_id):
@@ -73,12 +76,15 @@ def edit_zine(request, zine_id):
             context['response'] = 1
             zine = form.save()
             context['zine'] = zine
+            context['form'] = form
+            return redirect('zine', zine.id)
         else:
             context['response'] = 0
             context['error'] = 'Invalid input'
+            context['form'] = form
     else:
         form = ZineForm(instance=zine)
-    context['form'] = form
+        context['form'] = form
     return render(request, 'zines/edit-zine.html', context)
 
 def issue(request, zine_id, issue_no):

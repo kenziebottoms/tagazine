@@ -6,14 +6,12 @@
 
 {% block editor %}
     <div id="editor">
-        {% for authorship in authorships %}
-            {% if authorship.user_profile == user.profile %}
-                <a href="{% url 'zine' zine.id %}">
-                    <i class="material-icons md-48">close</i>
-                </a>
-                &nbsp;
-            {% endif %}
-        {% endfor %}
+        <a id="alt_submit">
+            <i class="material-icons md-48">save</i>
+        </a><br/>
+        <a href="{% url 'zine' zine.id %}">
+            <i class="material-icons md-48">close</i>
+        </a>
     </div>
 {% endblock %}
 
@@ -49,6 +47,11 @@
     <script>
         $('input[type=submit').on('mouseenter focusin', function() {
             updateQuillHiddenInput('id_desc');
+        });
+        $('#alt_submit').click(function(e) {
+            e.preventDefault();
+            updateQuillHiddenInput('id_desc');
+            $('#edit-zine').submit();
         });
     </script>
 {% endblock %}

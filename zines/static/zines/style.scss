@@ -17,13 +17,23 @@ body.editor {
         background: transparent;
         box-shadow: none;
         color: inherit;
+        border-width: 0 0 1px 0;
+        padding: 0;
+        border-color: #666;
         &:focus {
-            background: #444;
+            box-shadow: none;
+            background: transparent;
+            border-width: 0 0 1px 0;
+            border-color: #aaa;
         }
+    }
+    select[multiple=multiple] {
+        border-width: 1px;
     }
 }
 label {
     display: block;
+    color: #888;
 }
 input {
     &.heading {
@@ -49,6 +59,9 @@ i {
 h1 {
     margin-bottom: .25em;
     display: inline-block;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-transform: lowercase;
 }
 date {
     display: block;
@@ -111,10 +124,23 @@ body.editor {
         li {
             display: inline-block;
             a {
-                opacity: .5;
+                color: $orange;
                 &:hover {
-                    opacity: 1;
-                    color: $orange;
+                    color: #333;
+                }
+            }
+        }
+    }
+}
+body.editor {
+    #header {
+        ul {
+            li {
+                a {
+                    color: #fff;
+                    &:hover {
+                        color: $orange;
+                    }
                 }
             }
         }
@@ -140,6 +166,10 @@ body.editor {
     }
     a {
         color: inherit;
+    }
+    em {
+        opacity: .6;
+        font-style: normal;
     }
 }
 .actions {
@@ -263,8 +293,11 @@ body.editor {
 }
 
 // quill editor
-.ql-toolbar * {
+.ql-toolbar {
     color: #fff !important;
+    * {
+        color: #fff;
+    }
 }
 .ql-stroke {
     stroke: #fff !important;
@@ -278,6 +311,13 @@ body.editor {
     font-weight: 100;
     p {
         margin: 1rem !important;
+    }
+}
+.ql-container, .ql-toolbar {
+    border-color: #666 !important;
+    transition: .15s;
+    &.active {
+        border-color: #aaa !important;
     }
 }
 

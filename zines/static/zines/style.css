@@ -13,12 +13,21 @@ body.editor {
   body.editor input, body.editor select {
     background: transparent;
     box-shadow: none;
-    color: inherit; }
+    color: inherit;
+    border-width: 0 0 1px 0;
+    padding: 0;
+    border-color: #666; }
     body.editor input:focus, body.editor select:focus {
-      background: #444; }
+      box-shadow: none;
+      background: transparent;
+      border-width: 0 0 1px 0;
+      border-color: #aaa; }
+  body.editor select[multiple=multiple] {
+    border-width: 1px; }
 
 label {
-  display: block; }
+  display: block;
+  color: #888; }
 
 input.heading {
   font-size: 2rem !important;
@@ -41,6 +50,9 @@ i {
 h1 {
   margin-bottom: .25em;
   display: inline-block; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: lowercase; }
 
 date {
   display: block;
@@ -110,10 +122,14 @@ body.editor #editor {
   #header ul li {
     display: inline-block; }
     #header ul li a {
-      opacity: .5; }
+      color: #FA4866; }
       #header ul li a:hover {
-        opacity: 1;
-        color: #FA4866; }
+        color: #333; }
+
+body.editor #header ul li a {
+  color: #fff; }
+  body.editor #header ul li a:hover {
+    color: #FA4866; }
 
 #wrapper {
   width: 100%;
@@ -133,6 +149,9 @@ body.editor #editor {
     color: #FA4866; }
   #logo a {
     color: inherit; }
+  #logo em {
+    opacity: .6;
+    font-style: normal; }
 
 .actions {
   float: right;
@@ -230,8 +249,10 @@ body.editor #editor {
 .page {
   margin-bottom: 1rem; }
 
-.ql-toolbar * {
+.ql-toolbar {
   color: #fff !important; }
+  .ql-toolbar * {
+    color: #fff; }
 
 .ql-stroke {
   stroke: #fff !important; }
@@ -245,6 +266,12 @@ body.editor #editor {
   font-weight: 100; }
   .ql-editor p {
     margin: 1rem !important; }
+
+.ql-container, .ql-toolbar {
+  border-color: #666 !important;
+  transition: .15s; }
+  .ql-container.active, .ql-toolbar.active {
+    border-color: #aaa !important; }
 
 div#id_end_date_month,
 div#id_start_date_month {

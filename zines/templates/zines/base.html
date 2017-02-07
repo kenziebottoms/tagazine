@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>
-            FileTile | {% block title %} {% endblock %}
+            Tagazine | {% block title %} {% endblock %}
         </title>
 
         <!-- foundation -->
@@ -39,7 +39,7 @@
             <div id="header">
                 <div id="logo">
                     <a href="/zines">
-                        <i class="material-icons md-40">subtitles</i>end<span>zine </span>
+                        <i class="material-icons md-40">subtitles</i>tag<em>a</em><span>zine </span>
                     </a>
                 </div>
                 <ul class="menu inline">
@@ -59,6 +59,16 @@
         <script>
             var quill = new Quill('#quill', {
                 theme: 'snow'
+            });
+            $('.ql-editor').focus(function() {
+                console.log('focus');
+                $('.ql-toolbar').addClass('active');
+                $('.ql-container').addClass('active');
+            });
+            $('.ql-editor').blur(function() {
+                console.log('focus');
+                $('.ql-toolbar').removeClass('active');
+                $('.ql-container').removeClass('active');
             });
             function updateQuillHiddenInput(hiddenInputID) {
                 $input = $('#'+hiddenInputID);
