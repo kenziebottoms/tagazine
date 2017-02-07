@@ -9,8 +9,10 @@
     <date>published {{ issue.pub_date|date:'b j, Y' }}</date>
     <div class="authors">
         <p>Authors: {{ issue.zine.authorsLink|safe }}</p>
-        {% if issue.guest_authors %}
+        {% if issue.guest_authors.length > 0 or issue.ext_guest_authors != "" %}
             Feat. {{ issue.guestAuthorsLink|safe }}
+            {% if issue.guest_authors.length > 0 and issue.ext_guest_authors != "" %}, {% endif %}
+            {{ issue.ext_guest_authors }}
         {% endif %}
     </div>
     <div class="desc">

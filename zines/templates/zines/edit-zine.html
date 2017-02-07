@@ -19,39 +19,73 @@
 
 {% block body %}
     <form id="edit-zine" name="editZine" method="POST">
-        {% for field in form.visible_fields %}
-            <div id="{{ field.id_for_label }}">
-                <p class="error">
-                    {{ field.errors }}
-                </p>
-                {% if field.id_for_label == "id_cover" %}
-                    <img class="preview" src="{{ field.value.url }}"/>
-                {% endif %}
-                {{ field.label_tag }}
-                {{ field }}
+        <div class="row">
+            <div class="large-4 medium-6 small-12 columns">
+                {{ form.title }}
             </div>
-        {% endfor %}
-        {% for field in form.hidden_fields %}
-            {{ field }}
-        {% endfor %}
-        <label>Desc:</label>
-        <div id="quill">
-            {{ zine.desc|safe }}
+            <div class="large-8 medium-6 small-12 columns">
+                {{ form.tagline }}
+            </div>
         </div>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
+
+        <div class="row">
+            <div class="large-8 medium-6 small-12 columns">
+                {{ form.authors }}
+            </div>
+            <div class="large-4 medium-6 small-12 columns">
+                {{ form.show_author }} {{ form.show_author.label }}<br/>
+                {{ form.external }} {{ form.external.label }}<br/>
+                {{ form.submissions_open }} {{ form.submissions_open.label }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-4 medium-6 small-12 columns">
+                <img class="preview" src="{{ form.cover.value.url }}"/>
+                <div class="refresh"></div>
+                <div class="hide">
+                    {{ form.cover }}
+                </div>
+            </div>
+            <div class="large-4 medium-6 small-12 columns">
+                {{ form.locale.label_tag }} {{ form.locale }}
+                {{ form.start_date.label_tag }} {{ form.start_date }}
+                {{ form.end_date.label_tag }} {{ form.end_date }}
+            </div>
+            <div class="large-4 medium-6 small-12 columns">
+                {{ form.contact_email.label_tag }} {{ form.contact_email }}
+                {{ form.submission_email.label_tag }} {{ form.submission_email }}
+                {{ form.website.label_tag }} {{ form.website }}
+            </div>
+        </div>
+        <div class="row">
+            <label>Desc:</label>
+            <div id="quill">
+                {{ zine.desc|safe }}
+            </div>
+            {{ form.desc }}
+            {% csrf_token %}
+        </div>
     </form>
 {% endblock %}
 
 {% block scripts %}
     <script>
-        $('input[type=submit').on('mouseenter focusin', function() {
-            updateQuillHiddenInput('id_desc');
-        });
-        $('#alt_submit').click(function(e) {
-            e.preventDefault();
-            updateQuillHiddenInput('id_desc');
-            $('#edit-zine').submit();
+        $(document).ready(function() {
+            $('img.preview').click(function() {
+                $('#id_cover').click();
+            });
+            $('#id_cover').change(function() {
+                $('.refresh').html('Save to view');
+            });
+            $('input[type=submit').on('mouseenter focusin', function() {
+                updateQuillHiddenInput('id_desc');
+            });
+            $('#alt_submit').click(function(e) {
+                e.preventDefault();
+                updateQuillHiddenInput('id_desc');
+                $('#edit-zine').submit();
+            });
         });
     </script>
 {% endblock %}

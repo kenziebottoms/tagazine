@@ -30,6 +30,10 @@ body.editor {
     select[multiple=multiple] {
         border-width: 1px;
     }
+    input[type=checkbox] {
+        border: none;
+        margin: 0 .25rem 0 0;
+    }
 }
 label {
     display: block;
@@ -76,7 +80,9 @@ date {
 .material-icons.md-40 { font-size: 40px; }
 .material-icons.md-48 { font-size: 48px; }
 .material-icons.md-60 { font-size: 60px; }
-
+.row {
+    margin: 1rem auto;
+}
 .clearfix {
     clear: both;
 }
@@ -321,18 +327,9 @@ body.editor {
     }
 }
 
-div#id_end_date_month,
-div#id_start_date_month {
+div#id_end_date,
+div#id_start_date {
     width: 49.5%;
-    display: inline-block;
-}
-select#id_end_date_month,
-select#id_end_date_day,
-select#id_end_date_year,
-select#id_start_date_month,
-select#id_start_date_day,
-select#id_start_date_year {
-    width: 31%;
     display: inline-block;
 }
 div#id_authors,
@@ -386,8 +383,14 @@ body.home {
     }
 }
 img.preview {
-    width: 100px;
-    height: auto;
     float: left;
     margin: 0 1rem 1rem 0;
+    cursor: pointer;
+}
+.hide {
+    display: block;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
 }

@@ -44,14 +44,15 @@
 
 {% block scripts %}
     <script>
-        console.log({{ response }});
-        $('#alt_submit').click(function(e) {
-            e.preventDefault();
-            updateQuillHiddenInput('id_bio');
-            $('#edit-profile').submit();
-        });
-        $('input[type=submit').on('mouseenter focusin', function() {
-            updateQuillHiddenInput('id_bio');
+        $(document).ready(function() {
+            $('#alt_submit').click(function(e) {
+                e.preventDefault();
+                updateQuillHiddenInput('id_bio');
+                $('#edit-profile').submit();
+            });
+            $('input[type=submit').on('mouseenter focusin', function() {
+                updateQuillHiddenInput('id_bio');
+            });
         });
     </script>
 {% endblock %}

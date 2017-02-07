@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Zine, Profile
 from django.shortcuts import get_object_or_404
+import html5.forms.widgets as html5_widgets
 
 class ZineForm(ModelForm):
     class Meta:
@@ -13,8 +14,8 @@ class ZineForm(ModelForm):
                 'placeholder':'Title'
             }),
             'desc' : forms.HiddenInput,
-            'start_date' : forms.SelectDateWidget,
-            'end_date' : forms.SelectDateWidget,
+            'start_date' : html5_widgets.DateInput,
+            'end_date' : html5_widgets.DateInput,
         }
         labels = {
             'title' : '',
