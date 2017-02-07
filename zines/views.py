@@ -96,3 +96,15 @@ def issue(request, zine_id, issue_no):
         'pages' : pages,
     }
     return render(request, 'zines/issue.html', context)
+
+def drafts(request):
+    user_id = request.user.id
+    profile = Profile.objects.filter(user=user_id)[0]
+    authorships = Authorship.objects.filter(user_profile=profile.id,zine__published=False)
+    #issues = zine.unPublishedContent()
+    context = {
+        'profile' : profile,
+        'works' : authorships,
+        #'issues' : issues,
+    }
+    return render(request, 'zines/drafts.html', context)

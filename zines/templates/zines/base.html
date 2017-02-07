@@ -35,6 +35,16 @@
     </head>
     <body class="{% block classes %}{% endblock %}">
         <div id="editor">
+            {% load app_filters %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
+                    <div class="label">{{ message }}</div>
+                    <br/>
+                {% endfor %}
+            {% endif %}
+            
             {% block editor %}
             {% endblock %}
         </div>
@@ -55,7 +65,7 @@
                         </li>
                         {% if user.profile.hasUnPublishedContent %}
                             <li>
-                                <a href="">drafts</a>
+                                <a href="{% url 'drafts' %}">drafts</a>
                             </li>
                         {% endif %}
                     {% endif %}

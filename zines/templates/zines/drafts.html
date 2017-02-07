@@ -1,0 +1,55 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    {{ profile }}'s drafts
+{% endblock %}
+
+{% block editor %}
+    {% if user.is_authenticated and user.id == profile.user.id %}
+        <a href="{% url 'edit_profile' profile.id %}">
+            <i class="material-icons md-48">edit</i>
+            <div class="label">Edit</div>
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+    <h1>{{ profile }}'s Drafts</h1>
+    <hr/>
+    {% if works %}
+        <div class="zines">
+            <h3>zine drafts</h3>
+            {% for work in works %}
+                <div class="issue">
+                    <div class="bg" style="background-image: url(/media/{{ work.zine.cover }})">
+                        &nbsp;
+                    </div>
+                    <a href="{% url 'zine' work.zine.id %}">
+                        <div class="title">
+                            <span>{{ work.zine.title }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if issues %}
+        <div class="block">
+            <h3>featured on</h3>
+            {% for issue in issues %}
+                <div class="issue">
+                    <div class="bg" style="background-image: url(/media/{% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.cover }}{% endif %})">
+                        &nbsp;
+                    </div>
+                    <a href="{% url 'issue' issue.zine.id issue.number %}">
+                        <div class="title">
+                            <span>{{ issue.displayTitle }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

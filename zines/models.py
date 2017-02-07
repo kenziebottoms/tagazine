@@ -98,6 +98,9 @@ class Zine(models.Model):
     def firstIssue(self):
         return Issue.objects.filter(zine=self.id).order_by('number').first()
 
+    def unPublishedContent(self):
+        return Issue.objects.filter(zine=self.id,published=False)
+
     def __str__(self):
         if self.tagline != '':
             return (self.title + ': ' + self.tagline)

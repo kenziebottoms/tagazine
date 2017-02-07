@@ -5,16 +5,6 @@
 {% endblock %}
 
 {% block editor %}
-
-    {% load app_filters %}
-
-    {% if messages %}
-        {% for message in messages %}
-            <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
-            <div class="label">{{ message }}</div>
-            <br/>
-        {% endfor %}
-    {% endif %}
     <a id="alt_submit">
         <i class="material-icons md-48">save</i>
         <div class="label">Save &amp; close</div>
