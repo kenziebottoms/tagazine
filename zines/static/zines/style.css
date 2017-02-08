@@ -331,7 +331,8 @@ body.home .issue {
 body.home .recent-zines {
   padding: 2rem 0; }
   body.home .recent-zines .columns {
-    padding: 0; }
+    padding: 0;
+    float: left; }
   body.home .recent-zines .cover {
     padding: 0;
     height: 300px;

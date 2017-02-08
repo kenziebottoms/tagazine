@@ -4,14 +4,26 @@
     {{ issue }}
 {% endblock %}
 
+{% block editor %}
+    {% for authorship in authorships %}
+        {% if authorship.user_profile == user.profile %}
+            <a href="{% url 'edit_issue' issue.zine.id issue.number %}">
+                <i class="material-icons md-48">edit</i>
+                <div class="label">Edit</div>
+            </a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
 {% block body %}
+    {% load app_filters %}
+
     <h1>{{ issue.titleLink|safe }}</h1>
     <date>published {{ issue.pub_date|date:'b j, Y' }}</date>
     <div class="authors">
         <p>Authors: {{ issue.zine.authorsLink|safe }}</p>
-        {% if issue.guest_authors.length > 0 or issue.ext_guest_authors != "" %}
-            Feat. {{ issue.guestAuthorsLink|safe }}
-            {% if issue.guest_authors.length > 0 and issue.ext_guest_authors != "" %}, {% endif %}
+        {% if issue.guestAuthorsLink|length > 0 or issue.ext_guest_authors|length > 0 %}
+            Feat. {{ issue.guestAuthorsLink|safe }}{% if issue.guestAuthorsLink|length > 0 and issue.ext_guest_authors|length > 0 %}, {% endif %}
             {{ issue.ext_guest_authors }}
         {% endif %}
     </div>
@@ -21,7 +33,7 @@
                 <img src="{{ issue.cover.url }}"/>
             </div>
         {% endif %}
-        <p>{{ issue.desc }}</p>
+        <p>{{ issue.desc|safe }}</p>
     </div>
     <hr/>
     {% if pages %}

@@ -5,11 +5,36 @@ from django.contrib import messages
 from django.contrib.messages import constants as message_constants
 
 def issue(request, zine_id, issue_no):
-    issue = Issue.objects.filter(zine=zine_id,number=issue_no)[0]
+    issue = Issue.objects.filter(zine=zine_id,number=issue_no).first()
+    pages = Page.objects.filter(issue=issue.id)
+    authorships = Authorship.objects.filter(zine=zine_id)
+    context = {
+        'issue' : issue,
+        'pages' : pages,
+        'authorships' : authorships,
+        'messages' : messages.get_messages(request),
+    }
+    return render(request, 'zines/issue.html', context)
+
+def edit_issue(request, zine_id, issue_no):
+    issue = Issue.objects.filter(zine=zine_id,number=issue_no).first()
     pages = Page.objects.filter(issue=issue.id)
     context = {
         'issue' : issue,
         'pages' : pages,
         'messages' : messages.get_messages(request),
     }
-    return render(request, 'zines/issue.html', context)
+    if request.method == "POST":
+        form = IssueForm(request.POST,instance=issue)
+        if form.is_valid():
+            issue = form.save()
+            messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')
+            return redirect('issue', issue.zine.id, issue.number)
+        else:
+            context['response'] = 0
+            context['error'] = 'Invalid input'
+            context['form'] = form
+    else:
+        form = IssueForm(instance=issue)
+        context['form'] = form
+    return render(request, 'zines/edit-issue.html', context)

@@ -7,3 +7,5 @@ register = template.Library()
 @stringfilter
 def lastWord(value):
     return value.split(' ')[0].strip()
+def length(value):
+    return len(value)

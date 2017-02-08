@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^zine/(?P<zine_id>[0-9]+)/edit/$', views.zines.edit_zine, name='edit_zine'),
     # /zine/1/issue/15
     url(r'^zine/(?P<zine_id>[0-9]+)/issue/(?P<issue_no>[0-9]+)/$', views.issues.issue, name='issue'),
+    # /zine/1/issue/15/edit
+    url(r'^zine/(?P<zine_id>[0-9]+)/issue/(?P<issue_no>[0-9]+)/edit/$', views.issues.edit_issue, name='edit_issue'),
     # /drafts
     url(r'^drafts/$', views.drafts, name='drafts'),
 ]
