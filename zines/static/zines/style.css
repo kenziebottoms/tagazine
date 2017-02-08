@@ -2,14 +2,14 @@ body {
   margin: auto;
   font-size: 17px;
   font-family: 'Roboto', sans-serif;
-  background: #fff;
+  background: #fefefe;
   color: #333; }
 
 body.editor {
   background: #333;
-  color: #fff; }
+  color: #fefefe; }
   body.editor a:hover {
-    color: #fff; }
+    color: #fefefe; }
   body.editor input, body.editor select {
     background: transparent;
     box-shadow: none;
@@ -105,12 +105,12 @@ ul.inline {
   position: fixed;
   top: 20%;
   left: 0;
-  color: #fff;
+  color: #fefefe;
   border-radius: 0 .5rem .5rem 0;
   background: #333;
   box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1); }
   #editor a:hover {
-    color: #fff; }
+    color: #fefefe; }
   #editor i {
     padding: 0 .5rem 1.25rem .5rem; }
   #editor div.label {
@@ -127,7 +127,7 @@ ul.inline {
     color: #ff0072; }
 
 body.editor #editor {
-  background: #fff;
+  background: #fefefe;
   color: #333; }
   body.editor #editor a:hover {
     color: #333; }
@@ -148,7 +148,7 @@ body.editor #editor {
         color: #333; }
 
 body.editor #header ul li a {
-  color: #fff; }
+  color: #fefefe; }
   body.editor #header ul li a:hover {
     color: #FA4866; }
 
@@ -250,7 +250,7 @@ body.editor #header ul li a {
     z-index: 3000;
     top: -200px;
     left: 0;
-    color: #fff;
+    color: #fefefe;
     padding: 2rem 0;
     width: 100%;
     margin: auto;
@@ -271,15 +271,15 @@ body.editor #header ul li a {
   margin-bottom: 1rem; }
 
 .ql-toolbar {
-  color: #fff !important; }
+  color: #fefefe !important; }
   .ql-toolbar * {
-    color: #fff; }
+    color: #fefefe; }
 
 .ql-stroke {
-  stroke: #fff !important; }
+  stroke: #fefefe !important; }
 
 .ql-fill {
-  fill: #fff !important; }
+  fill: #fefefe !important; }
 
 .ql-editor {
   padding: 0 !important;
