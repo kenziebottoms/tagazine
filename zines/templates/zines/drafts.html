@@ -36,7 +36,7 @@
     {% endif %}
     {% if issues %}
         <div class="block">
-            <h3>featured on</h3>
+            <h3>issue drafts</h3>
             {% for issue in issues %}
                 <div class="issue">
                     <div class="bg" style="background-image: url(/media/{% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.cover }}{% endif %})">

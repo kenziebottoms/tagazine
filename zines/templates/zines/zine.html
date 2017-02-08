@@ -7,13 +7,10 @@
 {% block editor %}
     {% for authorship in authorships %}
         {% if authorship.user_profile == user.profile %}
-            <div id="editor">
-                <a href="{% url 'edit_zine' zine.id %}">
-                    <i class="material-icons md-48">edit</i>
-                    <div class="label">Edit</div>
-                </a>
-                &nbsp;
-            </div>
+            <a href="{% url 'edit_zine' zine.id %}">
+                <i class="material-icons md-48">edit</i>
+                <div class="label">Edit</div>
+            </a>
         {% endif %}
     {% endfor %}
 {% endblock %}

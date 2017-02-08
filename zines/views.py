@@ -27,14 +27,15 @@ def profile(request, profile_id):
         'profile' : profile,
         'works' : works,
         'guest_works' : guest_works,
+        'messages' : messages.get_messages(request),
     }
-    context['messages'] = messages.get_messages(request)
     return render(request, 'zines/profile.html', context)
 
 def edit_profile(request, profile_id):
     profile = get_object_or_404(Profile,pk=profile_id)
     context = {
         'profile' : profile,
+        'messages' : messages.get_messages(request),
     }
     if request.method == "POST":
         form = ProfileForm(request.POST,instance=profile)
@@ -59,6 +60,7 @@ def zine(request, zine_id):
         'zine' : zine,
         'issues' : issues,
         'authorships' : authorships,
+        'messages' : messages.get_messages(request),
     }
     return render(request, 'zines/zine.html', context)
 
@@ -70,14 +72,13 @@ def edit_zine(request, zine_id):
         'zine' : zine,
         'issues' : issues,
         'authorships' : authorships,
+        'messages' : messages.get_messages(request),
     }
     if request.method == "POST":
         form = ZineForm(request.POST,instance=zine)
         if form.is_valid():
-            context['response'] = 1
             zine = form.save()
-            context['zine'] = zine
-            context['form'] = form
+            messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')
             return redirect('zine', zine.id)
         else:
             context['response'] = 0
@@ -94,17 +95,25 @@ def issue(request, zine_id, issue_no):
     context = {
         'issue' : issue,
         'pages' : pages,
+        'messages' : messages.get_messages(request),
     }
     return render(request, 'zines/issue.html', context)
 
 def drafts(request):
     user_id = request.user.id
     profile = Profile.objects.filter(user=user_id)[0]
-    authorships = Authorship.objects.filter(user_profile=profile.id,zine__published=False)
-    #issues = zine.unPublishedContent()
+    unpub_authorships = Authorship.objects.filter(user_profile=profile.id,zine__published=False)
+    works = Authorship.objects.filter(user_profile=profile.id)
+    issue_ids = []
+    for work in works:
+        new_ids = work.zine.unPublishedContent().values_list('id',flat=True)
+        if new_ids:
+            issue_ids += list(new_ids)
+    issues = Issue.objects.filter(pk__in=issue_ids)
     context = {
         'profile' : profile,
-        'works' : authorships,
-        #'issues' : issues,
+        'works' : unpub_authorships,
+        'issues' : issues,
+        'messages' : messages.get_messages(request),
     }
     return render(request, 'zines/drafts.html', context)
