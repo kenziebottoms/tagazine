@@ -51,6 +51,12 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+class Tag(models.Model):
+    title = models.TextField()
+    slug = models.CharField(max_length=200)
+    #optional
+    parent_tag = models.ForeignKey('self',blank=True)
+
 class Zine(models.Model):
     #required
     title = models.CharField(max_length=500)
@@ -69,6 +75,7 @@ class Zine(models.Model):
     website = models.URLField(blank=True)
     cover = models.FileField(upload_to='covers')
     locale = models.CharField(max_length=500,blank=True)
+    tags = models.ManyToManyField(Tag)
 
     def issueCount(self):
         return Issue.objects.filter(zine=self.id).count()
