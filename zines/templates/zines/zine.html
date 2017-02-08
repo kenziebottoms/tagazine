@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block editor %}
+    <a href="">
+        <i class="material-icons md-48">add_to_photos</i>
+        <div class="label">Subscribe</div>
+    </a>
     {% for authorship in authorships %}
         {% if authorship.user_profile == user.profile %}
             <a href="{% url 'edit_zine' zine.id %}">
@@ -17,26 +21,26 @@
 
 {% block body %}
     <h1>{{ zine.title }}</h1>
-    <div class="info">
-        {% if zine.website != '' %}
-            <a href="{{ zine.website }}" target="blank">
-                <i class="material-icons md-30">launch</i>
-            </a>
+    <div class="row flex" id="details">
+        <div class="floe">
+            <i class="material-icons md-30">account_circle</i> {{ zine.authorsLink|safe }}
+        </div>
+        <div class="floe">
+            <i class="material-icons md-30">date_range</i> {{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}
+        </div>
+        {% if zine.locale %}
+            <div class="floe">
+                <i class="material-icons md-30">place</i> {{ zine.locale }}
+            </div>
         {% endif %}
-        {% if zine.contact_email != '' %}
-            <a href="mailto:{{ zine.contact_email }}" target="blank">
-                <i class="material-icons md-30">mail_outline</i>
-            </a>
+        {% if tags %}
+            <div class="floe tags">
+                <i class="material-icons md-30">local_offer</i>
+                {% for tag in tags %}
+                    <a href="{% url 'tag' tag.slug %}">{{ tag.title }}</a>
+                {% endfor %}
+            </div>
         {% endif %}
-    </div>
-    <div class="actions">
-        <i class="material-icons md-48">bookmark_border</i>
-    </div>
-    <date>{{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}</date>
- 
-    <div class="authors">
-        Authors: {{ zine.authorsLink|safe }}<br/>
-        Locale: {{ zine.locale }}
     </div>
     <div class="desc">
         {% if zine.cover != '' %}
@@ -46,7 +50,6 @@
         {% endif %}
         <p>{{ zine.desc|safe }}</p>
     </div>
-    <hr/>
     {% if issues %}
         <div class="block">
             {% for issue in issues %}

@@ -1,0 +1,28 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    {{ tag }}
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+    <h1>Zines in <a href="{% url 'tag' tag.slug %}">{{ tag }}</a></h1>
+    <hr/>
+    {% if zines %}
+        <div class="zines">
+            {% for zine in zines %}
+                <div class="issue">
+                    <div class="bg" style="background-image: url(/media/{{ zine.cover }})">
+                        &nbsp;
+                    </div>
+                    <a href="{% url 'zine' zine.id %}">
+                        <div class="title">
+                            <span>{{ zine.title }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

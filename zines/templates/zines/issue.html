@@ -19,12 +19,21 @@
     {% load app_filters %}
 
     <h1>{{ issue.titleLink|safe }}</h1>
-    <date>published {{ issue.pub_date|date:'b j, Y' }}</date>
-    <div class="authors">
-        <p>Authors: {{ issue.zine.authorsLink|safe }}</p>
+
+    <div class="row flex" id="details">
+        <div class="floe">
+            <i class="material-icons md-30">account_circle</i>
+            {{ issue.zine.authorsLink|safe }}
+        </div>
+        <div class="floe">
+            <i class="material-icons md-30">event</i>
+            {{ issue.pub_date }}
+        </div>
         {% if issue.guestAuthorsLink|length > 0 or issue.ext_guest_authors|length > 0 %}
-            Feat. {{ issue.guestAuthorsLink|safe }}{% if issue.guestAuthorsLink|length > 0 and issue.ext_guest_authors|length > 0 %}, {% endif %}
-            {{ issue.ext_guest_authors }}
+            <div class="floe">
+                <i class="material-icons md-30">group</i>
+                {{ issue.guestAuthorsLink|safe }}{% if issue.guestAuthorsLink|length > 0 and issue.ext_guest_authors|length > 0 %}, {% endif %} {{ issue.ext_guest_authors }}
+            </div>
         {% endif %}
     </div>
     <div class="desc">

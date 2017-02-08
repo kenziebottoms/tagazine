@@ -38,3 +38,11 @@ def drafts(request):
     }
     return render(request, 'zines/drafts.html', context)
 
+def tag(request, slug):
+    tag = Tag.objects.filter(slug=slug).first()
+    zines = Zine.objects.filter(tags__slug=slug)
+    context = {
+        'zines' : zines,
+        'tag' : tag,
+    }
+    return render(request, 'zines/tag.html', context)

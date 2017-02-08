@@ -86,6 +86,16 @@ date {
 
 .row {
   margin: 1rem auto; }
+  .row .columns:first-child {
+    padding-left: 0; }
+  .row .columns:last-child {
+    padding-right: 0; }
+  .row.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .row.flex .floe {
+      flex: auto; }
 
 .clearfix {
   clear: both; }
@@ -109,16 +119,16 @@ ul.inline {
   border-radius: 0 .5rem .5rem 0;
   background: #333;
   box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1); }
-  #editor a:hover {
-    color: #fefefe; }
-  #editor i {
-    padding: 0 .5rem 1.25rem .5rem; }
+  #editor a, #editor span.a {
+    margin: 0 .75rem .75rem .75rem;
+    display: block; }
+    #editor a:hover, #editor span.a:hover {
+      color: #fefefe; }
   #editor div.label {
     display: none;
-    vertical-align: top;
-    padding-top: 1.3rem;
-    padding-right: 1rem;
-    margin-left: .25rem; }
+    padding: 0 .5rem;
+    z-index: 3000;
+    vertical-align: super; }
     #editor div.label.show {
       display: inline-block; }
   #editor .check {
@@ -132,20 +142,22 @@ body.editor #editor {
   body.editor #editor a:hover {
     color: #333; }
 
-#header ul {
-  font-size: 1.2rem;
-  margin-left: 1em;
-  padding: 0;
-  color: #333;
-  font-weight: 100;
-  list-style-type: none;
-  text-transform: uppercase; }
-  #header ul li {
-    display: inline-block; }
-    #header ul li a {
-      color: #FA4866; }
-      #header ul li a:hover {
-        color: #333; }
+#header {
+  margin-bottom: 2rem; }
+  #header ul {
+    font-size: 1.2rem;
+    margin-left: 1em;
+    padding: 0;
+    color: #333;
+    font-weight: 100;
+    list-style-type: none;
+    text-transform: uppercase; }
+    #header ul li {
+      display: inline-block; }
+      #header ul li a {
+        color: #FA4866; }
+        #header ul li a:hover {
+          color: #333; }
 
 body.editor #header ul li a {
   color: #fefefe; }
@@ -183,6 +195,20 @@ body.editor #header ul li a {
     padding: 5px 0 5px 5px;
     border-radius: 5px; }
 
+#details {
+  margin: 1.5rem auto 2.5rem auto; }
+  #details i {
+    z-index: -1;
+    color: #ccc;
+    vertical-align: text-bottom;
+    margin-right: .5rem; }
+  #details .tags a {
+    display: inline-block;
+    margin: 0 .25rem;
+    border: 1px solid;
+    border-radius: .25rem;
+    padding: .1rem .5rem; }
+
 .info {
   display: inline-block;
   margin-left: .5em; }
@@ -193,7 +219,8 @@ body.editor #header ul li a {
 
 .desc {
   font-size: 1.2em;
-  font-weight: 100; }
+  font-weight: 100;
+  margin-bottom: 2rem; }
   .desc img {
     display: block;
     width: 100%;

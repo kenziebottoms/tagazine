@@ -39,9 +39,10 @@
 
             {% if messages %}
                 {% for message in messages %}
-                    <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
-                    <div class="label">{{ message }}</div>
-                    <br/>
+                    <span class="a">
+                        <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
+                        <div class="label">{{ message }}</div>
+                    </span>
                 {% endfor %}
             {% endif %}
             
@@ -68,6 +69,10 @@
                                 <a href="{% url 'drafts' %}">drafts</a>
                             </li>
                         {% endif %}
+                    {% else %}
+                        <li>
+                            <a href="">Log in</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

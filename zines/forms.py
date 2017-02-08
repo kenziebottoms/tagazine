@@ -48,7 +48,7 @@ class IssueForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'bio', 'website', 'contact_email', 'pic']
+        fields = ['name', 'bio', 'website', 'contact_email', 'pic', 'location']
         widgets = {
             'bio' : forms.HiddenInput,
         }

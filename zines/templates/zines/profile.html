@@ -8,13 +8,6 @@
 
     {% load app_filters %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <i class="{{ message.tags|lastWord }} material-icons md-48">{{ message.tags|lastWord }}</i>
-            <div class="label">{{ message }}</div>
-            <br/>
-        {% endfor %}
-    {% endif %}
     {% if user.is_authenticated and user.id == profile.user.id %}
         <a href="{% url 'edit_profile' profile.id %}">
             <i class="material-icons md-48">edit</i>
@@ -26,21 +19,34 @@
 {% block body %}
     {% load static %}
     <h1>{{ profile }}</h1>
-    <div class="info">
-        {% if profile.website != '' %}
-            <a href="{{ profile.website }}" target="blank">
-                <i class="material-icons md-30">launch</i>
-            </a>
+
+    <div class="row flex" id="details">
+        <div class="floe">
+            <i class="material-icons md-30">date_range</i>
+            member since {{ profile.member_since|date:'b j, Y' }}
+        </div>
+        {% if profile.location %}
+            <div class="floe">
+                <i class="material-icons md-30">place</i>
+                {{ profile.location }}
+            </div>
         {% endif %}
-        {% if profile.contact_email != '' %}
-            <a href="mailto:{{ profile.contact_email }}" target="blank">
+        {% if profile.website %}
+            <div class="floe">
+                <i class="material-icons md-30">insert_link</i>
+                <a href="{{ profile.website }}">{{ profile.website }}</a>
+            </div>
+        {% endif %}
+        {% if profile.contact_email %}
+            <div class="floe">
                 <i class="material-icons md-30">mail_outline</i>
-            </a>
+                <a href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a>
+            </div>
         {% endif %}
     </div>
-    <date>member since {{ profile.member_since|date:'b j, Y' }}</date>
-    <p>{{ profile.bio|safe }}</p>
-    <hr/>
+    <div class="desc">
+        <p>{{ profile.bio|safe }}</p>
+    </div>
     {% if works %}
         <div class="zines">
             <h3>co-authored zines</h3>

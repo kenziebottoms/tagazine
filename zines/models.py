@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.conf import settings
 import os, re, datetime
 
+from django.utils.text import slugify
+
 # integrating native User model
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -18,6 +20,7 @@ class Profile(models.Model):
     website = models.URLField(blank=True)
     contact_email = models.EmailField(blank=True)
     pic = models.FileField(upload_to='users',blank=True)
+    location = models.CharField(max_length=500,blank=True)
 
     def link(self):
         return '<a href="'+reverse('profile', args=(self.id,))+'">'+self.__str__()+'</a>'
@@ -53,9 +56,26 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Tag(models.Model):
     title = models.TextField()
-    slug = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True,editable=False)
     #optional
-    parent_tag = models.ForeignKey('self',blank=True)
+    parent_tag = models.ForeignKey('self',blank=True,null=True)
+
+    def genSlug(self):
+        slug = slugify(self.title)
+        unique_slug = slug
+        num = 1
+        while Tag.objects.filter(slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.genSlug()
+        super(Tag, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
 
 class Zine(models.Model):
     #required

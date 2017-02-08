@@ -86,6 +86,20 @@ date {
 .material-icons.md-60 { font-size: 60px; }
 .row {
     margin: 1rem auto;
+    .columns:first-child {
+        padding-left: 0;
+    }
+    .columns:last-child {
+        padding-right: 0;
+    }
+    &.flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .floe {
+            flex: auto;
+        }
+    }
 }
 .clearfix {
     clear: both;
@@ -110,20 +124,20 @@ ul.inline {
     border-radius: 0 .5rem .5rem 0;
     background: $black;
     box-shadow: 4px 4px 7px rgba(#000, .1);
-    a {
+    a, span.a {
+        margin: 0 .75rem .75rem .75rem;
+        display: block;
         &:hover {
             color: $white;
         }
     }
     i {
-        padding: 0 .5rem 1.25rem .5rem;
     }
     div.label {
         display: none;
-        vertical-align: top;
-        padding-top: 1.3rem;
-        padding-right: 1rem;
-        margin-left: .25rem;
+        padding: 0 .5rem;
+        z-index: 3000;
+        vertical-align: super;
         &.show {
             display: inline-block;
         }
@@ -147,6 +161,7 @@ body.editor {
     }
 }
 #header {
+    margin-bottom: 2rem;
     ul {
         font-size: 1.2rem;
         margin-left: 1em;
@@ -216,6 +231,24 @@ body.editor {
         border-radius: 5px;
     }
 }
+#details {
+    margin: 1.5rem auto 2.5rem auto;
+    i {
+        z-index: -1;
+        color: #ccc;
+        vertical-align: text-bottom;
+        margin-right: .5rem;
+    }
+    .tags {
+        a {
+            display: inline-block;
+            margin: 0 .25rem;
+            border: 1px solid;
+            border-radius: .25rem;
+            padding: .1rem .5rem;
+        }
+    }
+}
 .info {
     display: inline-block;
     margin-left: .5em;
@@ -229,6 +262,7 @@ body.editor {
 .desc {
     font-size: 1.2em;
     font-weight: 100;
+    margin-bottom: 2rem;
     img {
         display: block;
         width: 100%;

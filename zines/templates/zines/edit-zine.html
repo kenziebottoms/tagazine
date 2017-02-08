@@ -9,17 +9,17 @@
         <a id="unpublish">
             <i class="material-icons md-48">file_download</i>
             <div class="label">Unpublish</div>
-        </a><br/>
+        </a>
     {% else %}
         <a id="publish">
             <i class="material-icons md-48">publish</i>
             <div class="label">Publish</div>
-        </a><br/>
+        </a>
     {% endif %}
     <a id="alt_submit">
         <i class="material-icons md-48">save</i>
         <div class="label">Save &amp; exit</div>
-    </a><br/>
+    </a>
     <a href="{% url 'zine' zine.id %}">
         <i class="material-icons md-48">close</i>
         <div class="label">Close without saving</div>

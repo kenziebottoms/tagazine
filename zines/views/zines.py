@@ -8,11 +8,13 @@ def zine(request, zine_id):
     zine = get_object_or_404(Zine,pk=zine_id)
     issues = Issue.objects.filter(zine=zine_id,published=True)
     authorships = Authorship.objects.filter(zine=zine_id)
+    tags = zine.tags.all()
     context = {
         'zine' : zine,
         'issues' : issues,
         'authorships' : authorships,
         'messages' : messages.get_messages(request),
+        'tags' : tags,
     }
     return render(request, 'zines/zine.html', context)
 
