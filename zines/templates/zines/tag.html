@@ -6,7 +6,7 @@
 
 {% block body %}
     {% load static %}
-    <h1>Zines in <a href="{% url 'tag' tag.slug %}">{{ tag }}</a></h1>
+    <h1>Zines in <a href="{% url 'tag' tag.slug %}">#{{ tag }}</a></h1>
     <hr/>
     {% if zines %}
         <div class="zines">

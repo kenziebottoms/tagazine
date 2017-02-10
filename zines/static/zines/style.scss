@@ -125,13 +125,22 @@ ul.inline {
     background: $black;
     box-shadow: 4px 4px 7px rgba(#000, .1);
     a, span.a {
-        margin: 0 .75rem .75rem .75rem;
+        margin: 0 .75rem;
         display: block;
         &:hover {
             color: $white;
         }
+        &:first-child {
+            margin-top: .25rem;
+        }
+        &:last-child {
+            margin-bottom: 1rem;
+        }
     }
     i {
+        &.info {
+            margin-left: 0;
+        }
     }
     div.label {
         display: none;

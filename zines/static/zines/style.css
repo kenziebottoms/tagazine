@@ -120,10 +120,16 @@ ul.inline {
   background: #333;
   box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1); }
   #editor a, #editor span.a {
-    margin: 0 .75rem .75rem .75rem;
+    margin: 0 .75rem;
     display: block; }
     #editor a:hover, #editor span.a:hover {
       color: #fefefe; }
+    #editor a:first-child, #editor span.a:first-child {
+      margin-top: .25rem; }
+    #editor a:last-child, #editor span.a:last-child {
+      margin-bottom: 1rem; }
+  #editor i.info {
+    margin-left: 0; }
   #editor div.label {
     display: none;
     padding: 0 .5rem;
@@ -381,5 +387,3 @@ img.preview {
   top: 0;
   opacity: 0;
   visibility: hidden; }
-
-/*# sourceMappingURL=../../../../../../../static/zines/style.css.map */

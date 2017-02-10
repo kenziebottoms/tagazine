@@ -29,7 +29,10 @@ def edit_zine(request, zine_id):
         'messages' : messages.get_messages(request),
     }
     if request.method == "POST":
-        form = ZineForm(request.POST,instance=zine)
+        if request.FILES:
+            form = ZineForm(request.POST,request.FILES,instance=zine)
+        else:
+            form = ZineForm(request.POST,instance=zine)
         if form.is_valid():
             zine = form.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')

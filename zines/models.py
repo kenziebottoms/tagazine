@@ -19,7 +19,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     website = models.URLField(blank=True)
     contact_email = models.EmailField(blank=True)
-    pic = models.FileField(upload_to='users',blank=True)
+    pic = models.FileField(upload_to='/users',blank=True)
     location = models.CharField(max_length=500,blank=True)
 
     def link(self):

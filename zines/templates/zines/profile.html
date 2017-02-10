@@ -34,13 +34,13 @@
         {% if profile.website %}
             <div class="floe">
                 <i class="material-icons md-30">insert_link</i>
-                <a href="{{ profile.website }}">{{ profile.website }}</a>
+                <a target="blank" href="{{ profile.website }}">{{ profile.website }}</a>
             </div>
         {% endif %}
         {% if profile.contact_email %}
             <div class="floe">
                 <i class="material-icons md-30">mail_outline</i>
-                <a href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a>
+                <a target="blank" href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a>
             </div>
         {% endif %}
     </div>
