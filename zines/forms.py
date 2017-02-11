@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Zine, Profile, Issue
 from django.shortcuts import get_object_or_404
-import html5.forms.widgets as html5_widgets
+from .widgets import *
 
 class ZineForm(ModelForm):
     class Meta:
@@ -15,8 +15,8 @@ class ZineForm(ModelForm):
             }),
             'desc' : forms.HiddenInput,
             'published' : forms.HiddenInput,
-            'start_date' : html5_widgets.DateInput,
-            'end_date' : html5_widgets.DateInput,
+            'start_date' : HTML5DateInput,
+            'end_date' : HTML5DateInput,
         }
         labels = {
             'title' : '',
@@ -33,7 +33,7 @@ class IssueForm(ModelForm):
             'title' : forms.TextInput(attrs={
                 'class' : 'heading',
             }),
-            'pub_date' : html5_widgets.DateInput,
+            'pub_date' : HTML5DateInput,
             'desc' : forms.HiddenInput,
             'published' : forms.HiddenInput,
             'ext_guest_authors' : forms.Textarea(attrs={
