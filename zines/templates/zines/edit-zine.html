@@ -74,9 +74,11 @@
             <div class="large-12 medium-12 small-12 columns">
                 <input id="tags_auto" type="text" placeholder="Add tags..." />
                 {{ form.tags }}
-                {% for tag in zine.tags.all %}
-                    <a class="tag" data-id="{{ tag.id }}">{{ tag.title }}</a>
-                {% endfor %}
+                <div id="tag_list">
+                    {% for tag in zine.tags.all %}
+                        <a class="tag" data-id="{{ tag.id }}">{{ tag.title }}</a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <hr class="spacer"/>
@@ -96,9 +98,15 @@
     <script>
         $(document).ready(function() {
             initQuill();
+            // to do: delete tags when clicked
             $('#tags_auto').autocomplete({
                 source: "/zines/api/get_tags/",
                 minLength: 2,
+                select: function(event,ui) {
+                    // to do: if it's already on the page, don't add it again
+                    $('#tag_list').append('<a class="tag" data-id="'+ui.item.value+'">'+ui.item.label+'</a>');
+                    // to do: clear input
+                },
             });
             // cover image
             $('img.preview').click(function() {
