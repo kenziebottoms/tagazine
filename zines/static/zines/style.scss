@@ -106,6 +106,9 @@ date {
 }
 hr {
     clear: both;
+    &.spacer {
+        border-color: transparent;
+    }
 }
 ul.inline {
     display: inline-block;
@@ -240,6 +243,13 @@ body.editor {
         border-radius: 5px;
     }
 }
+a.tag {
+    display: inline-block;
+    margin: 0 .25em;
+    border: 1px solid;
+    border-radius: .3em;
+    padding: .1em .5em;
+}
 #details {
     margin: 1.5rem auto 2.5rem auto;
     i {
@@ -247,15 +257,6 @@ body.editor {
         color: #ccc;
         vertical-align: text-bottom;
         margin-right: .5rem;
-    }
-    .tags {
-        a {
-            display: inline-block;
-            margin: 0 .25rem;
-            border: 1px solid;
-            border-radius: .25rem;
-            padding: .1rem .5rem;
-        }
     }
 }
 .info {

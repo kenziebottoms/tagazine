@@ -1,10 +1,11 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Zine, Profile, Issue
+from .models import *
 from django.shortcuts import get_object_or_404
 from .widgets import *
 
 class ZineForm(ModelForm):
+    tags = forms.CharField(widget=forms.HiddenInput)
     class Meta:
         model = Zine
         fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'locale', 'published']

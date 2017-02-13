@@ -69,6 +69,17 @@
                 {{ form.website.label_tag }} {{ form.website }}
             </div>
         </div>
+        <hr class="spacer"/>
+        <div class="row">
+            <div class="large-12 medium-12 small-12 columns">
+                <input type="text" placeholder="Add tags..." />
+                {{ form.tags }}
+                {% for tag in zine.tags.all %}
+                    <a class="tag" data-id="{{ tag.id }}">{{ tag.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <hr class="spacer"/>
         <div class="row">
             <label>Desc:</label>
             <div id="quill">

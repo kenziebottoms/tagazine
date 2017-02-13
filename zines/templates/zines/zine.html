@@ -34,10 +34,10 @@
             </div>
         {% endif %}
         {% if tags %}
-            <div class="floe tags">
+            <div class="floe">
                 <i class="material-icons md-30">local_offer</i>
                 {% for tag in tags %}
-                    <a href="{% url 'tag' tag.slug %}">{{ tag.title }}</a>
+                    <a class="tag" href="{% url 'tag' tag.slug %}">{{ tag.title }}</a>
                 {% endfor %}
             </div>
         {% endif %}

@@ -102,6 +102,8 @@ date {
 
 hr {
   clear: both; }
+  hr.spacer {
+    border-color: transparent; }
 
 ul.inline {
   display: inline-block;
@@ -201,6 +203,13 @@ body.editor #header ul li a {
     padding: 5px 0 5px 5px;
     border-radius: 5px; }
 
+a.tag {
+  display: inline-block;
+  margin: 0 .25em;
+  border: 1px solid;
+  border-radius: .3em;
+  padding: .1em .5em; }
+
 #details {
   margin: 1.5rem auto 2.5rem auto; }
   #details i {
@@ -208,12 +217,6 @@ body.editor #header ul li a {
     color: #ccc;
     vertical-align: text-bottom;
     margin-right: .5rem; }
-  #details .tags a {
-    display: inline-block;
-    margin: 0 .25rem;
-    border: 1px solid;
-    border-radius: .25rem;
-    padding: .1rem .5rem; }
 
 .info {
   display: inline-block;
