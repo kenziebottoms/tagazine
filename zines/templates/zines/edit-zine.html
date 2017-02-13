@@ -72,7 +72,7 @@
         <hr class="spacer"/>
         <div class="row">
             <div class="large-12 medium-12 small-12 columns">
-                <input type="text" placeholder="Add tags..." />
+                <input id="tags_auto" type="text" placeholder="Add tags..." />
                 {{ form.tags }}
                 {% for tag in zine.tags.all %}
                     <a class="tag" data-id="{{ tag.id }}">{{ tag.title }}</a>
@@ -96,6 +96,10 @@
     <script>
         $(document).ready(function() {
             initQuill();
+            $('#tags_auto').autocomplete({
+                source: "/zines/api/get_tags/",
+                minLength: 2,
+            });
             // cover image
             $('img.preview').click(function() {
                 $('#id_cover').click();
