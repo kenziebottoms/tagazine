@@ -85,7 +85,7 @@ class Zine(models.Model):
     start_date = models.DateField('Published since')
     authors = models.ManyToManyField(Profile, through='Authorship')
     show_author = models.BooleanField(default=True)
-    external = models.BooleanField(default=False)
+    external = models.BooleanField('Externally hosted',default=False)
     submissions_open = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
     #optional

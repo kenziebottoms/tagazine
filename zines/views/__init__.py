@@ -12,10 +12,15 @@ def index(request):
     recent_zines = Zine.objects.filter(published=True).all();
     recent_zines = sorted(recent_zines, key=lambda i: i.lastUpdated())[:5]
     recent_zines.reverse()
+    tag_ids = []
+    for zine in recent_zines:
+        tag_ids += zine.tags.values_list('id',flat=True)
+    recent_tags = Tag.objects.filter(pk__in=tag_ids)
     context = {
         'recent_issues' : recent_issues,
         'new_users' : new_users,
         'recent_zines' : recent_zines,
+        'recent_tags' : recent_tags,
     }
     return render(request, 'zines/index.html', context)
 

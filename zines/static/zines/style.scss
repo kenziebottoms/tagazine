@@ -252,6 +252,15 @@ a.tag {
     border-radius: .3em;
     padding: .1em .5em;
 }
+#tags_auto {
+    width: 95%;
+    float: left;
+}
+#add_new {
+    width: 5%;
+    float: right;
+    text-align: right;
+}
 #details {
     margin: 1.5rem auto 2.5rem auto;
     i {
@@ -439,14 +448,14 @@ body.home {
         }
     }
     .recent-zines {
-        padding: 2rem 0;
+        padding-left: 0;
+        padding-right: 0;
         .columns {
             padding: 0;
-            float: left;
         }
         .cover {
             padding: 0;
-            height: 300px;
+            height: 250px;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;

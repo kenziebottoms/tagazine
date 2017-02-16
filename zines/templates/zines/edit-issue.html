@@ -74,6 +74,10 @@
 
 {% block scripts %}
     <script>
+        function publish() {
+            updateQuillHiddenInput('id_desc');
+            $('#edit-issue').submit();
+        }
         $(document).ready(function() {
             initQuill();
             // cover image
@@ -87,21 +91,7 @@
             // update hidden input before submitting
             $('#alt_submit').click(function(e) {
                 e.preventDefault();
-                updateQuillHiddenInput('id_desc');
-                $('#edit-issue').submit();
-            });
-            // update publish value before submitting
-            $('#publish').click(function(e) {
-                e.preventDefault();
-                updateQuillHiddenInput('id_desc');
-                $('#id_published').val("True");
-                $('#edit-issue').submit();
-            });
-            $('#unpublish').click(function(e) {
-                e.preventDefault();
-                updateQuillHiddenInput('id_desc');
-                $('#id_published').val("False");
-                $('#edit-issue').submit();
+                publish();
             });
         });
     </script>

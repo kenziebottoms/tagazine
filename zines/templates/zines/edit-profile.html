@@ -44,8 +44,11 @@
 
 {% block scripts %}
     <script>
+        function publish() {
+            updateQuillHiddenInput('id_bio');
+            $('#edit-profile').submit();
+        }
         $(document).ready(function() {
-            console.log({{ messages.0 }});
             initQuill();
             // update hidden input before submitting
             $('#alt_submit').click(function(e) {

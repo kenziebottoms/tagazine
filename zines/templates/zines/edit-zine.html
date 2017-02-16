@@ -73,7 +73,11 @@
         <hr class="spacer"/>
         <div class="row">
             <div class="large-12 medium-12 small-12 columns">
-                <input id="tags_auto" type="text" placeholder="Add tags..." />
+                <input id="tags_auto" type="text" placeholder="Add tags..." /> <a id="add_new"><i class="material-icons md-36">add_circle_outline</i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 medium-12 small-12 columns">
                 {{ form.tags }}
                 <div id="tag_list">
                     {% for tag in zine.tags.all %}
@@ -98,16 +102,29 @@
 
 {% block scripts %}
     <script>
+        function publish() {
+            updateQuillHiddenInput('id_desc');
+            updateTags();
+            $('#edit-zine').submit();
+        }
         $(document).ready(function() {
             initQuill();
-            // to do: delete tags when clicked
+            // removes tag on click
+            $('#tag_list .tag').click(function() {
+                $(this).remove();
+                updateTags();
+            });
+            // tag auto search
             $('#tags_auto').autocomplete({
                 source: "/zines/api/get_tags/",
                 minLength: 2,
                 select: function(event,ui) {
-                    // to do: if it's already on the page, don't add it again
-                    $('#tag_list').append('<a class="tag" data-id="'+ui.item.value+'">'+ui.item.label+'</a>');
-                    // to do: clear input
+                    if ($('#tag_list .tag[data-id='+ui.item.value+']').length == 0) {
+                        $('#tag_list').append('<a class="tag" data-id="'+ui.item.value+'">'+ui.item.label+'</a>');
+                    }
+                    updateTags();
+                    $(this).val('');
+                    return false;
                 },
             });
             // cover image
@@ -118,25 +135,12 @@
                 $('.refresh').html('Save to view');
             });
 
-            // update hidden input before submitting
+            // update hidden inputs before submitting
             $('#alt_submit').click(function(e) {
                 e.preventDefault();
-                updateQuillHiddenInput('id_desc');
-                $('#edit-zine').submit();
+                publish();
             });
-            // update publish value before submitting
-            $('#publish').click(function(e) {
-                e.preventDefault();
-                updateQuillHiddenInput('id_desc');
-                $('#id_published').val("True");
-                $('#edit-zine').submit();
-            });
-            $('#unpublish').click(function(e) {
-                e.preventDefault();
-                updateQuillHiddenInput('id_desc');
-                $('#id_published').val("False");
-                $('#edit-zine').submit();
-            });
+
         });
     </script>
 {% endblock %}

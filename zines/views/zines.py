@@ -31,17 +31,14 @@ def edit_zine(request, zine_id):
     if request.method == "POST":
         if request.FILES:
             form = ZineForm(request.POST,request.FILES,instance=zine)
-            messages.add_message(request, message_constants.INFO, 'Your form had an image attached.', 'info')
         else:
             form = ZineForm(request.POST,instance=zine)
-            messages.add_message(request, message_constants.INFO, 'Your form did not have an image attached.', 'info')
         if form.is_valid():
             zine = form.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')
             return redirect('zine', zine.id)
         else:
             messages.add_message(request, message_constants.ERROR, 'Your changes were not saved.', 'close')
-            context['error'] = 'Invalid input'
             context['form'] = form
     else:
         form = ZineForm(instance=zine)

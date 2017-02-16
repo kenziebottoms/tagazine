@@ -37,14 +37,16 @@
         {% endif %}
     </div>
     <div class="desc">
-        {% if issue.cover != '' %}
-            <div class="cover large-4 medium-6 small-12 columns">
-                <img src="{{ issue.cover.url }}"/>
-            </div>
-        {% endif %}
         <p>{{ issue.desc|safe }}</p>
     </div>
     <hr/>
+    {% if issue.cover %}
+        <div class="page large-4 medium-6 small-12 columns">
+            <a data-lightbox="pages" href="{{ issue.cover.url }}">
+                <img src="{{ issue.cover.url }}"/>
+            </a>
+        </div>
+    {% endif %}
     {% if pages %}
         {% for page in pages %}
             <div class="page large-4 medium-6 small-12 columns">

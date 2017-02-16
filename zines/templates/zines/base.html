@@ -103,8 +103,33 @@
                 $input = $('#'+hiddenInputID);
                 $input.val($('#quill>div')[0].innerHTML);
             }
+            function updateTags() {
+                // tags field
+                var tags = []
+                $('#tag_list .tag').each(function() {
+                    tags.push($(this).data('id'));
+                });
+                $('#id_tags').val(tags);
+                console.log(tags);
+            }
+        </script>
+        {% block scripts %} {% endblock %}
+        <script>
             $(document).ready(function() {
-                console.log({{response}});
+
+                // update publish value before submitting
+                $('#publish').click(function(e) {
+                    e.preventDefault();
+                    $('#id_published').val("True");
+                    publish();
+                });
+                $('#unpublish').click(function(e) {
+                    e.preventDefault();
+                    $('#id_published').val("False");
+                    publish();
+                });
+
+                // #editor
                 $('div.label').removeClass('show');
                 $('#editor').hover(function() {
                     $('div.label').addClass('show');
@@ -113,6 +138,5 @@
                 });
             });
         </script>
-        {% block scripts %} {% endblock %}
     </body>
 </html>

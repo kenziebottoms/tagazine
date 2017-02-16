@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from .widgets import *
 
 class ZineForm(ModelForm):
-    tags = forms.CharField(widget=forms.HiddenInput,required=False)
     class Meta:
         model = Zine
         fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'locale', 'published']
@@ -25,6 +24,31 @@ class ZineForm(ModelForm):
         css_class = {
             'show_author' : 'large-4 medium-4 small-12 columns'
         }
+
+    tags = forms.CharField(widget=forms.HiddenInput,required=False)
+
+    def __init__(self, *args, **kwargs):
+        if kwargs.get('instance'):
+            initial = kwargs.setdefault('initial', {})
+            initial['tags'] = [t.pk for t in kwargs['instance'].tags.all()]
+        forms.ModelForm.__init__(self, *args, **kwargs)
+
+    def save(self, commit=True):
+        instance = forms.ModelForm.save(self, False)
+
+        def save_tags():
+            instance.tags.clear()
+            tag_data = self.cleaned_data['tags'].replace('[', '');
+            tag_data = tag_data.replace('[', '');
+            tag_data = tag_data.split(',');
+            for tag in tag_data:
+                instance.tags.add(tag)
+
+        if commit:
+            instance.save()
+            save_tags()
+
+        return instance
 
 class IssueForm(ModelForm):
     class Meta:
