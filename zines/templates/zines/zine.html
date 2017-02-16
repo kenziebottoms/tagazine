@@ -20,27 +20,45 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ zine.title }}</h1>
-    <div class="row flex" id="details">
-        <div class="floe">
-            <i class="material-icons md-30">account_circle</i> {{ zine.authorsLink|safe }}
-        </div>
-        <div class="floe">
-            <i class="material-icons md-30">date_range</i> {{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}
-        </div>
-        {% if zine.locale %}
+    <h1>
+        {{ zine.title }}
+        <span class="tagline">
+            {{ zine.tagline }}
+        </span>
+    </h1>
+    <div id="details">
+        <div class="row flex">
             <div class="floe">
-                <i class="material-icons md-30">place</i> {{ zine.locale }}
+                <i class="material-icons md-30">account_circle</i> {{ zine.authorsLink|safe }}
             </div>
-        {% endif %}
-        {% if tags %}
             <div class="floe">
-                <i class="material-icons md-30">local_offer</i>
-                {% for tag in tags %}
-                    <a class="tag" href="{% url 'tag' tag.slug %}">{{ tag.title }}</a>
-                {% endfor %}
+                <i class="material-icons md-30">date_range</i> {{ zine.start_date|date:'b j, Y' }} – {% if zine.end_date != null %}{{ zine.end_date|date:'b j, Y' }}{% else %}present{% endif %}
             </div>
-        {% endif %}
+            {% if zine.website %}
+                <div class="floe">
+                    <i class="material-icons md-30">link</i>
+                    <a target="blank" href="{{ zine.website }}">{{ zine.website }}</a>
+                </div>
+            {% endif %}
+            {% if zine.locale %}
+                <div class="floe">
+                    <i class="material-icons md-30">place</i> {{ zine.locale }}
+                </div>
+            {% endif %}
+            <div class="floe">
+                <i class="material-icons md-30">language</i> {{ zine.primary_language }}
+            </div>
+        </div>
+        <div class="row flex">
+            {% if tags %}
+                <div class="floe">
+                    <i class="material-icons md-30">local_offer</i>
+                    {% for tag in tags %}
+                        <a class="tag" href="{% url 'tag' tag.slug %}">{{ tag.title }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
     </div>
     <div class="desc">
         {% if zine.cover != '' %}

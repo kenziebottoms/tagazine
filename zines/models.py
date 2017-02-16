@@ -88,6 +88,7 @@ class Zine(models.Model):
     external = models.BooleanField('Externally hosted',default=False)
     submissions_open = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
+    primary_language = models.CharField(max_length=300, default='English')
     #optional
     desc = models.TextField(blank=True)
     contact_email = models.CharField(max_length=200,blank=True)

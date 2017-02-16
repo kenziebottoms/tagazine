@@ -7,7 +7,7 @@ from .widgets import *
 class ZineForm(ModelForm):
     class Meta:
         model = Zine
-        fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'locale', 'published']
+        fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'primary_language', 'locale', 'published']
         widgets = {
             'title' : forms.TextInput(attrs={
                 'class' : 'heading',
@@ -39,10 +39,11 @@ class ZineForm(ModelForm):
         def save_tags():
             instance.tags.clear()
             tag_data = self.cleaned_data['tags'].replace('[', '');
-            tag_data = tag_data.replace('[', '');
-            tag_data = tag_data.split(',');
-            for tag in tag_data:
-                instance.tags.add(tag)
+            if tag_data != '':
+                tag_data = tag_data.replace('[', '');
+                tag_data = tag_data.split(',');
+                for tag in tag_data:
+                    instance.tags.add(tag)
 
         if commit:
             instance.save()

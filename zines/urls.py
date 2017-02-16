@@ -19,7 +19,7 @@ urlpatterns = [
     # /drafts
     url(r'^drafts/$', views.drafts, name='drafts'),
     # /tag/anarchy
-    url(r'^tag/(?P<slug>[a-z0-9]*)$', views.tag, name='tag'),
+    url(r'^tag/(?P<slug>[a-z0-9-]*)$', views.tag, name='tag'),
 
     ### API ###
     # /api/get_tags/fe, /api/get_tags/fem, /api/get_tags/femi

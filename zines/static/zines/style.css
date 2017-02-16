@@ -53,6 +53,8 @@ i {
 h1 {
   margin-bottom: .25em;
   display: inline-block; }
+  h1 .tagline {
+    font-weight: 100; }
 
 h1, h2, h3, h4, h5, h6 {
   text-transform: lowercase; }
@@ -93,7 +95,8 @@ date {
   .row.flex {
     display: flex;
     justify-content: space-between;
-    align-items: center; }
+    align-items: center;
+    flex-wrap: wrap; }
     .row.flex .floe {
       flex: auto; }
 
@@ -402,5 +405,3 @@ img.preview {
 
 .error {
   color: #FA4866; }
-
-/*# sourceMappingURL=../../../../../../../static/zines/style.css.map */
