@@ -37,6 +37,8 @@ class Profile(models.Model):
         for authorship in authorships:
             if authorship.zine.published == False:
                 return True
+            if authorship.zine.unPublishedContent():
+                return True
         return False
     
     def __str__(self):
@@ -95,7 +97,7 @@ class Zine(models.Model):
     website = models.URLField(blank=True)
     cover = models.FileField(upload_to='covers')
     locale = models.CharField(max_length=500,blank=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag,blank=True)
 
     def issueCount(self):
         return Issue.objects.filter(zine=self.id).count()

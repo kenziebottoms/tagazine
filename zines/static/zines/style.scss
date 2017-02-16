@@ -130,6 +130,8 @@ ul.inline {
     a, span.a {
         margin: 0 .75rem;
         display: block;
+    }
+    a {
         &:hover {
             color: $white;
         }
@@ -466,4 +468,7 @@ img.preview {
     top: 0;
     opacity: 0;
     visibility: hidden;
+}
+.error {
+    color: $orange;
 }

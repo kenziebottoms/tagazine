@@ -33,6 +33,7 @@
         <div class="row">
             <div class="large-4 medium-6 small-12 columns">
                 {{ form.title }}
+                {{ form.title.errors }}
             </div>
             <div class="large-8 medium-6 small-12 columns">
                 {{ form.tagline }}
@@ -79,6 +80,7 @@
                         <a class="tag" data-id="{{ tag.id }}">{{ tag.title }}</a>
                     {% endfor %}
                 </div>
+                <div class="error">{{ form.tags.errors.as_text }}</div>
             </div>
         </div>
         <hr class="spacer"/>
