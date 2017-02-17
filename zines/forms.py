@@ -75,3 +75,11 @@ class ProfileForm(ModelForm):
         widgets = {
             'bio' : forms.HiddenInput,
         }
+
+    def save(self, commit=True):
+        profile = super(ProfileForm, self).save(commit=True)
+        profile.create_thumb()
+        return profile
+
+
+

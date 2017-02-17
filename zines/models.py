@@ -11,7 +11,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # thumbnails
-from sorl.thumbnail import ImageField as ThumbField
+from PIL import Image
+from cStringIO import StringIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files import File
+from mimetypes import MimeTypes
+import urllib
 
 class Profile(models.Model):
     #required
@@ -22,19 +27,19 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     website = models.URLField(blank=True)
     contact_email = models.EmailField(blank=True)
-    pic = ThumbField(upload_to='users',blank=True)
+    pic = models.ImageField(upload_to='users',blank=True)
+    thumb = models.ImageField(upload_to='users',blank=True)
     location = models.CharField(max_length=500,blank=True)
 
+    # info fns
     def link(self):
-        return '<a href="'+reverse('profile', args=(self.id,))+'">'+self.__str__()+'</a>'
-    
+        return '<a href="'+reverse('profile', args=(self.id,))+'">'+self.__str__()+'</a>'    
     def hasPublishedContent(self):
         authorships = Authorship.objects.filter(user_profile=self.id)
         for authorship in authorships:
             if authorship.zine.published:
                 return True
         return False
-    
     def hasUnPublishedContent(self):
         authorships = Authorship.objects.filter(user_profile=self.id)
         for authorship in authorships:
@@ -43,12 +48,47 @@ class Profile(models.Model):
             if authorship.zine.unPublishedContent():
                 return True
         return False
-    
     def __str__(self):
         if self.name != '':
             return self.name
         else:
             return self.user.username
+
+    def create_thumb(self):
+        if not self.pic:
+            return
+
+        mime = MimeTypes()
+        url = urllib.pathname2url(self.pic.path)
+        directory = "/".join(url.split('/')[:-2])
+        mime_type = mime.guess_type(url)[0]
+
+        thumb = Image.open(self.pic.path)
+        TARGET_SIZE = [150, 150]
+        THUMB_SIZE = [150, 150]
+        width, height = thumb.size
+        if width > height:
+            THUMB_SIZE = [int(TARGET_SIZE[0]*width/float(height)), TARGET_SIZE[1]]
+        elif height > width:
+            THUMB_SIZE = [TARGET_SIZE[0],int(TARGET_SIZE[1]*height/float(width))]
+
+        mid_x = THUMB_SIZE[0] / 2
+        mid_y = THUMB_SIZE[1] / 2
+        # shrinks it down to at most 150x150 but keeps aspect ratio
+        thumb = thumb.resize(THUMB_SIZE,Image.ANTIALIAS)
+        # crops it down to a square from that
+        thumb = thumb.crop((mid_x-(TARGET_SIZE[0]/2),mid_y-(TARGET_SIZE[1]/2),mid_x+(TARGET_SIZE[0]/2),mid_y+(TARGET_SIZE[1]/2)))
+
+        filename, ext = os.path.splitext(self.pic.name)
+        filename = str(filename+"_150x150"+ext)
+
+        temp_image = open(os.path.join(directory,filename), 'w')
+        thumb.save(temp_image)
+
+        thumb_data = open(os.path.join(directory, filename), 'r')
+        thumb_file = File(thumb_data)
+
+        self.thumb.save(filename, thumb_file)
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

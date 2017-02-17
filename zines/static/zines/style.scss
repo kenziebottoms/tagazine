@@ -265,12 +265,25 @@ a.tag {
     float: right;
     text-align: right;
 }
+h1#profile {
+    margin-top: .5rem;
+}
+#profile_pic {
+    border-radius: 50%;
+    margin-right: 2rem;
+    margin-top: .6rem;
+    float: left;
+}
 #details {
-    margin: 1.5rem auto 2.5rem auto;
+    margin-bottom: 2.5rem;
+    margin-top: 0;
     i {
         z-index: -1;
         color: #ccc;
         vertical-align: text-bottom;
+        margin-right: .5rem;
+    }
+    .floe {
         margin-right: .5rem;
     }
 }
