@@ -8,7 +8,36 @@
 
 {% block body %}
     <h1>welcome</h1>
+    <div class="row">
+        {% if recent_tags %}
+            <div class="large-4 columns">
+                <h3>Recently Updated Tags</h3>
+                <ul>
+                    {% for tag in recent_tags %}
+                        <li>
+                            <a href="{% url 'tag' tag.slug %}">#{{ tag.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if recent_zines %}
+            <div class="large-8 columns recent-zines">
+                <h3>Recently Updated Zines</h3>
+                {% for zine in recent_zines %}
+                    <div class="large-4 columns">
+                        <a href="{% url 'zine' zine.id %}">
+                            <div class="cover" style="background-image: url({{ zine.cover.url }});">
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
     <hr/>
+    <hr class="spacer"/>
     <div class="row">
         {% if recent_issues %}
             <div class="large-8 medium-6 small-12 columns">
@@ -37,35 +66,6 @@
                         <li>{{ profile.link|safe }}</li>
                     {% endfor %}
                 </ul>
-            </div>
-        {% endif %}
-    </div>
-    <hr class="spacer"/>
-    <div class="row">
-        {% if recent_tags %}
-            <div class="large-4 columns">
-                <h3>Recently Updated Tags</h3>
-                <ul>
-                    {% for tag in recent_tags %}
-                        <li>
-                            <a href="{% url 'tag' tag.slug %}">#{{ tag.title }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        {% if recent_zines %}
-            <div class="large-8 columns recent-zines">
-                <h3>Recently Updated Zines</h3>
-                {% for zine in recent_zines %}
-                    <div class="large-4 columns">
-                        <a href="{% url 'zine' zine.id %}">
-                            <div class="cover" style="background-image: url({{ zine.cover.url }});">
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
             </div>
         {% endif %}
     </div>

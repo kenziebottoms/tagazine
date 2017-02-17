@@ -18,7 +18,7 @@
 {% block classes %}editor{% endblock %}
 
 {% block body %}
-    <form id="edit-profile" name="editProfile" method="POST">
+    <form enctype="multipart/form-data" id="edit-profile" name="editProfile" method="POST">
         {% for field in form.visible_fields %}
             <div id="{{ field.id_for_label }}">
                 <p class="error">

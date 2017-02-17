@@ -21,9 +21,6 @@ class ZineForm(ModelForm):
         labels = {
             'title' : '',
         }
-        css_class = {
-            'show_author' : 'large-4 medium-4 small-12 columns'
-        }
 
     tags = forms.CharField(widget=forms.HiddenInput,required=False)
 

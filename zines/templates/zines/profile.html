@@ -18,31 +18,38 @@
 
 {% block body %}
     {% load static %}
-    <h1>{{ profile }}</h1>
-
-    <div class="row flex" id="details">
-        <div class="floe">
-            <i class="material-icons md-30">date_range</i>
-            member since {{ profile.member_since|date:'b j, Y' }}
+    {% load thumbnail %}
+    <div class="row">
+        {% if profile.pic %}
+            {% thumbnail profile.pic "100x100" crop="center" as im %}
+                <img id="profile_pic" src="{{ im.url }}"/>
+            {% endthumbnail %}
+        {% endif %}
+        <h1>{{ profile }}</h1>
+        <div class="row flex" id="details">
+            <div class="floe">
+                <i class="material-icons md-30">date_range</i>
+                member since {{ profile.member_since|date:'b j, Y' }}
+            </div>
+            {% if profile.location %}
+                <div class="floe">
+                    <i class="material-icons md-30">place</i>
+                    {{ profile.location }}
+                </div>
+            {% endif %}
+            {% if profile.website %}
+                <div class="floe">
+                    <i class="material-icons md-30">insert_link</i>
+                    <a target="blank" href="{{ profile.website }}">{{ profile.website }}</a>
+                </div>
+            {% endif %}
+            {% if profile.contact_email %}
+                <div class="floe">
+                    <i class="material-icons md-30">mail_outline</i>
+                    <a target="blank" href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a>
+                </div>
+            {% endif %}
         </div>
-        {% if profile.location %}
-            <div class="floe">
-                <i class="material-icons md-30">place</i>
-                {{ profile.location }}
-            </div>
-        {% endif %}
-        {% if profile.website %}
-            <div class="floe">
-                <i class="material-icons md-30">insert_link</i>
-                <a target="blank" href="{{ profile.website }}">{{ profile.website }}</a>
-            </div>
-        {% endif %}
-        {% if profile.contact_email %}
-            <div class="floe">
-                <i class="material-icons md-30">mail_outline</i>
-                <a target="blank" href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a>
-            </div>
-        {% endif %}
     </div>
     <div class="desc">
         <p>{{ profile.bio|safe }}</p>

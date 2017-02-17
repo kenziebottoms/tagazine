@@ -25,14 +25,16 @@ def edit_profile(request, profile_id):
         'messages' : messages.get_messages(request),
     }
     if request.method == "POST":
-        form = ProfileForm(request.POST,instance=profile)
+        if request.FILES:
+            form = ProfileForm(request.POST,request.FILES,instance=profile)
+        else:
+            form = ProfileForm(request.POST,instance=profile)
         if form.is_valid():
             profile = form.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your profile was saved.', 'check')
             return redirect('profile', profile.id)
         else:
-            context['response'] = 0
-            context['error'] = 'Invalid input'
+            messages.add_message(request, message_constants.ERROR, 'Your profile was not saved.', 'close')
             context['form'] = form
     else:
         form = ProfileForm(instance=profile)

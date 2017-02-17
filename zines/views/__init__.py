@@ -10,7 +10,7 @@ def index(request):
     recent_issues = Issue.objects.filter(published=True).order_by('-pub_date')[:3]
     new_users = Profile.objects.order_by('member_since')[:5]
     recent_zines = Zine.objects.filter(published=True).all();
-    recent_zines = sorted(recent_zines, key=lambda i: i.lastUpdated())[:5]
+    recent_zines = sorted(recent_zines, key=lambda i: i.lastUpdated())[:3]
     recent_zines.reverse()
     tag_ids = []
     for zine in recent_zines:
