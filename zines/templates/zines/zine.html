@@ -78,7 +78,10 @@
                     </div>
                     <a href="{% url 'issue' zine.id issue.number %}">
                         <div class="title">
-                            <span>{{ issue.displayTitle }}</span>
+                            <div>
+                                <p>{{ issue.pub_date }}</p>
+                                <h2>{{ issue.displayTitle }}</h2>
+                            </div>
                         </div>
                     </a>
                 </div>

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.conf import settings
 import os, re, datetime
 
+# tag slugs
 from django.utils.text import slugify
 
 # integrating native User model
