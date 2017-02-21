@@ -22,7 +22,7 @@ import urllib
 class Profile(models.Model):
     #required
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    member_since = models.DateField(auto_now=True)
+    member_since = models.DateField(auto_now_add=True)
     #optional
     name = models.CharField(max_length=500,blank=True)
     bio = models.TextField(blank=True)
@@ -66,7 +66,6 @@ class Profile(models.Model):
 
         thumb = Image.open(self.pic.path)
         TARGET_SIZE = [150, 150]
-        THUMB_SIZE = [150, 150]
         width, height = thumb.size
         if width > height:
             THUMB_SIZE = [int(TARGET_SIZE[0]*width/float(height)), TARGET_SIZE[1]]
