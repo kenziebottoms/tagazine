@@ -353,7 +353,7 @@ h1#profile {
 .block {
     margin: 1.5rem 0;
 }
-.issue {
+.banner {
     z-index: -1;
     background-color: $black;
     padding: 0;
@@ -403,6 +403,16 @@ h1#profile {
             display: block;
             float: none;
             margin: 0;
+        }
+    }
+    &.h130px {
+        height: 130px;
+        .bg {
+            height: 130px;
+        }
+        .title {
+            height: 130px;
+            top: -130px;
         }
     }
 }

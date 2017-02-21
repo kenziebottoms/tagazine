@@ -43,16 +43,7 @@
             <div class="large-8 medium-6 small-12 columns">
                 <h3>Recent Issues</h3>
                 {% for issue in recent_issues %}
-                    <div class="issue">
-                        <div class="bg" style="background-image: url({% if issue.cover != '' %}{{ issue.cover.url }}{% else %}{{ issue.zine.zine_pic }}{% endif %})">
-                            &nbsp;
-                        </div>
-                        <a href="{% url 'issue' issue.zine.id issue.number %}">
-                            <div class="title">
-                                <h3>{{ issue.displayTitle }}</h3>
-                            </div>
-                        </a>
-                    </div>
+                    {% include 'zines/snippets/banner.html' with entity=issue height="130px" type='issue' %}
                 {% endfor %}
             </div>
         {% else %}

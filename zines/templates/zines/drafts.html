@@ -21,16 +21,7 @@
         <div class="zines">
             <h3>zine drafts</h3>
             {% for work in works %}
-                <div class="issue">
-                    <div class="bg" style="background-image: url(/media/{{ work.zine.cover }})">
-                        &nbsp;
-                    </div>
-                    <a href="{% url 'zine' work.zine.id %}">
-                        <div class="title">
-                            <span>{{ work.zine.title }}</span>
-                        </div>
-                    </a>
-                </div>
+                {% include 'zines/snippets/banner.html' with entity=work.zine type='zine' %}
             {% endfor %}
         </div>
     {% endif %}
@@ -38,16 +29,7 @@
         <div class="block">
             <h3>issue drafts</h3>
             {% for issue in issues %}
-                <div class="issue">
-                    <div class="bg" style="background-image: url(/media/{% if issue.cover != '' %}{{ issue.cover }}{% else %}{{ issue.zine.cover }}{% endif %})">
-                        &nbsp;
-                    </div>
-                    <a href="{% url 'issue' issue.zine.id issue.number %}">
-                        <div class="title">
-                            <span>{{ issue.displayTitle }}</span>
-                        </div>
-                    </a>
-                </div>
+                {% include 'zines/snippets/banner.html' with entity=issue type='issue' %}
             {% endfor %}
         </div>
     {% endif %}

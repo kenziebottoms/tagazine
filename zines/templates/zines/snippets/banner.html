@@ -1,0 +1,18 @@
+<div class="banner {% if height %}h{{height}}{% endif %}">
+    <div class="bg" style="background-image: url(/media/{% if entity.cover != '' %}{{ entity.cover }}{% elif entity.zine.cover %}{{ entity.zine.cover }}{% endif %})">
+        &nbsp;
+    </div>
+    {% if type == 'issue' %}
+        <a href="{% url 'issue' issue.zine.id issue.number %}">
+            <div class="title">
+                <h2>{{ entity.displayTitle }}</h2>
+            </div>
+        </a>
+    {% elif type == 'zine' %}
+        <a href="{% url 'zine' entity.id %}">
+            <div class="title">
+                <h2>{{ entity.title }}</h2>
+            </div>
+        </a>
+    {% endif %}
+</div>
