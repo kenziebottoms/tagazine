@@ -69,7 +69,7 @@ class Profile(models.Model):
         width, height = thumb.size
         if width > height:
             THUMB_SIZE = [int(TARGET_SIZE[0]*width/float(height)), TARGET_SIZE[1]]
-        elif height > width:
+        else:
             THUMB_SIZE = [TARGET_SIZE[0],int(TARGET_SIZE[1]*height/float(width))]
 
         mid_x = THUMB_SIZE[0] / 2
