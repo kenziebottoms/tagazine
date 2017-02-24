@@ -11,16 +11,7 @@
     {% if zines %}
         <div class="zines">
             {% for zine in zines %}
-                <div class="issue">
-                    <div class="bg" style="background-image: url(/media/{{ zine.cover }})">
-                        &nbsp;
-                    </div>
-                    <a href="{% url 'zine' zine.id %}">
-                        <div class="title">
-                            <span>{{ zine.title }}</span>
-                        </div>
-                    </a>
-                </div>
+                {% include 'zines/snippets/banner.html' with entity=zine type='zine' %}
             {% endfor %}
         </div>
     {% endif %}

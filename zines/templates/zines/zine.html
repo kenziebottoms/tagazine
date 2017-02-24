@@ -5,10 +5,17 @@
 {% endblock %}
 
 {% block editor %}
-    <a href="">
-        <i class="material-icons md-48">add_to_photos</i>
-        <div class="label">Subscribe</div>
-    </a>
+    {% if user.is_authenticated %}
+        <a href="">
+            <i class="material-icons md-48">add_to_photos</i>
+            <div class="label">Subscribe</div>
+        </a>
+    {% else %}
+        <a href="{% url 'login_view' %}">
+            <i class="material-icons md-48">add_to_photos</i>
+            <div class="label">Subscribe</div>
+        </a>
+    {% endif %}
     {% for authorship in authorships %}
         {% if authorship.user_profile == user.profile %}
             <a href="{% url 'edit_zine' zine.id %}">

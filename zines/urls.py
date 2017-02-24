@@ -24,4 +24,10 @@ urlpatterns = [
     ### API ###
     # /api/get_tags/fe, /api/get_tags/fem, /api/get_tags/femi
     url(r'^api/get_tags/', views.api.get_tags, name='get_tags'),
+
+    ### AUTH ###
+    # /login
+    url(r'^login/', views.auth.login_view, name='login_view'),
+    # /logout
+    url(r'^logout/', views.auth.logout_view, name='logout_view'),
 ]

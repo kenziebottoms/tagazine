@@ -73,9 +73,12 @@
                                 <a href="{% url 'drafts' %}">drafts</a>
                             </li>
                         {% endif %}
+                        <li>
+                            <a href="{% url 'logout_view' %}">Log Out</a>
+                        </li>
                     {% else %}
                         <li>
-                            <a href="">Log in</a>
+                            <a href="{% url 'login_view' %}">Log in</a>
                         </li>
                     {% endif %}
                 </ul>

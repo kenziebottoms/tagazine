@@ -12,14 +12,10 @@
         {% if recent_tags %}
             <div class="large-4 columns">
                 <h3>Recently Updated Tags</h3>
-                <ul>
-                    {% for tag in recent_tags %}
-                        <li>
-                            <a href="{% url 'tag' tag.slug %}">#{{ tag.title }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% for tag in recent_tags %}
+                    <a class="tag" href="{% url 'tag' tag.slug %}">#{{ tag.title }}
+                    </a>
+                {% endfor %}
             </div>
         {% endif %}
         {% if recent_zines %}
@@ -36,7 +32,6 @@
             </div>
         {% endif %}
     </div>
-    <hr/>
     <hr class="spacer"/>
     <div class="row">
         {% if recent_issues %}

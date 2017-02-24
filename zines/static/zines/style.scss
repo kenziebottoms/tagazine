@@ -11,6 +11,17 @@ body {
     background: $white;
     color: $black;
 }
+input:not([type=submit]), select {
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    border-width: 0 0 1px 0;
+    padding: 0;
+    &:focus {
+        box-shadow: none;
+        background: transparent;
+    }
+}
 body.editor {
     background: $black;
     color: $white;
@@ -18,15 +29,8 @@ body.editor {
         color: $white;
     }
     input, select {
-        background: transparent;
-        box-shadow: none;
-        color: inherit;
-        border-width: 0 0 1px 0;
-        padding: 0;
         border-color: #666;
         &:focus {
-            box-shadow: none;
-            background: transparent;
             border-width: 0 0 1px 0;
             border-color: #aaa;
         }
@@ -37,6 +41,29 @@ body.editor {
     input[type=checkbox] {
         border: none;
         margin: 0 .25rem 0 0;
+    }
+}
+body.log {
+    form {
+        background: #eee;
+        padding: 2rem;
+        width: 50%;
+        margin: 5rem auto;
+        text-align: right;
+        input[type=submit] {
+            background: transparent;
+            border: 1px solid $orange;
+            color: $orange;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 1.2rem !important;
+            text-align: right;
+            &:hover {
+                cursor: pointer;
+                color: $black;
+                border-color: $black;
+            }
+        }
     }
 }
 label {
@@ -180,7 +207,7 @@ body.editor {
 }
 #header {
     margin-bottom: 2rem;
-    ul {
+    ul.menu {
         font-size: 1.2rem;
         margin-left: 1em;
         padding: 0;
@@ -190,6 +217,7 @@ body.editor {
         text-transform: uppercase;
         li {
             display: inline-block;
+            margin-right: .4rem;
             a {
                 color: $orange;
                 &:hover {
@@ -201,7 +229,7 @@ body.editor {
 }
 body.editor {
     #header {
-        ul {
+        ul.menu {
             li {
                 a {
                     color: $white;
@@ -251,7 +279,7 @@ body.editor {
 }
 a.tag {
     display: inline-block;
-    margin: 0 .25em;
+    margin: .25em;
     border: 1px solid;
     border-radius: .3em;
     padding: .1em .5em;

@@ -5,21 +5,24 @@ body {
   background: #fefefe;
   color: #333; }
 
+input:not([type=submit]), select {
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  border-width: 0 0 1px 0;
+  padding: 0; }
+  input:not([type=submit]):focus, select:focus {
+    box-shadow: none;
+    background: transparent; }
+
 body.editor {
   background: #333;
   color: #fefefe; }
   body.editor a:hover {
     color: #fefefe; }
   body.editor input, body.editor select {
-    background: transparent;
-    box-shadow: none;
-    color: inherit;
-    border-width: 0 0 1px 0;
-    padding: 0;
     border-color: #666; }
     body.editor input:focus, body.editor select:focus {
-      box-shadow: none;
-      background: transparent;
       border-width: 0 0 1px 0;
       border-color: #aaa; }
   body.editor select[multiple=multiple] {
@@ -27,6 +30,25 @@ body.editor {
   body.editor input[type=checkbox] {
     border: none;
     margin: 0 .25rem 0 0; }
+
+body.log form {
+  background: #eee;
+  padding: 2rem;
+  width: 50%;
+  margin: 5rem auto;
+  text-align: right; }
+  body.log form input[type=submit] {
+    background: transparent;
+    border: 1px solid #FA4866;
+    color: #FA4866;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.2rem !important;
+    text-align: right; }
+    body.log form input[type=submit]:hover {
+      cursor: pointer;
+      color: #333;
+      border-color: #333; }
 
 label {
   display: block;
@@ -155,7 +177,7 @@ body.editor #editor {
 
 #header {
   margin-bottom: 2rem; }
-  #header ul {
+  #header ul.menu {
     font-size: 1.2rem;
     margin-left: 1em;
     padding: 0;
@@ -163,16 +185,17 @@ body.editor #editor {
     font-weight: 100;
     list-style-type: none;
     text-transform: uppercase; }
-    #header ul li {
-      display: inline-block; }
-      #header ul li a {
+    #header ul.menu li {
+      display: inline-block;
+      margin-right: .4rem; }
+      #header ul.menu li a {
         color: #FA4866; }
-        #header ul li a:hover {
+        #header ul.menu li a:hover {
           color: #333; }
 
-body.editor #header ul li a {
+body.editor #header ul.menu li a {
   color: #fefefe; }
-  body.editor #header ul li a:hover {
+  body.editor #header ul.menu li a:hover {
     color: #FA4866; }
 
 #wrapper {
@@ -208,7 +231,7 @@ body.editor #header ul li a {
 
 a.tag {
   display: inline-block;
-  margin: 0 .25em;
+  margin: .25em;
   border: 1px solid;
   border-radius: .3em;
   padding: .1em .5em; }
@@ -434,5 +457,3 @@ img.preview {
 
 .error {
   color: #FA4866; }
-
-/*# sourceMappingURL=../../../../../../../static/zines/style.css.map */
