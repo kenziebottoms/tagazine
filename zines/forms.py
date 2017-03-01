@@ -80,6 +80,3 @@ class ProfileForm(ModelForm):
         profile = super(ProfileForm, self).save(commit=True)
         profile.create_thumb()
         return profile
-
-
-

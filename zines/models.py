@@ -12,12 +12,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # thumbnails
-from PIL import Image
-from cStringIO import StringIO
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.core.files import File
-from mimetypes import MimeTypes
-import urllib
+import image_processing
 
 class Profile(models.Model):
     #required
@@ -59,36 +54,7 @@ class Profile(models.Model):
         if not self.pic:
             return
 
-        mime = MimeTypes()
-        url = urllib.pathname2url(self.pic.path)
-        directory = "/".join(url.split('/')[:-2])
-        mime_type = mime.guess_type(url)[0]
-
-        thumb = Image.open(self.pic.path)
-        TARGET_SIZE = [150, 150]
-        width, height = thumb.size
-        if width > height:
-            THUMB_SIZE = [int(TARGET_SIZE[0]*width/float(height)), TARGET_SIZE[1]]
-        else:
-            THUMB_SIZE = [TARGET_SIZE[0],int(TARGET_SIZE[1]*height/float(width))]
-
-        mid_x = THUMB_SIZE[0] / 2
-        mid_y = THUMB_SIZE[1] / 2
-        # shrinks it down to at most 150x150 but keeps aspect ratio
-        thumb = thumb.resize(THUMB_SIZE,Image.ANTIALIAS)
-        # crops it down to a square from that
-        thumb = thumb.crop((mid_x-(TARGET_SIZE[0]/2),mid_y-(TARGET_SIZE[1]/2),mid_x+(TARGET_SIZE[0]/2),mid_y+(TARGET_SIZE[1]/2)))
-
-        filename, ext = os.path.splitext(self.pic.name)
-        filename = str(filename+"_150x150"+ext)
-
-        temp_image = open(os.path.join(directory,filename), 'w')
-        thumb.save(temp_image)
-
-        thumb_data = open(os.path.join(directory, filename), 'r')
-        thumb_file = File(thumb_data)
-
-        self.thumb.save(filename, thumb_file)
+        image_processing.cover(self.pic, self.thumb, 150, 150)
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
