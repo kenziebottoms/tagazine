@@ -374,6 +374,12 @@ h1#profile {
   color: #fefefe !important; }
   .ql-toolbar * {
     color: #fefefe; }
+  .ql-toolbar .ql-picker-label:hover:before {
+    color: #FA4866; }
+  .ql-toolbar .ql-picker-item {
+    color: #333 !important; }
+    .ql-toolbar .ql-picker-item:hover {
+      color: #FA4866 !important; }
 
 .ql-stroke {
   stroke: #fefefe !important; }

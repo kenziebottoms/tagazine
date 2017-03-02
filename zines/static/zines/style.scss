@@ -454,6 +454,19 @@ h1#profile {
     * {
         color: $white;
     }
+    .ql-picker-label {
+        &:hover {
+            &:before {
+                color: $orange;
+            }
+        }
+    }
+    .ql-picker-item {
+        color: #333 !important;
+        &:hover {
+            color: $orange !important;
+        }
+    }
 }
 .ql-stroke {
     stroke: $white !important;

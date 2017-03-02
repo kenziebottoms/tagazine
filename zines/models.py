@@ -53,7 +53,6 @@ class Profile(models.Model):
     def create_thumb(self):
         if not self.pic:
             return
-
         image_processing.crop(self.pic, self.thumb, 150, 150)
 
 @receiver(post_save,sender=User)
@@ -105,7 +104,8 @@ class Zine(models.Model):
     tagline = models.CharField(max_length=500,blank=True)
     end_date = models.DateField('Published until', blank=True,null=True)
     website = models.URLField(blank=True)
-    cover = models.FileField(upload_to='covers')
+    cover = models.ImageField(upload_to='covers')
+    thumb = models.ImageField(upload_to='covers',blank=True)
     locale = models.CharField(max_length=500,blank=True)
     tags = models.ManyToManyField(Tag,blank=True)
 
@@ -157,7 +157,8 @@ class Issue(models.Model):
     guest_authors = models.ManyToManyField(Profile,blank=True)
     ext_guest_authors = models.TextField(blank=True)
     number = models.IntegerField(default=1)
-    cover = models.FileField(upload_to='covers')
+    cover = models.ImageField(upload_to='issues',blank=True)
+    thumb = models.ImageField(upload_to='issues',blank=True)
 
     def guestAuthorsLink(self):
         guest_authors = self.guest_authors.all()
@@ -183,13 +184,16 @@ class Issue(models.Model):
 
     class Meta:
         order_with_respect_to = 'zine'
+    def create_thumb(self):
+        if not self.cover:
+            return
+        image_processing.crop(self.cover, self.thumb, 300, 400)
     def __str__(self):
         return self.displayTitle()
 
 class Authorship(models.Model):
     zine = models.ForeignKey(Zine,on_delete=models.CASCADE)
     user_profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
-    date_joined = models.DateField()
     hideIdentity = models.BooleanField('Hide Identity',default=False)
 
     def authorLink(self):
@@ -216,7 +220,9 @@ class Authorship(models.Model):
 
 class Page(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE)
-    content = models.FileField(upload_to='issues')
+    content = models.ImageField(upload_to='issues')
+    #optional
+    thumb = models.ImageField(upload_to='issues',blank=True)
     subtitles = models.TextField(blank=True)
     class Meta:
         order_with_respect_to = 'issue'

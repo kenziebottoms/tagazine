@@ -67,6 +67,10 @@ class IssueForm(ModelForm):
         labels = {
             'title' : '',
         }
+    # def save(self, commit=True):
+    #     issue = super(IssueForm, self).save(commit=True)
+    #     issue.create_thumb()
+    #     return issue
 
 class ProfileForm(ModelForm):
     class Meta:
