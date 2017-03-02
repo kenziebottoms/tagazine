@@ -54,7 +54,7 @@ class Profile(models.Model):
         if not self.pic:
             return
 
-        image_processing.cover(self.pic, self.thumb, 150, 150)
+        image_processing.crop(self.pic, self.thumb, 150, 150)
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

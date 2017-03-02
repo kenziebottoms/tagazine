@@ -1,13 +1,20 @@
 
 from PIL import Image
 from cStringIO import StringIO
+from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.base import ContentFile
 from django.core.files import File
 from mimetypes import MimeTypes
 import urllib, os
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
 
-def cover(source, dest, x, y):
-    thumb = Image.open(source.path)
+def crop(source, dest, x, y):
+    
+    thumb = Image.open(StringIO(source.read()))
+
     width, height = thumb.size
 
     if width > height:
@@ -22,9 +29,12 @@ def cover(source, dest, x, y):
     # crops it down to a square from that
     thumb = thumb.crop((mid_x-(x/2),mid_y-(y/2),mid_x+(x/2),mid_y+(y/2)))
 
-    filename, ext = os.path.splitext(source.path)
-    filename = str(filename+"_"+str(x)+"x"+str(y)+ext)
-
-    thumb.save(filename)
-
-    dest.save(filename, File(open(filename, 'r')))
+    filename, ext = os.path.splitext(source.name)
+    filename = str(filename+"_150x150"+ext)
+    
+    f = BytesIO()
+    try:
+        thumb.save(f, format='png')
+        dest.save(filename, ContentFile(f.getvalue()))
+    finally:
+        f.close()
