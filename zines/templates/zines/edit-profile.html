@@ -24,7 +24,7 @@
                 <p class="error">
                     {{ field.errors }}
                 </p>
-                {% if field.id_for_label == "id_cover" %}
+                {% if field.id_for_label == "id_pic" %}
                     <img class="preview" src="{{ field.value.url }}"/>
                 {% endif %}
                 {{ field.label_tag }}

@@ -10,21 +10,21 @@ def crop(source, dest, x, y):
 
     width, height = thumb.size
 
-    if width > height:
+    if width/float(x) > height/float(y):
         THUMB_SIZE = [int(x*width/float(height)), y]
     else:
         THUMB_SIZE = [x,int(y*height/float(width))]
 
     mid_x = THUMB_SIZE[0] / 2
     mid_y = THUMB_SIZE[1] / 2
-    # shrinks it down to at most 150x150 but keeps aspect ratio
+    # shrinks it down to at most XxY but keeps aspect ratio
     thumb = thumb.resize(THUMB_SIZE,Image.ANTIALIAS)
     # crops it down to a square from that
     thumb = thumb.crop((mid_x-(x/2),mid_y-(y/2),mid_x+(x/2),mid_y+(y/2)))
 
     name = source.name.split('/')[-1]
     filename, ext = os.path.splitext(name)
-    filename = str(filename+"_150x150"+ext)
+    filename = str(filename+"_"+str(x)+"x"+str(y)+ext)
     
     f = BytesIO()
     try:

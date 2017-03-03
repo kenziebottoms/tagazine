@@ -53,9 +53,6 @@ class IssueForm(ModelForm):
         model = Issue
         fields = ['title', 'desc', 'pub_date', 'published', 'cover', 'guest_authors', 'ext_guest_authors']
         widgets = {
-            'title' : forms.TextInput(attrs={
-                'class' : 'heading',
-            }),
             'pub_date' : HTML5DateInput,
             'desc' : forms.HiddenInput,
             'published' : forms.HiddenInput,
@@ -64,13 +61,10 @@ class IssueForm(ModelForm):
                 'rows' : '4',
             })
         }
-        labels = {
-            'title' : '',
-        }
-    # def save(self, commit=True):
-    #     issue = super(IssueForm, self).save(commit=True)
-    #     issue.create_thumb()
-    #     return issue
+    def save(self, commit=True):
+        issue = super(IssueForm, self).save(commit=True)
+        issue.create_thumb()
+        return issue
 
 class ProfileForm(ModelForm):
     class Meta:

@@ -187,7 +187,7 @@ class Issue(models.Model):
     def create_thumb(self):
         if not self.cover:
             return
-        image_processing.crop(self.cover, self.thumb, 300, 400)
+        image_processing.crop(self.cover, self.thumb, 400, 300)
     def __str__(self):
         return self.displayTitle()
 

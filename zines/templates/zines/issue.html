@@ -43,7 +43,7 @@
     {% if issue.cover %}
         <div class="page large-4 medium-6 small-12 columns">
             <a data-lightbox="pages" href="{{ issue.cover.url }}">
-                <img src="{{ issue.cover.url }}"/>
+                <img src="{{ issue.thumb.url }}"/>
             </a>
         </div>
     {% endif %}
@@ -51,7 +51,7 @@
         {% for page in pages %}
             <div class="page large-4 medium-6 small-12 columns">
                 <a data-lightbox="pages" data-title="{{ page.subtitles|safe }}" href="{{ page.content.url }}">
-                    <img src="{{ page.content.url }}"/>
+                    <img src="{{ page.thumb.url }}"/>
                 </a>
             </div>
         {% endfor %}

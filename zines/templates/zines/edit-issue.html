@@ -29,46 +29,29 @@
 {% block classes %}editor{% endblock %}
 
 {% block body %}
-    <form id="edit-issue" name="editIssue" method="POST">
-        <div class="row">
-            <div class="large-12 medium-12 small-12 columns">
-                <label>{{ issue }}</label> {{ form.title }}
+    <form enctype="multipart/form-data" id="edit-issue" name="editIssue" method="POST">
+        {% for field in form.visible_fields %}
+            <div id="{{ field.id_for_label }}">
+                <p class="error">
+                    {{ field.errors }}
+                </p>
+                {% if field.id_for_label == "id_cover" %}
+                    <img class="preview" src="{{ field.value.url }}"/>
+                {% endif %}
+                {{ field.label_tag }}
+                {{ field }}
             </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        <label>Desc:</label>
+        <div id="quill">
+            {{ issue.desc|safe }}
         </div>
-
-        <div class="row">
-            <div class="large-4 medium-6 small-12 columns">
-                <img class="preview" src="{{ form.cover.value.url }}"/>
-                <div class="refresh"></div>
-                <div class="hide">
-                    {{ form.cover }}
-                </div>
-            </div>
-            <div class="large-8 medium-6 small-12 columns">
-                <div class="row">
-                    <div class="large-6 medium-6 small-12 columns">
-                        {{ form.guest_authors.label_tag}} {{ form.guest_authors }}
-                    </div>
-                    <div class="large-6 medium-6 small-12 columns">
-                        {{ form.pub_date.label_tag}} {{ form.pub_date }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 medium-12 small-12 columns">
-                        {{ form.ext_guest_authors.label_tag}} {{ form.ext_guest_authors }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <label>Desc:</label>
-            <div id="quill">
-                {{ issue.desc|safe }}
-            </div>
-            {{ form.desc }}
-            {{ form.published }}
-            {% csrf_token %}
-        </div>
+        {{ form.desc }}
+        {{ form.published }}
+        {% csrf_token %}
     </form>
 {% endblock %}
 
