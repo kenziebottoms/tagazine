@@ -43,7 +43,11 @@
     {% if issue.cover %}
         <div class="page large-4 medium-6 small-12 columns">
             <a data-lightbox="pages" href="{{ issue.cover.url }}">
-                <img src="{{ issue.thumb.url }}"/>
+                {% if issue.thumb %}
+                    <img src="{{ issue.thumb.url }}"/>
+                {% else %}
+                    <img src="{{ issue.cover.url }}"/>
+                {% endif %}
             </a>
         </div>
     {% endif %}
@@ -51,7 +55,11 @@
         {% for page in pages %}
             <div class="page large-4 medium-6 small-12 columns">
                 <a data-lightbox="pages" data-title="{{ page.subtitles|safe }}" href="{{ page.content.url }}">
+                {% if page.thumb %}
                     <img src="{{ page.thumb.url }}"/>
+                {% else %}
+                    <img src="{{ page.cover.url }}"/>
+                {% endif %}
                 </a>
             </div>
         {% endfor %}
