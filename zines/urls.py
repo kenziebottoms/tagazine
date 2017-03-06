@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^drafts/$', views.drafts, name='drafts'),
     # /tag/anarchy
     url(r'^tag/(?P<slug>[a-z0-9-]*)$', views.tag, name='tag'),
+    # /search/feminism
+    url(r'^search/$', views.search, name='search'),
 
     ### API ###
     # /api/get_tags/fe, /api/get_tags/fem, /api/get_tags/femi

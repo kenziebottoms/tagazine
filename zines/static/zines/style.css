@@ -15,6 +15,23 @@ input:not([type=submit]), select {
     box-shadow: none;
     background: transparent; }
 
+#search i {
+  display: inline-block; }
+
+#search input[type=text] {
+  color: #333;
+  width: 0;
+  position: absolute;
+  margin-top: -2.5rem;
+  margin-left: 2.5rem;
+  transition: .2s;
+  opacity: .5; }
+  #search input[type=text].show {
+    width: 10rem;
+    opacity: 1; }
+  #search input[type=text]:focus {
+    border-width: 0 0 1px 0 !important; }
+
 body.editor {
   background: #333;
   color: #fefefe; }
@@ -192,6 +209,8 @@ body.editor #editor {
         color: #FA4866; }
         #header ul.menu li a:hover {
           color: #333; }
+        #header ul.menu li a i {
+          vertical-align: text-bottom; }
 
 body.editor #header ul.menu li a {
   color: #fefefe; }
@@ -463,5 +482,11 @@ img.preview {
 
 .error {
   color: #FA4866; }
+
+.profiles .profile {
+  text-align: center; }
+  .profiles .profile img {
+    margin: 0 auto !important;
+    float: none !important; }
 
 /*# sourceMappingURL=../../../../../../../static/zines/style.css.map */

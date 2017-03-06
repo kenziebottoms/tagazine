@@ -51,3 +51,17 @@ def tag(request, slug):
         'tag' : tag,
     }
     return render(request, 'zines/tag.html', context)
+
+def search(request):
+    term = request.GET['term']
+    zines = Zine.objects.filter(title__icontains=term) | Zine.objects.filter(desc__icontains=term) | Zine.objects.filter(tagline__icontains=term)
+    issues = Issue.objects.filter(title__icontains=term) | Issue.objects.filter(desc__icontains=term) | Issue.objects.filter(ext_guest_authors__icontains=term)
+    profiles = Profile.objects.filter(user__username__icontains=term) | Profile.objects.filter(name__icontains=term) | Profile.objects.filter(bio__icontains=term)
+    context = {
+        'zines' : zines[:20],
+        'issues' : issues[:20],
+        'profiles' : profiles[:20],
+        'term' : term,
+    }
+    return render(request, 'zines/search.html', context)
+

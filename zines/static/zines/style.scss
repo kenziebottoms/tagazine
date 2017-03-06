@@ -22,6 +22,27 @@ input:not([type=submit]), select {
         background: transparent;
     }
 }
+#search {
+    i {
+        display: inline-block;
+    }
+    input[type=text] {
+        color: $black;
+        width: 0;
+        position: absolute;
+        margin-top: -2.5rem;
+        margin-left: 2.5rem;
+        transition: .2s;
+        opacity: .5;
+        &.show {
+            width: 10rem;
+            opacity: 1;
+        }
+        &:focus {
+            border-width: 0 0 1px 0 !important;
+        }
+    }
+}
 body.editor {
     background: $black;
     color: $white;
@@ -222,6 +243,9 @@ body.editor {
                 color: $orange;
                 &:hover {
                     color: $black;
+                }
+                i {
+                    vertical-align: text-bottom;
                 }
             }
         }
@@ -560,4 +584,13 @@ img.preview {
 }
 .error {
     color: $orange;
+}
+.profiles {
+    .profile {
+        text-align: center;
+        img {
+            margin: 0 auto !important;
+            float: none !important;
+        }
+    }
 }

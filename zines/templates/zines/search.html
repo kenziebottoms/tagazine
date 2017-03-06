@@ -1,0 +1,47 @@
+{% extends 'zines/base.html' %}
+
+{% block title %}
+    Search: {{ term }}
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+    <h1>Searching for &ldquo;{{ term }}&rdquo;</h1>
+    <hr/>
+    {% if zines %}
+        <h2>Zines</h2>
+        <div class="zines">
+            {% for zine in zines %}
+                {% include 'zines/snippets/banner.html' with entity=zine type='zine' %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if issues %}
+        <h2>issues</h2>
+        <div class="issues">
+            {% for issue in issues %}
+                {% include 'zines/snippets/banner.html' with entity=issue type='issue' %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if profiles %}
+        <h2>users</h2>
+        <div class="row profiles">
+            {% for profile in profiles %}
+                <div class="profile large-3 medium-4 small-6 columns">
+                    {% if profile.pic %}
+                        <a href="{% url 'profile' profile.id %}">
+                            <img id="profile_pic" src="{{ profile.thumb.url }}" />
+                        </a>
+                    {% endif %}
+                    <h3>
+                        <a href="{% url 'profile' profile.id %}">
+                            {{ profile }}
+                        </a>
+                    </h3>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

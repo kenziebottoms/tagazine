@@ -81,6 +81,14 @@
                             <a href="{% url 'login_view' %}">Log in</a>
                         </li>
                     {% endif %}
+                    <li>
+                        <a>
+                            <form id="search" method="GET" action="{% url 'search' %}">
+                                <i class="material-icons md-36">search</i>
+                                <input type="text" name="term" placeholder="Go for it." />
+                            </form>
+                        </a>
+                    </li>
                 </ul>
             </div>
             {% block body %} {% endblock %}
@@ -138,6 +146,16 @@
                     $('div.label').addClass('show');
                 }, function() {
                     $('div.label').removeClass('show');
+                });
+
+                // search
+                $('#search').click(function(e) {
+                    e.preventDefault();
+                    $('#search input[type=text]').addClass('show');
+                    $('#search input[type=text').focus();
+                });
+                $('#search input[type=text').blur(function(e) {
+                    $('#search input[type=text]').removeClass('show');
                 });
             });
         </script>
