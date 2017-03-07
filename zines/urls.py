@@ -18,6 +18,8 @@ urlpatterns = [
     url(r'^zine/(?P<zine_id>[0-9]+)/issue/(?P<issue_no>[0-9]+)/edit/$', views.issues.edit_issue, name='edit_issue'),
     # /drafts
     url(r'^drafts/$', views.drafts, name='drafts'),
+    # /dash
+    url(r'^dash/$', views.dash, name='dash'),
     # /tag/anarchy
     url(r'^tag/(?P<slug>[a-z0-9-]*)$', views.tag, name='tag'),
     # /search/feminism

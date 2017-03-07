@@ -25,7 +25,10 @@ SECRET_KEY = 'ehe^m=es(b3^y862^-gs8+-#*68=xa$t7xbuu9fm-6nxyttu1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [   'tagazine.dev',
+                    'www.tagazine.dev',
+                    'localhost',
+                    '127.0.0.1']
 
 
 # Application definition

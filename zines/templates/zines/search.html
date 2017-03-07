@@ -12,7 +12,7 @@
         <h2>Zines</h2>
         <div class="zines">
             {% for zine in zines %}
-                {% include 'zines/snippets/banner.html' with entity=zine type='zine' %}
+                {% include 'zines/snippets/banner.html' with height="130px" entity=zine type='zine' %}
             {% endfor %}
         </div>
     {% endif %}
@@ -20,7 +20,7 @@
         <h2>issues</h2>
         <div class="issues">
             {% for issue in issues %}
-                {% include 'zines/snippets/banner.html' with entity=issue type='issue' %}
+                {% include 'zines/snippets/banner.html' with height="130px" entity=issue type='issue' %}
             {% endfor %}
         </div>
     {% endif %}

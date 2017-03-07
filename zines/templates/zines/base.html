@@ -19,9 +19,6 @@
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-        <!-- angularJS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
-
         <!-- fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
         
@@ -36,8 +33,31 @@
         <script src="//cdn.quilljs.com/1.1.7/quill.js"></script>
         <script src="//cdn.quilljs.com/1.1.7/quill.min.js"></script>
         <link href="https://cdn.quilljs.com/1.1.7/quill.snow.css" rel="stylesheet">
+
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TKGCZN9');</script>
+        <!-- End Google Tag Manager -->
+
+        <!-- embed GA dash -->
+        <script>
+            (function(w,d,s,g,js,fs){
+                g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+                js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+                js.src='https://apis.google.com/js/platform.js';
+                fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+            }(window,document,'script'));
+        </script>
+
     </head>
     <body class="{% block classes %}{% endblock %}">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKGCZN9"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
         <div id="editor">
             {% load app_filters %}
 
@@ -94,70 +114,8 @@
             {% block body %} {% endblock %}
         </div>
 
-        <script>
-            function initQuill() {
-                var quill = new Quill('#quill', {
-                    theme: 'snow'
-                });
-                $('.ql-editor').focus(function() {
-                    console.log('focus');
-                    $('.ql-toolbar').addClass('active');
-                    $('.ql-container').addClass('active');
-                });
-                $('.ql-editor').blur(function() {
-                    console.log('focus');
-                    $('.ql-toolbar').removeClass('active');
-                    $('.ql-container').removeClass('active');
-                });
-            }
-            function updateQuillHiddenInput(hiddenInputID) {
-                $input = $('#'+hiddenInputID);
-                $input.val($('#quill>div')[0].innerHTML);
-            }
-            function updateTags() {
-                // tags field
-                var tags = []
-                $('#tag_list .tag').each(function() {
-                    tags.push($(this).data('id'));
-                });
-                $('#id_tags').val(tags);
-                console.log(tags);
-            }
-        </script>
+        <script src="{% static 'zines/js/tagazine.js' %}"></script>
         {% block scripts %} {% endblock %}
-        <script>
-            $(document).ready(function() {
-
-                // update publish value before submitting
-                $('#publish').click(function(e) {
-                    e.preventDefault();
-                    $('#id_published').val("True");
-                    publish();
-                });
-                $('#unpublish').click(function(e) {
-                    e.preventDefault();
-                    $('#id_published').val("False");
-                    publish();
-                });
-
-                // #editor
-                $('div.label').removeClass('show');
-                $('#editor').hover(function() {
-                    $('div.label').addClass('show');
-                }, function() {
-                    $('div.label').removeClass('show');
-                });
-
-                // search
-                $('#search').click(function(e) {
-                    e.preventDefault();
-                    $('#search input[type=text]').addClass('show');
-                    $('#search input[type=text').focus();
-                });
-                $('#search input[type=text').blur(function(e) {
-                    $('#search input[type=text]').removeClass('show');
-                });
-            });
-        </script>
+        <script src="{% static 'zines/js/custom.js' %}"></script>
     </body>
 </html>

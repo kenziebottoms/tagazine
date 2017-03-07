@@ -65,3 +65,10 @@ def search(request):
     }
     return render(request, 'zines/search.html', context)
 
+def dash(request):
+    user_id = request.user.id
+    profile = get_object_or_404(Profile, pk=request.user.profile.id)
+    context = {
+        'profile' : profile
+    }
+    return render(request, 'zines/dash.html', context)
