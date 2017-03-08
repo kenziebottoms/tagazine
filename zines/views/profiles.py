@@ -6,14 +6,17 @@ from django.contrib.messages import constants as message_constants
 
 def profile(request, profile_id):
     profile = get_object_or_404(Profile,pk=profile_id)
-    works = Authorship.objects.filter(user_profile=profile_id,hideIdentity=False,zine__published=True)
-    works = sorted(works, key=lambda i: i.zine.lastUpdated())
-    works.reverse()
-    guest_works = Issue.objects.filter(guest_authors=profile_id,published=True).order_by('pub_date')
+    if profile == request.user.profile:
+        zines = Zine.objects.filter(authors__id=profile_id)
+    else:
+        zines = Zine.objects.filter(authors__id=profile_id,published=True)
+    zines = sorted(zines, key=lambda i: i.lastUpdated())
+    zines.reverse()
+    issues = Issue.objects.filter(guest_authors__id=profile_id,published=True).order_by('pub_date')
     context = {
         'profile' : profile,
-        'works' : works,
-        'guest_works' : guest_works,
+        'zines' : zines,
+        'issues' : issues,
         'messages' : messages.get_messages(request),
     }
     return render(request, 'zines/profile.html', context)

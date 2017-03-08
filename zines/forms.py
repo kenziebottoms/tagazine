@@ -7,7 +7,7 @@ from .widgets import *
 class ZineForm(ModelForm):
     class Meta:
         model = Zine
-        fields = ['title', 'tagline', 'authors', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'primary_language', 'locale', 'published']
+        fields = ['title', 'tagline', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'primary_language', 'locale', 'published']
         widgets = {
             'title' : forms.TextInput(attrs={
                 'class' : 'heading',

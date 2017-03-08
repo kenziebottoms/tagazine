@@ -20,10 +20,17 @@
         <i class="material-icons md-48">save</i>
         <div class="label">Save &amp; exit</div>
     </a>
-    <a href="{% url 'zine' zine.id %}">
-        <i class="material-icons md-48">close</i>
-        <div class="label">Close without saving</div>
-    </a>
+    {% if zine.id %}
+        <a href="{% url 'zine' zine.id %}">
+            <i class="material-icons md-48">close</i>
+            <div class="label">Close without saving</div>
+        </a>
+    {% else %}
+        <a href="{% url 'index' %}">
+            <i class="material-icons md-48">close</i>
+            <div class="label">Close without saving</div>
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block classes %}editor{% endblock %}
@@ -41,21 +48,24 @@
         </div>
 
         <div class="row">
-            <div class="large-8 medium-6 small-12 columns">
-                {{ form.authors }}
+            <div class="large-4 medium-6 small-12 columns">
+                {{ form.show_author }} {{ form.show_author.label }}
             </div>
             <div class="large-4 medium-6 small-12 columns">
-                {{ form.show_author }} {{ form.show_author.label }}<br/>
-                {{ form.external }} {{ form.external.label }}<br/>
+                {{ form.external }} {{ form.external.label }}
+            </div>
+            <div class="large-4 medium-6 small-12 columns">
                 {{ form.submissions_open }} {{ form.submissions_open.label }}
             </div>
         </div>
+
+        <hr class="spacer"/>
 
         <div class="row">
             <div class="large-4 medium-6 small-12 columns">
                 <img class="preview" src="{{ form.cover.value.url }}"/>
                 <div class="refresh"></div>
-                <div class="hide">
+                <div class="{% if form.cover.value %}hide{% endif %}">
                     {{ form.cover }}
                 </div>
             </div>
@@ -92,7 +102,7 @@
         <div class="row">
             <label>Desc:</label>
             <div id="quill">
-                {{ zine.desc|safe }}
+                {{ form.desc.value|safe }}
             </div>
             {{ form.desc }}
             {{ form.published }}

@@ -25,20 +25,14 @@ def index(request):
     return render(request, 'zines/index.html', context)
 
 def drafts(request):
-    user_id = request.user.id
-    profile = Profile.objects.filter(user=user_id)[0]
-    unpub_authorships = Authorship.objects.filter(user_profile=profile.id,zine__published=False)
-    works = Authorship.objects.filter(user_profile=profile.id)
-    issue_ids = []
-    for work in works:
-        new_ids = work.zine.unPublishedContent().values_list('id',flat=True)
-        if new_ids:
-            issue_ids += list(new_ids)
-    issues = Issue.objects.filter(pk__in=issue_ids)
+    user = request.user
+    profile = user.profile
+    private_zines = Zine.objects.filter(authors=profile,published=False)
+    private_issues = Issue.objects.filter(zine__authors=profile,published=False)
     context = {
         'profile' : profile,
-        'works' : unpub_authorships,
-        'issues' : issues,
+        'zines' : private_zines,
+        'issues' : private_issues,
         'messages' : messages.get_messages(request),
     }
     return render(request, 'zines/drafts.html', context)

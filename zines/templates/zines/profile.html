@@ -20,7 +20,7 @@
     {% load static %}
     <div class="row">
         {% if profile.pic %}
-            <a href="{{ profile.pic.url }}"><img id="profile_pic" src="{{ profile.thumb.url }}"/></a>
+            <a href="{{ profile.pic.url }}"><img data-lightbox="profile" id="profile_pic" src="{{ profile.thumb.url }}"/></a>
         {% endif %}
         <h1 id="profile">{{ profile }}</h1>
         <div class="row flex" id="details">
@@ -51,18 +51,18 @@
     <div class="desc">
         <p>{{ profile.bio|safe }}</p>
     </div>
-    {% if works %}
+    {% if zines %}
         <div class="zines">
             <h3>co-authored zines</h3>
-            {% for work in works %}
-                {% include 'zines/snippets/banner.html' with entity=work.zine type='zine' %}
+            {% for zine in zines %}
+                {% include 'zines/snippets/banner.html' with entity=zine type='zine' %}
             {% endfor %}
         </div>
     {% endif %}
-    {% if guest_works %}
+    {% if issues %}
         <div class="block">
             <h3>featured on</h3>
-            {% for issue in guest_works %}
+            {% for issue in issues %}
                 {% include 'zines/snippets/banner.html' with entity=issue type='issue' %}
             {% endfor %}
         </div>

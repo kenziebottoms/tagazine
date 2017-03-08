@@ -5,13 +5,19 @@
     {% if type == 'issue' %}
         <a href="{% url 'issue' issue.zine.id issue.number %}">
             <div class="title">
-                <h2>{{ entity.displayTitle }}</h2>
+                <h2>
+                    {{ entity.displayTitle }}
+                    {% if not entity.published %}(private){% endif %}
+                </h2>
             </div>
         </a>
     {% elif type == 'zine' %}
         <a href="{% url 'zine' entity.id %}">
             <div class="title">
-                <h2>{{ entity.title }}</h2>
+                <h2>
+                    {{ entity.title }}
+                    {% if not entity.published %}(private){% endif %}
+                </h2>
             </div>
         </a>
     {% endif %}

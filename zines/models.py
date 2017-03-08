@@ -30,20 +30,16 @@ class Profile(models.Model):
     # info fns
     def link(self):
         return '<a href="'+reverse('profile', args=(self.id,))+'">'+self.__str__()+'</a>'    
+
     def hasPublishedContent(self):
-        authorships = Authorship.objects.filter(user_profile=self.id)
-        for authorship in authorships:
-            if authorship.zine.published:
-                return True
-        return False
+        zines = Zine.objects.filter(authors=self.id,published=True)
+        return (len(zines) > 0)
+
     def hasUnPublishedContent(self):
-        authorships = Authorship.objects.filter(user_profile=self.id)
-        for authorship in authorships:
-            if authorship.zine.published == False:
-                return True
-            if authorship.zine.unPublishedContent():
-                return True
-        return False
+        private_zines = Zine.objects.filter(authors=self,published=False)
+        private_issues = Issue.objects.filter(zine__authors=self,published=False)
+        return (private_zines or private_issues)
+
     def __str__(self):
         if self.name != '':
             return self.name
@@ -91,7 +87,7 @@ class Zine(models.Model):
     #required
     title = models.CharField(max_length=500)
     start_date = models.DateField('Published since')
-    authors = models.ManyToManyField(Profile, through='Authorship')
+    authors = models.ManyToManyField(Profile)
     show_author = models.BooleanField(default=True)
     external = models.BooleanField('Externally hosted',default=False)
     submissions_open = models.BooleanField(default=False)
@@ -116,14 +112,14 @@ class Zine(models.Model):
         return '<a href="'+reverse('zine',args=(self.id,))+'">'+self.title+'</a>'
 
     def authorsLink(self):
-        authorships = Authorship.objects.filter(zine=self.id)
-        if len(authorships) == 1:
-            return authorships[0].authorLink()
+        authors = self.authors.all()
+        if len(authors) == 1:
+            return authors[0].link()
         else:
             string = ''
-            for authorship in authorships:
-                string += authorship.authorLink()
-                if authorship != authorships[len(authorships)-1]:
+            for author in authors:
+                string += author.link()
+                if author != authors[len(authors)-1]:
                     string += ', '
             return string
 
@@ -191,32 +187,32 @@ class Issue(models.Model):
     def __str__(self):
         return self.displayTitle()
 
-class Authorship(models.Model):
-    zine = models.ForeignKey(Zine,on_delete=models.CASCADE)
-    user_profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
-    hideIdentity = models.BooleanField('Hide Identity',default=False)
+# class Authorship(models.Model):
+#     zine = models.ForeignKey(Zine,on_delete=models.CASCADE)
+#     user_profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+#     hideIdentity = models.BooleanField('Hide Identity',default=False)
 
-    def authorLink(self):
-        if self.hideIdentity:
-            return 'Anonymous'
-        else:
-            return self.user_profile.link()
+#     def authorLink(self):
+#         if self.hideIdentity:
+#             return 'Anonymous'
+#         else:
+#             return self.user_profile.link()
 
-    def zineLink(self):
-        return self.zine.link()
+#     def zineLink(self):
+#         return self.zine.link()
 
-    def link(self):
-        return (self.zine.Link()+' by '+self.authorLink())
+#     def link(self):
+#         return (self.zine.Link()+' by '+self.authorLink())
 
-    def __str__(self):
-        string = self.zine.title + ' by '
-        if self.hideIdentity:
-            string += 'Anonymous'
-        else:
-            string += self.user_profile.__str__()
-        return string
-    class Meta:
-        auto_created = True
+#     def __str__(self):
+#         string = self.zine.title + ' by '
+#         if self.hideIdentity:
+#             string += 'Anonymous'
+#         else:
+#             string += self.user_profile.__str__()
+#         return string
+#     class Meta:
+#         auto_created = True
 
 class Page(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE)

@@ -13,15 +13,17 @@
     {% endif %}
 {% endblock %}
 
+{% block classes %}editor{% endblock %}
+
 {% block body %}
     {% load static %}
     <h1>{{ profile }}'s Drafts</h1>
     <hr/>
-    {% if works %}
+    {% if zines %}
         <div class="zines">
             <h3>zine drafts</h3>
-            {% for work in works %}
-                {% include 'zines/snippets/banner.html' with entity=work.zine type='zine' %}
+            {% for zine in zines %}
+                {% include 'zines/snippets/banner.html' with entity=zine type='zine' %}
             {% endfor %}
         </div>
     {% endif %}
