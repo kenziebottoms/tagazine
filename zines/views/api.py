@@ -18,3 +18,13 @@ def get_tags(request):
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+def add_tag(request):
+    if request.is_ajax():
+        title = request.POST['title']
+        tag = Tag.create(title)
+        data = tag.id
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)

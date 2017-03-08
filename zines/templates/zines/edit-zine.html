@@ -127,16 +127,28 @@
             });
             // tag auto search
             $('#tags_auto').autocomplete({
-                source: "/zines/api/get_tags/",
+                source: "{% url 'get_tags' %}",
                 minLength: 2,
                 select: function(event,ui) {
-                    if ($('#tag_list .tag[data-id='+ui.item.value+']').length == 0) {
-                        $('#tag_list').append('<a class="tag" data-id="'+ui.item.value+'">'+ui.item.label+'</a>');
-                    }
+                    addTag(ui.item.value, ui.item.label);
                     updateTags();
                     $(this).val('');
                     return false;
                 },
+            });
+            // add new
+            $('#add_new').click(function() {
+                var new_tag = $('#tags_auto').val();
+                if (confirm('Create new tag "'+new_tag+'"?')) {
+                    $.ajax({
+                        method: "POST",
+                        url: "{% url 'add_tag' %}",
+                        data: { 'title': new_tag, 'csrfmiddlewaretoken':"{{ csrf_token }}" },
+                    }).done(function(id) {
+                        addTag(id, new_tag);
+                        updateTags();
+                    });
+                }
             });
             // cover image
             $('img.preview').click(function() {

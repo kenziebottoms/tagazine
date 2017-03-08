@@ -82,6 +82,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+    @classmethod
+    def create(cls, title):
+        tag = cls(title=title)
+        tag.save()
+        return tag
 
 class Zine(models.Model):
     #required
