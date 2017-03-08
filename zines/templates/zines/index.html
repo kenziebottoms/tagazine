@@ -9,18 +9,20 @@
 {% block body %}
     <h1>welcome</h1>
     <div class="row">
-        {% if recent_tags %}
-            <div class="large-4 columns">
-                <h3>Recently Updated Tags</h3>
+        <div class="large-4 columns">
+            <h3>Recently Updated Tags</h3>
+            {% if recent_tags %}
                 {% for tag in recent_tags %}
                     <a class="tag" href="{% url 'tag' tag.slug %}">#{{ tag.title }}
                     </a>
                 {% endfor %}
-            </div>
-        {% endif %}
-        {% if recent_zines %}
-            <div class="large-8 columns recent-zines">
-                <h3>Recently Updated Zines</h3>
+            {% else %}
+                No tags have been updated.
+            {% endif %}
+        </div>
+        <div class="large-8 columns recent-zines">
+            <h3>Recently Updated Zines</h3>
+            {% if recent_zines %}
                 {% for zine in recent_zines %}
                     <div class="large-4 columns">
                         <a href="{% url 'zine' zine.id %}">
@@ -29,30 +31,34 @@
                         </a>
                     </div>
                 {% endfor %}
-            </div>
-        {% endif %}
+            {% else %}
+                No zines have been updated.
+            {% endif %}
+        </div>
     </div>
     <hr class="spacer"/>
     <div class="row">
-        {% if recent_issues %}
-            <div class="large-8 medium-6 small-12 columns">
-                <h3>Recent Issues</h3>
+        <div class="large-8 medium-6 small-12 columns">
+            <h3>Recent Issues</h3>
+            {% if recent_issues %}
                 {% for issue in recent_issues %}
                     {% include 'zines/snippets/banner.html' with entity=issue height="130px" type='issue' %}
                 {% endfor %}
-            </div>
-        {% else %}
-            <p>No issues have been published.</p>
-        {% endif %}
-        {% if new_users %}
-            <div class="large-4 columns">
-                <h3>New Users</h3>
+            {% else %}
+                No issues have been published.
+            {% endif %}
+        </div>
+        <div class="large-4 columns">
+            <h3>New Users</h3>
+            {% if new_users %}
                 <ul>
                     {% for profile in new_users %}
                         <li>{{ profile.link|safe }}</li>
                     {% endfor %}
                 </ul>
-            </div>
-        {% endif %}
+            {% else %}
+                There are no new users.
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
