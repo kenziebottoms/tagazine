@@ -47,6 +47,9 @@ body.editor {
   body.editor input[type=checkbox] {
     border: none;
     margin: 0 .25rem 0 0; }
+  body.editor .slug {
+    color: #999;
+    display: block; }
 
 body.log form#login {
   background: #eee;

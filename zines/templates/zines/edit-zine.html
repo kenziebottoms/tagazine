@@ -21,7 +21,7 @@
         <div class="label">Save &amp; exit</div>
     </a>
     {% if zine.id %}
-        <a href="{% url 'zine' zine.id %}">
+        <a href="{% url 'zine' zine.slug %}">
             <i class="material-icons md-48">close</i>
             <div class="label">Close without saving</div>
         </a>
@@ -41,6 +41,10 @@
             <div class="large-4 medium-6 small-12 columns">
                 {{ form.title }}
                 {{ form.title.errors }}
+                <div class="slug">
+                    <span>/{{ zine.slug }}</span>
+                    <a id="re_slug" title="Refresh slug."><i class="material-icons md-24">refresh</i></a>
+                </div>
             </div>
             <div class="large-8 medium-6 small-12 columns">
                 {{ form.tagline }}
@@ -147,6 +151,7 @@
                     }).done(function(id) {
                         addTag(id, new_tag);
                         updateTags();
+                        $('#tags_auto').val('');
                     });
                 }
             });
@@ -164,6 +169,18 @@
                 publish();
             });
 
+            // refresh slug
+            $('#re_slug').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    method: "POST",
+                    url: "{% url 'zine_reslug' %}",
+                    data: { 'id': {{ zine.id }}, 'csrfmiddlewaretoken':"{{ csrf_token }}" },
+                        dataType: "json",
+                }).always(function(response) {
+                    $('.slug span').html('/'+response['slug']);
+                });
+            });
         });
     </script>
 {% endblock %}

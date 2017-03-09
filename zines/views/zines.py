@@ -4,9 +4,12 @@ from ..forms import *
 from django.contrib import messages
 from django.contrib.messages import constants as message_constants
 
-def zine(request, zine_id):
-    zine = get_object_or_404(Zine,pk=zine_id)
-    issues = Issue.objects.filter(zine=zine_id,published=True)
+def zine(request, zine_id=0, slug=''):
+    if zine_id > 0:
+        zine = get_object_or_404(Zine,pk=zine_id)
+    else:
+        zine = Zine.objects.filter(slug=slug)[0]
+    issues = Issue.objects.filter(zine=zine.id,published=True)
     authors = zine.authors.all()
     tags = zine.tags.all()
     context = {
@@ -18,9 +21,14 @@ def zine(request, zine_id):
     }
     return render(request, 'zines/zine.html', context)
 
-def edit_zine(request, zine_id):
-    zine = get_object_or_404(Zine,pk=zine_id)
-    issues = Issue.objects.filter(zine=zine_id)
+def edit_zine(request, zine_id=0, slug=''):
+    if zine_id > 0:
+        zine = get_object_or_404(Zine,pk=zine_id)
+        return redirect('zine', zine.slug)
+    else:
+        zine = Zine.objects.filter(slug=slug)[0]
+        zine_id = zine.id
+    issues = Issue.objects.filter(zine=zine.id)
     authors = zine.authors.all()
     context = {
         'zine' : zine,
@@ -33,7 +41,7 @@ def edit_zine(request, zine_id):
         if form.is_valid():
             zine = form.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')
-            return redirect('zine', zine.id)
+            return redirect('zine', zine_id)
         else:
             messages.add_message(request, message_constants.ERROR, 'Your changes were not saved.', 'close')
             context['form'] = form

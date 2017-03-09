@@ -69,13 +69,6 @@
                     </span>
                 {% endfor %}
             {% endif %}
-
-            {% if user.is_authenticated %}
-                <a href="{% url 'new_zine' %}">
-                    <i class="material-icons md-48">add</i>
-                    <div class="label">Add new zine.</div>
-                </a>
-            {% endif %}
             
             {% block editor %}
             {% endblock %}

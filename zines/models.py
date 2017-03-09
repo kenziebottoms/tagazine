@@ -98,6 +98,7 @@ class Zine(models.Model):
     submissions_open = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
     primary_language = models.CharField(max_length=300, default='English')
+    slug = models.SlugField(unique=True,editable=False,blank=True)
     #optional
     desc = models.TextField(blank=True)
     contact_email = models.CharField(max_length=200,blank=True)
@@ -140,6 +141,21 @@ class Zine(models.Model):
 
     def unPublishedContent(self):
         return Issue.objects.filter(zine=self.id,published=False)
+
+    def genSlug(self):
+        slug = slugify(self.title)
+        unique_slug = slug
+        num = 1
+        existing = Zine.objects.filter(slug=unique_slug)
+        while existing.exists() and existing[0].id != self.id:
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.genSlug()
+        super(Zine, self).save(*args, **kwargs)
 
     def __str__(self):
         if self.tagline != '':

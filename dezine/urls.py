@@ -20,5 +20,5 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^zines/', include('zines.urls')),
+    url(r'^', include('zines.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

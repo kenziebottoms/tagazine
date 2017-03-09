@@ -25,10 +25,7 @@ def edit_issue(request, zine_id, issue_no):
         'messages' : messages.get_messages(request),
     }
     if request.method == "POST":
-        if request.FILES:
-            form = IssueForm(request.POST,request.FILES,instance=issue)
-        else:
-            form = IssueForm(request.POST,instance=issue)
+        form = IssueForm(request.POST,request.FILES,instance=issue)
         if form.is_valid():
             issue = form.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')

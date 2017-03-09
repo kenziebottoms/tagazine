@@ -41,7 +41,6 @@ class ZineForm(ModelForm):
                 tag_data = tag_data.split(',');
                 for tag in tag_data:
                     instance.tags.add(tag)
-
         if commit:
             instance.save()
             save_tags()

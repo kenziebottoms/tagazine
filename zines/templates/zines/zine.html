@@ -12,7 +12,7 @@
         </a>
         {% for author in authors %}
             {% if author.user.id == user.id %}
-                <a href="{% url 'edit_zine' zine.id %}">
+                <a href="{% url 'edit_zine' zine.slug %}">
                     <i class="material-icons md-48">edit</i>
                     <div class="label">Edit</div>
                 </a>
