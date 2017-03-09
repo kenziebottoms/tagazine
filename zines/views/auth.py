@@ -1,5 +1,7 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
 
 def login_view(request):
     context = []
@@ -13,7 +15,7 @@ def login_view(request):
             login(request, user)
             return redirect('index')
         else:
-            context['response'] = "Login failed."
+            messages.add_message(request, message_constants.ERROR, 'Invalid username and/or password.', 'close')
     return render(request, 'zines/login.html', context)
 
 def logout_view(request):

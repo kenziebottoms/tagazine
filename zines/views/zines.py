@@ -48,13 +48,15 @@ def new_zine(request):
         form = ZineForm(request.POST,request.FILES)
         if form.is_valid():
             zine = form.save()
+            zine.authors = {request.user.profile}
+            zine.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')
             return redirect('zine', zine.id)
         else:
-            messages.add_message(request, message_constants.ERROR, 'Your changes were not saved.', 'close')
+            messages.add_message(request, message_constants.ERROR, form.errors, 'close')
             context['form'] = form
     else:
-        form = ZineForm(initial={'author':request.user.user_profile})
+        form = ZineForm(initial={'desc':''})
         context['form'] = form
     context['messages'] = messages.get_messages(request)
     return render(request, 'zines/edit-zine.html', context)

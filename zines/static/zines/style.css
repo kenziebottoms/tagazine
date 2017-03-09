@@ -48,13 +48,13 @@ body.editor {
     border: none;
     margin: 0 .25rem 0 0; }
 
-body.log form {
+body.log form#login {
   background: #eee;
   padding: 2rem;
   width: 50%;
   margin: 5rem auto;
   text-align: right; }
-  body.log form input[type=submit] {
+  body.log form#login input[type=submit] {
     background: transparent;
     border: 1px solid #FA4866;
     color: #FA4866;
@@ -62,7 +62,7 @@ body.log form {
     padding: 5px;
     font-size: 1.2rem !important;
     text-align: right; }
-    body.log form input[type=submit]:hover {
+    body.log form#login input[type=submit]:hover {
       cursor: pointer;
       color: #333;
       border-color: #333; }

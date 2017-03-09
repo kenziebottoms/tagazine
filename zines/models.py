@@ -91,7 +91,7 @@ class Tag(models.Model):
 class Zine(models.Model):
     #required
     title = models.CharField(max_length=500)
-    start_date = models.DateField('Published since')
+    start_date = models.DateField('Published since',default=datetime.datetime.now)
     authors = models.ManyToManyField(Profile)
     show_author = models.BooleanField(default=True)
     external = models.BooleanField('Externally hosted',default=False)
