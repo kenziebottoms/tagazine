@@ -135,7 +135,4 @@ STATIC_ROOT = 'zines/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'zines/media/zines/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
