@@ -12,7 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
-print '===== sys.path / PYTHONPATH ====='
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dezine.settings")
 
 application = get_wsgi_application()
