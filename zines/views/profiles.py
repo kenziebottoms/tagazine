@@ -42,4 +42,4 @@ def edit_profile(request, profile_id):
     else:
         form = ProfileForm(instance=profile)
         context['form'] = form
-    return render(request, 'zines/edit-profile.html', context)
+    return render(request, 'zines/backend/edit-profile.html', context)

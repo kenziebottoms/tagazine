@@ -76,7 +76,7 @@
         <div id="wrapper">
             <div id="header">
                 <div id="logo">
-                    <a href="/zines">
+                    <a href="{% url 'index' %}">
                         <i class="material-icons md-40">subtitles</i>taga<span>zine </span>
                     </a>
                 </div>
@@ -99,6 +99,9 @@
                     {% else %}
                         <li>
                             <a href="{% url 'login_view' %}">Log in</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'signup' %}">Sign up</a>
                         </li>
                     {% endif %}
                     <li>

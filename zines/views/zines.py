@@ -67,4 +67,4 @@ def new_zine(request):
         form = ZineForm(initial={'desc':''})
         context['form'] = form
     context['messages'] = messages.get_messages(request)
-    return render(request, 'zines/edit-zine.html', context)
+    return render(request, 'zines/backend/edit-zine.html', context)

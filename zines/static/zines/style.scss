@@ -20,6 +20,7 @@ input:not([type=submit]), select {
     &:focus {
         box-shadow: none;
         background: transparent;
+        border-width: 0 0 1px 0;
     }
 }
 #search {
@@ -69,7 +70,7 @@ body.editor {
     }
 }
 body.log {
-    form#login {
+    form#login, form#signup {
         background: #eee;
         padding: 2rem;
         width: 50%;
@@ -87,6 +88,20 @@ body.log {
                 cursor: pointer;
                 color: $black;
                 border-color: $black;
+            }
+        }
+        input {
+            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                color: #aaa;
+            }
+            &::-moz-placeholder { /* Firefox 19+ */
+                color: #aaa;
+            }
+            &:-ms-input-placeholder { /* IE 10+ */
+                color: #aaa;
+            }
+            &:-moz-placeholder { /* Firefox 18- */
+                color: #aaa;
             }
         }
     }

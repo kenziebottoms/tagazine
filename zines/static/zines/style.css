@@ -13,7 +13,8 @@ input:not([type=submit]), select {
   padding: 0; }
   input:not([type=submit]):focus, select:focus {
     box-shadow: none;
-    background: transparent; }
+    background: transparent;
+    border-width: 0 0 1px 0; }
 
 #search i {
   display: inline-block; }
@@ -51,13 +52,13 @@ body.editor {
     color: #999;
     display: block; }
 
-body.log form#login {
+body.log form#login, body.log form#signup {
   background: #eee;
   padding: 2rem;
   width: 50%;
   margin: 5rem auto;
   text-align: right; }
-  body.log form#login input[type=submit] {
+  body.log form#login input[type=submit], body.log form#signup input[type=submit] {
     background: transparent;
     border: 1px solid #FA4866;
     color: #FA4866;
@@ -65,10 +66,22 @@ body.log form#login {
     padding: 5px;
     font-size: 1.2rem !important;
     text-align: right; }
-    body.log form#login input[type=submit]:hover {
+    body.log form#login input[type=submit]:hover, body.log form#signup input[type=submit]:hover {
       cursor: pointer;
       color: #333;
       border-color: #333; }
+  body.log form#login input::-webkit-input-placeholder, body.log form#signup input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #aaa; }
+  body.log form#login input::-moz-placeholder, body.log form#signup input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #aaa; }
+  body.log form#login input:-ms-input-placeholder, body.log form#signup input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #aaa; }
+  body.log form#login input:-moz-placeholder, body.log form#signup input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #aaa; }
 
 label {
   display: block;

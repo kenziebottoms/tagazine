@@ -50,4 +50,6 @@ urlpatterns = [
     url(r'^login/', views.auth.login_view, name='login_view'),
     # /logout
     url(r'^logout/', views.auth.logout_view, name='logout_view'),
+    # /signup
+    url(r'^signup/', views.auth.signup, name='signup'),
 ]

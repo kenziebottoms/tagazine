@@ -36,4 +36,4 @@ def edit_issue(request, zine_id, issue_no):
     else:
         form = IssueForm(instance=issue)
         context['form'] = form
-    return render(request, 'zines/edit-issue.html', context)
+    return render(request, 'zines/backend/edit-issue.html', context)
