@@ -16,6 +16,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             user.last_login = timezone.now()
+            user.save()
             return redirect('index')
         else:
             messages.add_message(request, message_constants.ERROR, 'Invalid username and/or password.', 'close')
@@ -47,5 +48,6 @@ def signup(request):
             user = authenticate(username=username,password=password)
             login(request, user)
             user.last_login = timezone.now()
+            user.save()
             return redirect('index')
     return render(request, 'zines/auth/signup.html', context)
