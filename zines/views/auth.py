@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.messages import constants as message_constants
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 def login_view(request):
     context = []
@@ -14,6 +15,7 @@ def login_view(request):
         user = authenticate(username=username,password=password)
         if user is not None:
             login(request, user)
+            user.last_login = timezone.now()
             return redirect('index')
         else:
             messages.add_message(request, message_constants.ERROR, 'Invalid username and/or password.', 'close')
@@ -44,5 +46,6 @@ def signup(request):
             user.save()
             user = authenticate(username=username,password=password)
             login(request, user)
+            user.last_login = timezone.now()
             return redirect('index')
     return render(request, 'zines/auth/signup.html', context)
