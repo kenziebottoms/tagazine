@@ -28,7 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = [   'tagazine.dev',
                     'www.tagazine.dev',
                     'localhost',
-                    '127.0.0.1']
+                    '127.0.0.1',
+                    'tagazine.herokuapp.com']
 
 
 # Application definition
