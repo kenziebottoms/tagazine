@@ -35,7 +35,6 @@ ALLOWED_HOSTS = [   'tagazine.dev',
 # Application definition
 
 INSTALLED_APPS = [
-    'zines.apps.ZinesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sass_processor',
+    'zines.apps.ZinesConfig',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        # 'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         # 'NAME' : 'tagazine',
         # 'USER' : 'tagazine',
         # 'PASSWORD' : 'tagazine',
@@ -92,7 +92,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
