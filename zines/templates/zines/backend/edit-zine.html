@@ -175,8 +175,11 @@
                 $.ajax({
                     method: "POST",
                     url: "{% url 'zine_reslug' %}",
-                    data: { 'id': {{ zine.id }}, 'csrfmiddlewaretoken':"{{ csrf_token }}" },
-                        dataType: "json",
+                    data: {
+                        'id': {% if zine %}{{ zine.id }}{% else %}0{%endif %},
+                        'csrfmiddlewaretoken':"{{ csrf_token }}"
+                    },
+                    dataType: "json"
                 }).always(function(response) {
                     $('.slug span').html('/'+response['slug']);
                 });

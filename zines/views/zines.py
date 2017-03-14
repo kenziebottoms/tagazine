@@ -8,7 +8,10 @@ def zine(request, zine_id=0, slug=''):
     if zine_id > 0:
         zine = get_object_or_404(Zine,pk=zine_id)
     else:
-        zine = Zine.objects.filter(slug=slug)[0]
+        if Zine.objects.filter(slug=slug).exists():
+            zine = Zine.objects.filter(slug=slug)
+        else:
+            context['zine'] = False
     issues = Issue.objects.filter(zine=zine.id,published=True)
     authors = zine.authors.all()
     tags = zine.tags.all()
@@ -48,7 +51,7 @@ def edit_zine(request, zine_id=0, slug=''):
     else:
         form = ZineForm(instance=zine)
         context['form'] = form
-    return render(request, 'zines/edit-zine.html', context)
+    return render(request, 'zines/backend/edit-zine.html', context)
 
 def new_zine(request):
     context = {}

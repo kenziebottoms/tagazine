@@ -14,14 +14,14 @@ urlpatterns = [
     ### ZINES
     # /zine/1
     url(r'^zine/(?P<zine_id>[0-9]+)/$', views.zines.zine, name='zine'),
+    # /zine/new
+    url(r'^zine/new/$', views.zines.new_zine, name='new_zine'),
     # /zine/white-fungus
     url(r'^zine/(?P<slug>[a-z0-9-]*)/$', views.zines.zine, name='zine'),
     # /zine/1/edit
     url(r'^zine/(?P<zine_id>[0-9]+)/edit/$', views.zines.edit_zine, name='edit_zine'),
     # /zine/white-fungus/edit
     url(r'^zine/(?P<slug>[a-z0-9-]*)/edit/$', views.zines.edit_zine, name='edit_zine'),
-    # /zine/new
-    url(r'^zine/new/$', views.zines.new_zine, name='new_zine'),
     # /zine/1/issue/15
     url(r'^zine/(?P<zine_id>[0-9]+)/issue/(?P<issue_no>[0-9]+)/$', views.issues.issue, name='issue'),
     # /zine/1/issue/15/edit
