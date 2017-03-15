@@ -254,6 +254,12 @@ body.editor #header ul.menu li a {
   #logo em {
     opacity: .6;
     font-style: normal; }
+  #logo sub {
+    font-size: .4em;
+    position: relative;
+    top: 1.4rem;
+    left: -7.6rem;
+    opacity: .5; }
 
 .actions {
   float: right;
@@ -504,5 +510,12 @@ img.preview {
   .profiles .profile img {
     margin: 0 auto !important;
     float: none !important; }
+
+.light {
+  opacity: .5; }
+
+.center {
+  text-align: center;
+  margin: auto; }
 
 /*# sourceMappingURL=../../../../../../../static/zines/style.css.map */

@@ -309,6 +309,13 @@ body.editor {
         opacity: .6;
         font-style: normal;
     }
+    sub {
+        font-size: .4em;
+        position: relative;
+        top: 1.4rem;
+        left: -7.6rem;
+        opacity: .5;
+    }
 }
 .actions {
     float: right;
@@ -612,4 +619,11 @@ img.preview {
             float: none !important;
         }
     }
+}
+.light {
+    opacity: .5;
+}
+.center {
+    text-align: center;
+    margin: auto;
 }

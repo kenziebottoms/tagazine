@@ -51,21 +51,26 @@
     <div class="desc">
         <p>{{ profile.bio|safe }}</p>
     </div>
-    {% if zines %}
-        <div class="zines">
-            <h3>co-authored zines</h3>
+    <div class="zines">
+        <h3>co-authored zines</h3>
+        {% if zines %}
             {% for zine in zines %}
                 {% include 'zines/snippets/banner.html' with entity=zine type='zine' %}
             {% endfor %}
-        </div>
-    {% endif %}
-    {% if issues %}
-        <div class="block">
-            <h3>featured on</h3>
+        {% else %}
+            <p class="light">{{ profile }} has not published any zines.</p>
+        {% endif %}
+    </div>
+
+    <div class="block">
+        <h3>featured on</h3>
+        {% if issues %}
             {% for issue in issues %}
                 {% include 'zines/snippets/banner.html' with entity=issue type='issue' %}
             {% endfor %}
-        </div>
-    {% endif %}
+        {% else %}
+            <p class="light">{{ profile }} has not contributed to any zines.</p>
+        {% endif %}
+    </div>
 
 {% endblock %}

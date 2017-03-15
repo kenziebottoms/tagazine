@@ -42,16 +42,6 @@
         })(window,document,'script','dataLayer','GTM-TKGCZN9');</script>
         <!-- End Google Tag Manager -->
 
-        <!-- embed GA dash -->
-        <script>
-            (function(w,d,s,g,js,fs){
-                g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
-                js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
-                js.src='https://apis.google.com/js/platform.js';
-                fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
-            }(window,document,'script'));
-        </script>
-
     </head>
     <body class="{% block classes %}{% endblock %}">
         <!-- Google Tag Manager (noscript) -->
@@ -78,6 +68,7 @@
                 <div id="logo">
                     <a href="{% url 'index' %}">
                         <i class="material-icons md-40">subtitles</i>taga<span>zine </span>
+                        <sub>pre-alpha</sub>
                     </a>
                 </div>
                 <ul class="menu inline">
