@@ -2,3 +2,4 @@
 .DS_Store
 .env*
 myenv
+zines/migrations
