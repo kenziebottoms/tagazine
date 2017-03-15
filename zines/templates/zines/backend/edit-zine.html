@@ -133,6 +133,10 @@
             $('#tags_auto').autocomplete({
                 source: "{% url 'get_tags' %}",
                 minLength: 2,
+                focus: function(event, ui) {
+                    $('#tags_auto').val(ui.item.label);
+                    return false;
+                },
                 select: function(event,ui) {
                     addTag(ui.item.value, ui.item.label);
                     updateTags();
@@ -141,6 +145,11 @@
                 },
             });
             // add new
+            $('#tags_auto').keypress(function(e) {
+                if (e.keyCode == 13) {
+                    $('#add_new').click();
+                }
+            });
             $('#add_new').click(function() {
                 var new_tag = $('#tags_auto').val();
                 if (confirm('Create new tag "'+new_tag+'"?')) {

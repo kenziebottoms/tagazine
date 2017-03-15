@@ -60,6 +60,7 @@ def new_zine(request):
         if form.is_valid():
             zine = form.save()
             zine.authors = {request.user.profile}
+            zine.owner = request.user.profile
             zine.save()
             messages.add_message(request, message_constants.SUCCESS, 'Your changes were saved.', 'check')
             return redirect('zine', zine.id)

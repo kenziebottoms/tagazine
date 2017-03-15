@@ -601,6 +601,17 @@ img.preview {
     margin: 0 1rem 1rem 0;
     cursor: pointer;
 }
+// tag autocomplete
+ul.ui-autocomplete {
+    li {
+        border: none;
+        .ui-state-active {
+            color: $orange;
+            border: none !important;
+            background: #eee;
+        }
+    }
+}
 .hide {
     display: block;
     position: absolute;

@@ -17,6 +17,7 @@ function updateQuillHiddenInput(hiddenInputID) {
     $input = $('#'+hiddenInputID);
     $input.val($('#quill>div')[0].innerHTML);
 }
+// adds tag to the interface
 function addTag(value, label) {
     if ($('#tag_list .tag[data-id='+value+']').length == 0) {
         $('#tag_list').append('<a class="tag" data-id="'+value+'">'+label+'</a>');
