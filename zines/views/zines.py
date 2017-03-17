@@ -5,13 +5,15 @@ from django.contrib import messages
 from django.contrib.messages import constants as message_constants
 
 def zine(request, zine_id=0, slug=''):
+    context = {}
     if zine_id > 0:
         zine = get_object_or_404(Zine,pk=zine_id)
     else:
         if Zine.objects.filter(slug=slug).exists():
-            zine = Zine.objects.filter(slug=slug)
+            zine = Zine.objects.filter(slug=slug)[0]
         else:
             context['zine'] = False
+            return redirect('index')
     issues = Issue.objects.filter(zine=zine.id,published=True)
     authors = zine.authors.all()
     tags = zine.tags.all()
