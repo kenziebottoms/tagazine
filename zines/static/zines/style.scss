@@ -309,6 +309,13 @@ body.editor {
         opacity: .6;
         font-style: normal;
     }
+    sub {
+        font-size: .4em;
+        position: relative;
+        top: 1.4rem;
+        left: -7.6rem;
+        opacity: .5;
+    }
 }
 .actions {
     float: right;
@@ -594,6 +601,17 @@ img.preview {
     margin: 0 1rem 1rem 0;
     cursor: pointer;
 }
+// tag autocomplete
+ul.ui-autocomplete {
+    li {
+        border: none;
+        .ui-state-active {
+            color: $orange;
+            border: none !important;
+            background: #eee;
+        }
+    }
+}
 .hide {
     display: block;
     position: absolute;
@@ -612,4 +630,11 @@ img.preview {
             float: none !important;
         }
     }
+}
+.light {
+    opacity: .5;
+}
+.center {
+    text-align: center;
+    margin: auto;
 }

@@ -93,6 +93,7 @@ class Zine(models.Model):
     title = models.CharField(max_length=500)
     start_date = models.DateField('Published since',default=datetime.datetime.now)
     authors = models.ManyToManyField(Profile)
+    owner = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='owner',null=True)
     show_author = models.BooleanField(default=True)
     external = models.BooleanField('Externally hosted',default=False)
     submissions_open = models.BooleanField(default=False)

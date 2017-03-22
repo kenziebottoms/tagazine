@@ -254,6 +254,12 @@ body.editor #header ul.menu li a {
   #logo em {
     opacity: .6;
     font-style: normal; }
+  #logo sub {
+    font-size: .4em;
+    position: relative;
+    top: 1.4rem;
+    left: -7.6rem;
+    opacity: .5; }
 
 .actions {
   float: right;
@@ -489,6 +495,13 @@ img.preview {
   margin: 0 1rem 1rem 0;
   cursor: pointer; }
 
+ul.ui-autocomplete li {
+  border: none; }
+  ul.ui-autocomplete li .ui-state-active {
+    color: #FA4866;
+    border: none !important;
+    background: #eee; }
+
 .hide {
   display: block;
   position: absolute;
@@ -504,5 +517,12 @@ img.preview {
   .profiles .profile img {
     margin: 0 auto !important;
     float: none !important; }
+
+.light {
+  opacity: .5; }
+
+.center {
+  text-align: center;
+  margin: auto; }
 
 /*# sourceMappingURL=../../../../../../../static/zines/style.css.map */
