@@ -9,5 +9,10 @@
 {% block body %}
     <h1>dashboard</h1>
     <div class="row">
+        {% if stats %}
+            {% for key, val in stats.items %}
+                <p>{{ key }}: {{ val }}</p>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

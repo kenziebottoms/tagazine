@@ -77,8 +77,12 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li>
+                            <a href="{% url 'dash' %}">Dashboard</a>
+                        </li>
+                        <li>
                             <a href="{% url 'profile' user.profile.id %}">profile</a>
                         </li>
+
                         {% if user.profile.hasUnPublishedContent %}
                             <li>
                                 <a href="{% url 'drafts' %}">drafts</a>

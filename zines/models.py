@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-import os, re, datetime
+import os, re, datetime, json
 
 # tag slugs
 from django.utils.text import slugify
@@ -209,33 +209,6 @@ class Issue(models.Model):
     def __str__(self):
         return self.displayTitle()
 
-# class Authorship(models.Model):
-#     zine = models.ForeignKey(Zine,on_delete=models.CASCADE)
-#     user_profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
-#     hideIdentity = models.BooleanField('Hide Identity',default=False)
-
-#     def authorLink(self):
-#         if self.hideIdentity:
-#             return 'Anonymous'
-#         else:
-#             return self.user_profile.link()
-
-#     def zineLink(self):
-#         return self.zine.link()
-
-#     def link(self):
-#         return (self.zine.Link()+' by '+self.authorLink())
-
-#     def __str__(self):
-#         string = self.zine.title + ' by '
-#         if self.hideIdentity:
-#             string += 'Anonymous'
-#         else:
-#             string += self.user_profile.__str__()
-#         return string
-#     class Meta:
-#         auto_created = True
-
 class Page(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE)
     content = models.ImageField(upload_to='issues')
@@ -248,3 +221,13 @@ class Page(models.Model):
         pages = map(int,Page.objects.filter(issue=self.issue).values_list('id',flat=True))
         pageNo = pages.index(self.id)+1
         return (self.issue.displayTitle() + '.' + str(pageNo))
+
+def get_stats():
+    stats = {}
+    stats['Total zines'] = Zine.objects.count()
+    stats['Total published zines'] = Zine.objects.filter(published=True).count()
+    stats['Total issues'] = Issue.objects.count()
+    stats['Total pages'] = Page.objects.count()
+    stats['Total users'] = User.objects.count()
+    return stats
+

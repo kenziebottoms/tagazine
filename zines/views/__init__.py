@@ -63,8 +63,12 @@ def search(request):
 
 def dash(request):
     user_id = request.user.id
+    stats = []
+    if request.user.is_superuser:
+        stats = get_stats()
     profile = get_object_or_404(Profile, pk=request.user.profile.id)
     context = {
-        'profile' : profile
+        'profile' : profile,
+        'stats' : stats
     }
-    return render(request, 'zines/dash.html', context)
+    return render(request, 'zines/backend/dash.html', context)
