@@ -6,7 +6,7 @@ from django.contrib.messages import constants as message_constants
 
 def profile(request, profile_id):
     profile = get_object_or_404(Profile,pk=profile_id)
-    if profile == request.user.profile:
+    if request.user.is_authenticated() and request.user.profile == profile:
         zines = Zine.objects.filter(authors__id=profile_id)
     else:
         zines = Zine.objects.filter(authors__id=profile_id,published=True)
