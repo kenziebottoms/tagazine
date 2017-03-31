@@ -8,6 +8,12 @@
     {% load static %}
     <h1>Searching for &ldquo;{{ term }}&rdquo;</h1>
     <hr/>
+    {% if tags %}
+        <h2>Tags</h2>
+        {% for tag in tags %}
+            <a href="{% url 'tag' tag.slug %}" class="tag">{{ tag.title }}</a>
+        {% endfor %}
+    {% endif %}
     {% if zines %}
         <h2>Zines</h2>
         <div class="zines">
