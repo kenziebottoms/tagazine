@@ -10,8 +10,15 @@
     <h1>dashboard</h1>
     <div class="row">
         {% if stats %}
-            {% for key, val in stats.items %}
-                <p>{{ key }}: {{ val }}</p>
+            {% for stat in stats %}
+                <p>{{ stat.0 }}: {{ stat.1 }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="row">
+        {% if user_stats %}
+            {% for stat in user_stats %}
+                <p>{{ stat.0 }}: {{ stat.1 }}</p>
             {% endfor %}
         {% endif %}
     </div>

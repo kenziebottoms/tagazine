@@ -66,9 +66,11 @@ def dash(request):
     stats = []
     if request.user.is_superuser:
         stats = get_stats()
+    user_stats = get_user_stats(user_id)
     profile = get_object_or_404(Profile, pk=request.user.profile.id)
     context = {
         'profile' : profile,
-        'stats' : stats
+        'stats' : stats,
+        'user_stats' : user_stats,
     }
     return render(request, 'zines/backend/dash.html', context)

@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 import os, re, datetime, json
+from django.shortcuts import get_object_or_404
 
 # tag slugs
 from django.utils.text import slugify
@@ -223,11 +224,20 @@ class Page(models.Model):
         return (self.issue.displayTitle() + '.' + str(pageNo))
 
 def get_stats():
-    stats = {}
-    stats['Total zines'] = Zine.objects.count()
-    stats['Total published zines'] = Zine.objects.filter(published=True).count()
-    stats['Total issues'] = Issue.objects.count()
-    stats['Total pages'] = Page.objects.count()
-    stats['Total users'] = User.objects.count()
+    stats = []
+    stats.append(['Total zines', Zine.objects.count()])
+    stats.append(['Total published zines', Zine.objects.filter(published=True).count()])
+    stats.append(['Total issues', Issue.objects.count()])
+    stats.append(['Total pages',  Page.objects.count()])
+    stats.append(['Total users', User.objects.count()])
     return stats
 
+def get_user_stats(user_id):
+    stats = []
+    user = get_object_or_404(User, pk=user_id)
+    profile = user.profile
+    stats.append([str(profile)+'\'s zines', Zine.objects.filter(authors=profile).count()])
+    stats.append([str(profile)+'\'s published zines', Zine.objects.filter(published=True,authors=profile).count()])
+    stats.append([str(profile)+'\'s issues', Issue.objects.filter(zine__authors=profile).count()])
+    stats.append([str(profile)+'\'s pages',  Page.objects.filter(issue__zine__authors=profile).count()])
+    return stats
