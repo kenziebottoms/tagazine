@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block editor %}
-    {% for authorship in authorships %}
-        {% if authorship.user_profile == user.profile %}
-            <a href="{% url 'edit_issue' issue.zine.id issue.number %}">
-                <i class="material-icons md-48">edit</i>
-                <div class="label">Edit</div>
-            </a>
-        {% endif %}
-    {% endfor %}
+    {% if user.is_authenticated %}
+        {% for author in authors %}
+            {% if author.user.id == user.id %}
+                <a href="{% url 'edit_issue' issue.zine.id issue.number %}">
+                    <i class="material-icons md-48">edit</i>
+                    <div class="label">Edit</div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block body %}

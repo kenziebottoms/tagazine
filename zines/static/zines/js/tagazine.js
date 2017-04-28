@@ -3,12 +3,10 @@ function initQuill() {
         theme: 'snow'
     });
     $('.ql-editor').focus(function() {
-        console.log('focus');
         $('.ql-toolbar').addClass('active');
         $('.ql-container').addClass('active');
     });
     $('.ql-editor').blur(function() {
-        console.log('focus');
         $('.ql-toolbar').removeClass('active');
         $('.ql-container').removeClass('active');
     });

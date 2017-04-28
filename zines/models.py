@@ -208,7 +208,7 @@ class Issue(models.Model):
             return
         image_processing.crop(self.cover, self.thumb, 400, 300)
     def __str__(self):
-        return self.displayTitle()
+        return str(self.displayTitle())
 
 class Page(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE)

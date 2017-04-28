@@ -33,7 +33,7 @@
             <h3>Recently Updated Zines</h3>
             {% if recent_zines %}
                 {% for zine in recent_zines %}
-                    <div class="large-4 columns">
+                    <div class="large-4 columns row">
                         <a href="{% url 'zine' zine.id %}">
                             <div class="cover" style="background-image: url({{ zine.cover.url }});">
                             </div>

@@ -61,7 +61,7 @@ class IssueForm(ModelForm):
             })
         }
     def save(self, commit=True):
-        issue = super(IssueForm, self).save(commit=True)
+        issue = super(IssueForm, self).save(commit)
         issue.create_thumb()
         return issue
 

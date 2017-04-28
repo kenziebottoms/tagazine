@@ -20,10 +20,17 @@
         <i class="material-icons md-48">save</i>
         <div class="label">Save &amp; exit</div>
     </a>
-    <a href="{% url 'issue' issue.zine.id issue.number %}">
-        <i class="material-icons md-48">close</i>
-        <div class="label">Close without saving</div>
-    </a>
+    {% if issue.id %}
+        <a href="{% url 'issue' issue.zine.id issue.number %}">
+            <i class="material-icons md-48">close</i>
+            <div class="label">Close without saving</div>
+        </a>
+    {% else %}
+        <a href="{% url 'index' %}">
+            <i class="material-icons md-48">close</i>
+            <div class="label">Close without saving</div>
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block classes %}editor{% endblock %}
@@ -35,7 +42,7 @@
                 <p class="error">
                     {{ field.errors }}
                 </p>
-                {% if field.id_for_label == "id_cover" %}
+                {% if field.id_for_label == "id_cover" and field.value %}
                     <img class="preview" src="{{ field.value.url }}"/>
                 {% endif %}
                 {{ field.label_tag }}

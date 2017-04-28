@@ -7,7 +7,7 @@
 {% block editor %}
     {% if user.is_authenticated %}
         <a href="">
-            <i class="material-icons md-48">add_to_photos</i>
+            <i class="material-icons md-48">playlist_add</i>
             <div class="label">Subscribe</div>
         </a>
         {% for author in authors %}
@@ -16,11 +16,15 @@
                     <i class="material-icons md-48">edit</i>
                     <div class="label">Edit</div>
                 </a>
+                <a href="{% url 'new_issue' zine.id %}">
+                    <i class="material-icons md-48">add_to_photos</i>
+                    <div class="label">Add issue</div>
+                </a>
             {% endif %}
         {% endfor %}
     {% else %}
         <a href="{% url 'login_view' %}">
-            <i class="material-icons md-48">add_to_photos</i>
+            <i class="material-icons md-48">playlist_add</i>
             <div class="label">Subscribe</div>
         </a>
     {% endif %}
