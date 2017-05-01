@@ -83,6 +83,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
     @classmethod
     def create(cls, title):
         tag = cls(title=title)
@@ -190,9 +191,11 @@ class Issue(models.Model):
                 if author != guest_authors[len(guest_authors)-1]:
                     string += ', '
             return string
+
     def displayTitle(self):
         if self.title == '':
             return self.zine.title+' #'+str(self.number)
+
     def titleLink(self):
         string = self.zine.link()+' &raquo '
         if self.title == '':
@@ -203,10 +206,12 @@ class Issue(models.Model):
 
     class Meta:
         order_with_respect_to = 'zine'
+
     def create_thumb(self):
         if not self.cover:
             return
         image_processing.crop(self.cover, self.thumb, 400, 300)
+
     def __str__(self):
         return str(self.displayTitle())
 
@@ -216,8 +221,10 @@ class Page(models.Model):
     #optional
     thumb = models.ImageField(upload_to='issues',blank=True)
     subtitles = models.TextField(blank=True)
+
     class Meta:
         order_with_respect_to = 'issue'
+
     def __str__(self):
         pages = map(int,Page.objects.filter(issue=self.issue).values_list('id',flat=True))
         pageNo = pages.index(self.id)+1

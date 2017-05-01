@@ -49,9 +49,6 @@
                 {{ field }}
             </div>
         {% endfor %}
-        {% for field in form.hidden_fields %}
-            {{ field }}
-        {% endfor %}
         <label>Desc:</label>
         <div id="quill">
             {{ issue.desc|safe }}
