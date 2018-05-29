@@ -1,1 +1,1 @@
-web: gunicorn dezine.wsgi:application --log-file=-
+web: gunicorn tagazine.wsgi:application --log-file=-
