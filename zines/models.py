@@ -122,21 +122,18 @@ class Zine(models.Model):
 
     def authorsLink(self):
         authors = self.authors.all()
-        if len(authors) == 1:
-            return authors[0].link()
-        else:
-            string = ''
-            for author in authors:
-                string += author.link()
-                if author != authors[len(authors)-1]:
-                    string += ', '
-            return string
+        string = ''
+        # TODO: map
+        for author in authors:
+            string += author.link() + ', '
+        return string
 
     def lastUpdated(self):
         issues = Issue.objects.filter(zine=self.id)
         if issues:
             return issues.latest('pub_date').pub_date
         else:
+            # TODO: wtf
             return datetime.date(1900,1,1)
 
     def firstIssue(self):
@@ -225,6 +222,7 @@ class Page(models.Model):
     class Meta:
         order_with_respect_to = 'issue'
 
+    # TODO: there's a better way to do this
     def __str__(self):
         pages = map(int,Page.objects.filter(issue=self.issue).values_list('id',flat=True))
         pageNo = pages.index(self.id)+1
