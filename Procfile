@@ -1,1 +1,0 @@
-web: gunicorn tagazine.wsgi:application --log-file=-
