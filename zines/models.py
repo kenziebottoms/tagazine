@@ -195,6 +195,8 @@ class Issue(models.Model):
     def displayTitle(self):
         if self.title == '':
             return self.zine.title+' #'+str(self.number)
+        else:
+            return self.title
 
     def titleLink(self):
         string = self.zine.link()+' &raquo '
