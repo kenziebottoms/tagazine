@@ -161,10 +161,10 @@ class Zine(models.Model):
         super(Zine, self).save(*args, **kwargs)
 
     def __str__(self):
-        if self.tagline != '':
-            return (self.title + ': ' + self.tagline)
-        else:
-            return self.title
+        title = self.title
+        if self.tagline:
+            title += ': ' + self.tagline
+        return title
 
 class Issue(models.Model):
     #required
@@ -192,11 +192,9 @@ class Issue(models.Model):
                     string += ', '
             return string
 
+    # 'Issue Title' or 'Zine Title #2'
     def displayTitle(self):
-        if self.title == '':
-            return self.zine.title+' #'+str(self.number)
-        else:
-            return self.title
+        return self.title or self.zine.title+' #'+str(self.number)
 
     def titleLink(self):
         string = self.zine.link()+' &raquo '
