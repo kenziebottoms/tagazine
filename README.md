@@ -1,5 +1,9 @@
 # Tagazine
 
+![](https://img.shields.io/badge/django-v1.11.13-00C18B.svg)
+![](https://img.shields.io/badge/data-postgresql-green.svg)
+![](https://img.shields.io/badge/css_framework-bootstrap-5F2C7C.svg)
+
 A web app for uploading, sharing, reading, and documenting zines.
 
 > ## zine
@@ -13,14 +17,16 @@ A web app for uploading, sharing, reading, and documenting zines.
 ## Run locally
 
 Assumes the following are already installed:
-- python
-- pip
-- postgres
+- `python`
+- `pyenv`
+- `pip`
+- `postgres`
 
 ```bash
 git clone git@github.com:kenziebottoms/tagazine.git
 cd tagazine
 sudo pip install -r requirements.txt
+pyenv local 3.6.0
 psql -c 'create database tagazine;'
 python manage.py runserver
 ```
