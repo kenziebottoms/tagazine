@@ -71,9 +71,9 @@
             {% endif %}
         </div>
     </div>
-    <div class="desc">
+    <div class="desc row">
         {% if zine.cover != '' %}
-            <div class="cover large-4 medium-6 small-12 columns">
+            <div class="cover col-lg-4 col-md-6 col-12">
                 <a data-lightbox="cover" href="{{ zine.cover.url }}"><img src="{{ zine.cover.url }}"/></a>
             </div>
         {% endif %}

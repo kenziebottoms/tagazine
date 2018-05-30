@@ -16,6 +16,12 @@ input:not([type=submit]), select {
     background: transparent;
     border-width: 0 0 1px 0; }
 
+a:hover {
+  text-decoration: none; }
+
+img {
+  max-width: 100%; }
+
 #search i {
   display: inline-block; }
 
@@ -237,6 +243,9 @@ body.editor #header ul.menu li a {
   width: 100%;
   max-width: 60rem;
   margin: auto; }
+  @media (max-width: 70rem) {
+    #wrapper > *:not(:nth-child(1)) {
+      padding-left: 5rem; } }
 
 #logo {
   font-size: 50px;
@@ -324,6 +333,7 @@ h1#profile {
     height: auto;
     width: auto; }
   .desc .cover {
+    height: 100%;
     padding: 0;
     margin: 0 1rem 1rem 0;
     background: #fafafa;

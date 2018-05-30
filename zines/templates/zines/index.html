@@ -18,24 +18,25 @@
 {% block body %}
     <h1>welcome</h1>
     <div class="row">
-        <div class="large-4 columns">
+        <div class="col col-md-4">
             <h3>Recently Updated Tags</h3>
             {% if recent_tags %}
                 {% for tag in recent_tags %}
-                    <a class="tag" href="{% url 'tag' tag.slug %}">{{ tag.title }}
+                    <a class="tag" href="{% url 'tag' tag.slug %}">
+                        {{ tag.title }}
                     </a>
                 {% endfor %}
             {% else %}
                 No tags have been updated.
             {% endif %}
         </div>
-        <div class="large-8 columns recent-zines">
+        <div class="col col-md-8 recent-zines">
             <h3>Recently Updated Zines</h3>
             {% if recent_zines %}
                 {% for zine in recent_zines %}
-                    <div class="large-4 columns row">
-                        <a href="{% url 'zine' zine.id %}">
-                            <div class="cover" style="background-image: url({{ zine.cover.url }});">
+                    <div class="col-12 col-lg-4">
+                        <a class='row' href="{% url 'zine' zine.id %}">
+                            <div class="col-12 cover" style="background-image: url({{ zine.cover.url }});">
                             </div>
                         </a>
                     </div>
@@ -47,7 +48,7 @@
     </div>
     <hr class="spacer"/>
     <div class="row">
-        <div class="large-8 medium-6 small-12 columns">
+        <div class="col-12 col-sm-8">
             <h3>Recent Issues</h3>
             {% if recent_issues %}
                 {% for issue in recent_issues %}
@@ -57,7 +58,7 @@
                 No issues have been published.
             {% endif %}
         </div>
-        <div class="large-4 columns">
+        <div class="col-12 col-sm-4">
             <h3>New Users</h3>
             {% if new_users %}
                 <ul>
