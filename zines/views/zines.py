@@ -6,13 +6,12 @@ from django.contrib.messages import constants as message_constants
 
 def zine(request, zine_id=0, slug=''):
     context = {}
-    if zine_id > 0:
+    if zine_id:
         zine = get_object_or_404(Zine,pk=zine_id)
     else:
         if Zine.objects.filter(slug=slug).exists():
-            zine = Zine.objects.filter(slug=slug)[0]
+            zine = Zine.objects.get(slug=slug)
         else:
-            context['zine'] = False
             return redirect('index')
     issues = Issue.objects.filter(zine=zine.id,published=True)
     authors = zine.authors.all()
@@ -27,11 +26,11 @@ def zine(request, zine_id=0, slug=''):
     return render(request, 'zines/zine.html', context)
 
 def edit_zine(request, zine_id=0, slug=''):
-    if zine_id > 0:
+    if zine_id:
         zine = get_object_or_404(Zine,pk=zine_id)
         return redirect('zine', zine.slug)
     else:
-        zine = Zine.objects.filter(slug=slug)[0]
+        zine = Zine.objects.get(slug=slug)
         zine_id = zine.id
     issues = Issue.objects.filter(zine=zine.id)
     authors = zine.authors.all()

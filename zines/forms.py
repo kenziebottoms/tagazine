@@ -7,7 +7,23 @@ from .widgets import *
 class ZineForm(ModelForm):
     class Meta:
         model = Zine
-        fields = ['title', 'tagline', 'show_author', 'external', 'submissions_open', 'start_date', 'end_date', 'desc', 'contact_email', 'submission_email', 'website', 'cover', 'primary_language', 'locale', 'published']
+        fields = [
+            'title',
+            'tagline',
+            'show_author',
+            'external',
+            'submissions_open',
+            'start_date',
+            'end_date',
+            'desc',
+            'contact_email',
+            'submission_email',
+            'website',
+            'cover',
+            'primary_language',
+            'locale',
+            'published'
+        ]
         widgets = {
             'title' : forms.TextInput(attrs={
                 'class' : 'heading',
@@ -35,6 +51,7 @@ class ZineForm(ModelForm):
 
         def save_tags():
             instance.tags.clear()
+            # TODO: regex
             tag_data = self.cleaned_data['tags'].replace('[', '');
             if tag_data != '':
                 tag_data = tag_data.replace('[', '');
@@ -50,7 +67,15 @@ class ZineForm(ModelForm):
 class IssueForm(ModelForm):
     class Meta:
         model = Issue
-        fields = ['title', 'desc', 'pub_date', 'published', 'cover', 'guest_authors', 'ext_guest_authors']
+        fields = [
+            'title',
+            'desc',
+            'pub_date',
+            'published',
+            'cover',
+            'guest_authors',
+            'ext_guest_authors'
+        ]
         widgets = {
             'pub_date' : HTML5DateInput,
             'desc' : forms.HiddenInput,
@@ -68,7 +93,14 @@ class IssueForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'bio', 'website', 'contact_email', 'pic', 'location']
+        fields = [
+            'name',
+            'bio',
+            'website',
+            'contact_email',
+            'pic',
+            'location'
+        ]
         widgets = {
             'bio' : forms.HiddenInput,
         }

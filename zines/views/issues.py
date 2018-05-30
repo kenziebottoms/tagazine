@@ -54,7 +54,10 @@ def new_issue(request, zine_id):
             messages.add_message(request, message_constants.ERROR, form.errors, 'close')
             context['form'] = form
     else:
-        form = IssueForm(initial={'desc':'', 'pub_date':datetime.datetime.now})
+        form = IssueForm(initial = {
+            'desc': '',
+            'pub_date': datetime.datetime.now
+        })
         context['form'] = form
     context['messages'] = messages.get_messages(request)
     return render(request, 'zines/backend/edit-issue.html', context)

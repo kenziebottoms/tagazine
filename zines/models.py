@@ -180,6 +180,7 @@ class Issue(models.Model):
     def displayTitle(self):
         return self.title or self.zine.title+' #'+str(self.number)
 
+    # 'Zine Title >> #1' or 'Zine Title >> Issue Title'
     def titleLink(self):
         string = self.zine.link()+' &raquo '
         addon = self.title or '#'+str(self.number)
