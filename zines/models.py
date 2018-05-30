@@ -172,17 +172,9 @@ class Issue(models.Model):
     cover = models.ImageField(upload_to='issues',blank=True)
     thumb = models.ImageField(upload_to='issues',blank=True)
 
+    # TODO: add external guest authors here
     def guestAuthorsLink(self):
-        guest_authors = self.guest_authors.all()
-        if len(guest_authors.all()) == 1:
-            return guest_authors.all()[0].link()
-        else:
-            string = ''
-            for author in guest_authors:
-                string += author.link()
-                if author != guest_authors[len(guest_authors)-1]:
-                    string += ', '
-            return string
+        return ', '.join(map(lambda a: a.link(), self.guest_authors.all()))
 
     # 'Issue Title' or 'Zine Title #2'
     def displayTitle(self):
@@ -190,11 +182,8 @@ class Issue(models.Model):
 
     def titleLink(self):
         string = self.zine.link()+' &raquo '
-        if self.title == '':
-            string += '#'+str(self.number)
-        else:
-            string += self.title
-        return string
+        addon = self.title or '#'+str(self.number)
+        return string+addon
 
     class Meta:
         order_with_respect_to = 'zine'
