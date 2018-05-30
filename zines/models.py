@@ -121,12 +121,7 @@ class Zine(models.Model):
         return '<a href="'+reverse('zine',args=(self.id,))+'">'+self.title+'</a>'
 
     def authorsLink(self):
-        authors = self.authors.all()
-        string = ''
-        # TODO: map
-        for author in authors:
-            string += author.link() + ', '
-        return string
+        return ', '.join(map(lambda a: a.link(), self.authors.all()))
 
     def lastUpdated(self):
         issues = Issue.objects.filter(zine=self.id)
