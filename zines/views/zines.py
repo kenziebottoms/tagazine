@@ -13,8 +13,11 @@ def zine(request, zine_id=0, slug=''):
             zine = Zine.objects.get(slug=slug)
         else:
             return redirect('index')
-    issues = Issue.objects.filter(zine=zine.id,published=True)
     authors = zine.authors.all()
+    if request.user.id in map(lambda a: a.user.id, authors):
+        issues = Issue.objects.filter(zine=zine.id)
+    else:
+        issues = Issue.objects.filter(zine=zine.id,published=True)
     tags = zine.tags.all()
     context = {
         'zine' : zine,

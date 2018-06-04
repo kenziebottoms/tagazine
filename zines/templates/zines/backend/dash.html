@@ -8,18 +8,18 @@
 
 {% block body %}
     <h1>dashboard</h1>
-    <div class="row">
+    <p>
         {% if stats %}
             {% for stat in stats %}
-                <p>{{ stat.0 }}: {{ stat.1 }}</p>
+                {{ stat.0 }}: {{ stat.1 }}<br/>
             {% endfor %}
         {% endif %}
-    </div>
-    <div class="row">
+    </p>
+    <p>
         {% if user_stats %}
             {% for stat in user_stats %}
-                <p>{{ stat.0 }}: {{ stat.1 }}</p>
+                {{ stat.0 }}: {{ stat.1 }}<br/>
             {% endfor %}
         {% endif %}
-    </div>
+    </p>
 {% endblock %}

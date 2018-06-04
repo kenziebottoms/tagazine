@@ -1,6 +1,6 @@
 # Tagazine
 
-![](https://img.shields.io/badge/python-v3.6.0-316391.svg)
+![](https://img.shields.io/badge/python-v3.6.0-2B5784.svg)
 ![](https://img.shields.io/badge/django-v1.11.13-005237.svg)
 ![](https://img.shields.io/badge/data-postgres-316391.svg)
 ![](https://img.shields.io/badge/css_framework-bootstrap-5F2C7C.svg)
